@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "heading": "welcome to the enhancer",
+    "message": "try out a few mods and [join the discord](https://discord.com/invite/sFWPXtA)",
+    "type": "celebration",
+    "appears_on": {
+      "versions": ["0.11.0"],
+      "extension": true,
+      "app": true
+    }
+  },
+  {}
+]
