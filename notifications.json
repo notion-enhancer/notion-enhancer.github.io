@@ -3,22 +3,23 @@
     "id": 0,
     "heading": "welcome to the enhancer",
     "message": "try out a few mods and [join the discord](https://discord.com/invite/sFWPXtA)",
-    "type": "celebration",
-    "appears_on": {
-      "versions": ["*"],
-      "extension": true,
-      "app": true
-    }
+    "color": "blue",
+    "icon": "monstr/party"
   },
   {
     "id": 1,
     "heading": "warning",
     "message": "message",
-    "type": "warning",
-    "appears_on": {
-      "versions": ["*"],
-      "extension": true,
-      "app": true
-    }
+    "color": "red",
+    "icon": "fa/solid/exclamation-triangle",
+    "versions": ["0.11.0"]
+  },
+  {
+    "id": 2,
+    "heading": "info",
+    "message": "message",
+    "color": "green",
+    "icon": "fa/solid/info",
+    "environments": ["extension"]
   }
 ]
