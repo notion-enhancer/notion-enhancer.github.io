@@ -1,0 +1,81 @@
+---
+layout: layouts/base.njk
+description: an enhancer/customiser for the all-in-one productivity workspace notion.so
+
+buttons:
+  - text: Installation
+    icon: download
+    url: /getting-started/installation
+  - text: Documentation
+    icon: book
+    url: /developer-documentation/general-concepts
+  - text: Community
+    icon: message-circle
+    url: https://discord.gg/sFWPXtA
+  - text: Source Code
+    icon: github
+    url: https://github.com/notion-enhancer
+  - text: Donate
+    icon: coffee
+    url: https://buy.stripe.com/00gdR93R6csIgDKeUV
+
+features:
+  - In-app tabs
+  - colour themes
+  - extra sidebar features
+  - right to left text
+  - database customisation
+  - icon upload history
+  - and more...
+
+screenshots:
+  - src: /screenshots/pastel-dark.png
+    title: outliner & the pastel dark theme
+  - src: /screenshots/nord.png
+    title: notion-enhancer menu & the nord theme
+  - src: /screenshots/material-ocean.png
+    title: compact tabs & the material ocean theme 
+  - src: /screenshots/pinky-boom.png
+    title: weekly calendar view & the pinky boom theme
+
+summary: Available on Mac, Windows, Linux or in the browser.
+---
+
+<header class="flex flex-col items-center px-6 pt-24 pb-9 sm:pb-18 bg-secondary">
+  <div class="items-center <sm:(text-center flex flex-col) sm:grid">
+    <img src="/media/animated.gif" class="col-span-1 row-span-2 h-36 w-36 <sm:mb-4 sm:mr-6">
+    <h1 class="col-start-2 mt-auto font-mono font-bold text-2xl sm:text-3xl">notion-enhancer</h1>
+    <p class="col-start-2 mb-auto text-lg max-w-xs sm:max-w-sm">{{ description }}</p>
+  </div>
+  <nav>
+    <ul class="flex flex-row flex-wrap justify-center mt-6 sm:mt-9 <lg:max-w-prose">
+      {% for btn in buttons %}
+      <li class="p-1">
+        <a href="{{ btn.url | url(true) }}" class="button">
+          <svg class="feather">
+            <use href="{{ '/dep/feather-sprite.svg' | url(true) }}#{{ btn.icon }}"/>
+          </svg>
+          <span>{{ btn.text }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
+
+<main class="<md:text-center md:grid grid-cols-2 justify-center px-6 pb-4 pt-10 w-4/5 mx-auto">
+  <p class="text-md px-4.5 pb-4">{{ features | join(', ') }}</p>
+
+  {% for img in screenshots %}
+    <div class="w-full row-span-3" data-tilt>
+      <img src="{{ img.src | url(true) }}" title="" class="w-full">
+    </div>
+  {% endfor %}
+  <script type="module" src="{{ '/scripts/tilt-element.js' | url(true) }}"></script>
+  
+  <footer class="text-md px-4.5 row-span-3">
+    {{ summary }} <br>
+    Created free and open source by <a href="https://dragonwocky.me/" class="link">dragonwocky</a>.
+  </footer>
+</main>
+

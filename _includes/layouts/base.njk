@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en" class="h-full w-full hidden">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% if title %}{{ title }} | {% endif %}notion-enhancer</title>
+    <link href="/media/colour-x32.png" rel="icon" type="image/png" sizes="32x32">
+    <meta name="description" content="{{ description }}">
+    
+    <meta property="og:image" content="{{ '/media/colour-x512.png' | url(true) }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ '/' | url(true) }}">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="{{ '/media/colour-x512.png' | url(true) }}">
+    <meta name="twitter:creator" content="@dragonwocky">
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/windi.css' | url(true) }}">
+
+  </head>
+
+  <body class="min-h-full w-full flex flex-col font-sans bg-main">
+    {{ content | safe }}
+
+    <button id="toggle-theme" class="
+      box-content z-9 bottom-4 right-4 h-4 w-4 fixed
+      shadow p-2 group bg-interactive rounded-full
+      border border-dark-100 dark:border-dark-50
+    ">
+      <span class="tooltip right-10 bottom-0.5">Toggle theme</span>
+      <svg class="feather">
+        <use href="{{ '/dep/feather-sprite.svg' | url(true) }}#sun"/>
+      </svg>
+    </button>
+    <script type="module" src="{{ '/scripts/toggle-theme.js' | url(true) }}"></script>
+  </body>
+</html>
