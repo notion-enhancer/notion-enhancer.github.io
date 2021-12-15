@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+---
+
+<header class="flex <sm:flex-col sm:flex-row px-6 py-6 bg-secondary">
+  <a href="/" class="flex-shrink-0 items-center <sm:(text-center flex flex-col) sm:grid">
+    <img src="{{ site_icon | url }}" class="col-span-1 row-span-2 h-18 w-18 <sm:mb-4 sm:mr-4">
+    <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
+    <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
+  </a>
+  <nav class="sm:ml-auto">
+    <ul class="flex flex-row flex-wrap justify-center sm:(items-center h-full) <sm:(mt-6 max-w-prose)">
+      {% for btn in nav %}
+      <li class="p-1">
+        <a href="{{ btn.url | url }}" class="button text-sm">
+          <svg class="feather">
+            <use href="{{ '/dep/feather-sprite.svg' | url }}#{{ btn.icon }}"/>
+          </svg>
+          <span>{{ btn.text }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>
+

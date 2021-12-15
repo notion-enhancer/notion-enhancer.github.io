@@ -1,0 +1,20 @@
+site_icon: /media/animated.gif
+site_name: notion-enhancer
+site_description: an enhancer/customiser for the all-in-one productivity workspace notion.so
+
+nav:
+  - text: Installation
+    icon: download
+    url: /getting-started/installation
+  - text: Documentation
+    icon: book
+    url: /documentation/general-concepts
+  - text: Community
+    icon: message-circle
+    url: https://discord.gg/sFWPXtA
+  - text: Source Code
+    icon: github
+    url: https://github.com/notion-enhancer
+  - text: Donate
+    icon: coffee
+    url: https://buy.stripe.com/00gdR93R6csIgDKeUV
