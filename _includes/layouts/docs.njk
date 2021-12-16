@@ -30,39 +30,67 @@ sidebar:
   </nav>
 </header>
 
-<main class="flex-grow flex <md:flex-col">
+<main class="flex-grow flex <md:flex-col overflow-hidden">
 
-<aside id="menu" class="
-  pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-main
-  <md:(absolute top-0 left-0 transform -translate-x-64) flex-shrink-0
-">
-  <ul>
-  {% for section in sidebar %}
-    <li>
-      <p class="mt-6 mb-2"><strong>{{ search.data(section).section }}</strong></p>
-      <ul>
-      {% for page in search.pages(section, "order title") %}
-        <li>
-        {% if page.data.url == url %}
-          <a aria-current="page" aria-description="{{ page.data.description }}" href="{{ page.data.url }}" 
-            class="border-l border-primary pl-3 py-1 text-sm text-primary"
-          >{{ page.data.title | md(true) | safe }}</a>
-        {% else %}
-          <a aria-description="{{ page.data.description }}" href="{{ page.data.url }}" class="
-            border-l border-dim pl-3 py-1 text-sm transition duration-200
-            text-dim hover:text-primary
-          ">{{ page.data.title | md(true) | safe }}</a>
-        {% endif %}
-        </li>
-      {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-  </ul>
-</aside>
+  <aside id="menu" class="
+    pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-main
+    <md:(absolute top-0 left-0 transform -translate-x-64) flex-shrink-0
+    overflow-y-auto
+  ">
+    <ul>
+    {% for section in sidebar %}
+      <li>
+        <p class="mt-6 mb-2"><strong>{{ search.data(section).section }}</strong></p>
+        <ul>
+        {% for page in search.pages(section, "order title") %}
+          <li>
+          {% if page.data.url == url %}
+            <a aria-current="page" aria-description="{{ page.data.description }}" href="{{ page.data.url }}" 
+              class="border-l border-primary pl-3 py-1 text-sm text-primary"
+            >{{ page.data.title | md(true) | safe }}</a>
+          {% else %}
+            <a aria-description="{{ page.data.description }}" href="{{ page.data.url }}" class="
+              border-l border-dim pl-3 py-1 text-sm transition duration-200
+              text-dim hover:text-primary
+            ">{{ page.data.title | md(true) | safe }}</a>
+          {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+    </ul>
+  </aside>
 
-<article class="px-10 py-8 w-full <md:flex-grow">
-  {{ content | safe }}
-</article>
+  <article class="px-10 py-8 w-full min-h-full flex flex-col <md:flex-grow overflow-y-auto">
+    <div class="prose flex-grow">
+      {{ content | safe }}
+    </div>
+
+    {% if edit_url %}
+      <a href="{{ edit_url }}{{ sourceFile }}" class="link flex mt-8 items-center space-x-3">
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#edit-3"/>
+        </svg>
+        <span>Edit this page</span>
+      </a>
+    {% endif %}
+
+    <footer class="max-w-prose flex border-dim border-t mt-8 pt-8">
+      {%- set prev = search.previousPage(url, "url!=/", "section_order order title") %}
+      {%- if prev %}
+      <a href="{{ prev.data.url }}" rel="prev" class="link">
+        ← {{ prev.data.title | md(true) | safe }}
+      </a>
+      {% endif %}
+
+      {%- set next = search.nextPage(url, "url!=/", "section_order order title") %}
+      {%- if next %}
+      <a href="{{ next.data.url }}" rel="next" class="link ml-auto">
+        {{ next.data.title | md(true) | safe }} →
+      </a>
+      {% endif %}
+    </footer>
+  </article>
 
 </main>

@@ -26,10 +26,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/windi.css">
+    <link rel="stylesheet" href="/app.css">
     <script type="module" src="/app.js"></script>
   </head>
 
-  <body class="min-h-full w-full flex flex-col font-sans bg-main">
+  <body class="min-h-full w-full flex flex-col font-sans bg-main h-full overflow-hidden">
     {{ content | safe }}
 
     <div id="floating-buttons" class="fixed bottom-4 right-4 z-9 flex flex-col">

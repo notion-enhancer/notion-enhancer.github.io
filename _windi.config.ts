@@ -4,7 +4,8 @@
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-import { defineConfig } from "https://esm.sh/windicss@3.1.2/helpers";
+import { defineConfig } from "https://cdn.skypack.dev/windicss@3.3.0/helpers";
+import typography from "https://cdn.skypack.dev/windicss@3.3.0/plugin/typography";
 
 export default defineConfig({
   preflight: true,
@@ -15,18 +16,9 @@ export default defineConfig({
         sans: "'Inter var', Inter, sans-serif",
         mono: "Fira Code, monospace",
       },
-      colors: {
-        notion: {
-          light: "#fff",
-          "light-secondary": "rgb(247, 246, 243)",
-          "light-card": "#fff",
-          dark: "rgb(47, 52, 55)",
-          "dark-secondary": "rgb(55, 60, 63)",
-          "dark-card": "rgb(63, 68, 71)",
-        },
-      },
     },
   },
+  plugins: [typography({ dark: true })],
   shortcuts: {
     "bg-main": `
       transition
@@ -38,9 +30,10 @@ export default defineConfig({
       bg-light-900 text-dark-900
       dark:(bg-dark-900 text-light-900)
       `,
-    "bg-interactive": `
-      transition bg-light-700 text-dark-900 hover:bg-light-600
-      dark:(bg-dark-700 text-light-900 hover:bg-dark-600)
+    "bg-card": `
+      transition
+      bg-light-700 text-dark-900
+      dark:(bg-dark-500 text-light-900)
     `,
 
     "text-primary": `text-violet-600 dark:text-violet-300`,
@@ -52,11 +45,12 @@ export default defineConfig({
     "button": `
       transition
       flex space-x-3 items-center px-4 py-3 rounded-md
-      bg-interactive border border-dim
+      bg-card hover:(bg-light-600 dark:bg-dark-600)
+      border border-dim
     `,
     "button-floating": `
       box-content h-4 w-4 p-2 mt-2 shadow rounded-full
-      relative bg-interactive border border-dim
+      relative bg-card hover:(bg-light-600 dark:bg-dark-600) border border-dim
     `,
 
     "tooltip": `
