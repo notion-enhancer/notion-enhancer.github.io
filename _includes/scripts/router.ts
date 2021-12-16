@@ -24,7 +24,9 @@ const promisifyAnimation = (
 };
 
 let _currentRoute = location.pathname;
-const postRouteCleanup = () => {
+const _requestCache = new Map(),
+  _responseCache = new Map(),
+  postRouteCleanup = () => {
     _currentRoute = location.pathname;
     _routeListeners.forEach((handler) => handler());
     // remove e.g. success messages from url
@@ -39,49 +41,42 @@ const postRouteCleanup = () => {
     $progressBar.style.top = "0";
     $progressBar.style.left = "0";
     $progressBar.style.background = "rgba(147,197,253)";
-    const animateProgress = async (percentage: number) => {
+    const animateProgress = async (percentage: number, duration = 500) => {
       await promisifyAnimation($progressBar, [
         [{ width: $progressBar.style.width }, { width: `${percentage}%` }],
-        { duration: 500, easing: "ease-out" },
+        { duration, easing: "ease-out" },
       ]);
       $progressBar.style.width = `${percentage}%`;
     };
-    await animateProgress(10);
 
-    (<HTMLElement> document.activeElement)?.blur?.();
-    const res = (await destination);
+    let body = _responseCache.get(destination);
+    const animation = body ? 1 : animateProgress(100),
+      res = (await destination);
+    if (!body) {
+      body = await res.text();
+      _responseCache.set(destination, body);
+    }
     history.pushState(null, "", res.url);
 
-    const reader = (res.body as ReadableStream<Uint8Array>).getReader(),
-      contentLength = +(res.headers.get("Content-Length") || 0),
-      receivedChunks = new Uint8Array(contentLength);
-    let position = 0;
-    while (contentLength) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      if (value) {
-        receivedChunks.set(value, position);
-        position += value.length;
-      }
-      await animateProgress((position / contentLength) * 100);
-    }
-
-    const $destinationDocument = document.implementation.createHTMLDocument();
-    $destinationDocument.documentElement.innerHTML = new TextDecoder("utf-8")
-      .decode(receivedChunks);
+    (<HTMLElement> document.activeElement)?.blur?.();
+    const $destinationDocument = document.implementation.createHTMLDocument(),
+      $destinationHeader = $destinationDocument.querySelector("header"),
+      $destinationMain = $destinationDocument.querySelector("main"),
+      $originHeader = document.querySelector("header"),
+      $originMain = document.querySelector("main"),
+      semanticReplacement = $destinationHeader && $destinationMain &&
+        $originHeader && $originMain;
+    $destinationDocument.documentElement.innerHTML = body;
     document.title = $destinationDocument.title;
-    await promisifyAnimation($progressBar, [
-      [{ opacity: 1 }, { opacity: 0.5 }],
-      { duration: 250, easing: "ease-out" },
-    ]);
-    $progressBar.style.opacity = "0.5";
-    (document.querySelector("#root") || document.body).replaceWith(
-      $destinationDocument.querySelector("#root") || $destinationDocument.body,
-    );
+    if (semanticReplacement) {
+      $originHeader.replaceWith($destinationHeader);
+      $originMain.replaceWith($destinationMain);
+    } else document.body.replaceWith($destinationDocument.body);
 
     requestAnimationFrame(async () => {
+      await animation;
       await promisifyAnimation($progressBar, [
-        [{ opacity: 0.5 }, { opacity: 0 }],
+        [{ opacity: 1 }, { opacity: 0 }],
         { duration: 250, easing: "ease-out" },
       ]);
       $progressBar.remove();
@@ -89,11 +84,16 @@ const postRouteCleanup = () => {
     });
   };
 
-const routers = [
+interface Router {
+  selector: string;
+  click?: EventListenerOrEventListenerObject;
+  hover?: EventListenerOrEventListenerObject;
+}
+const routers: Router[] = [
   {
     // forms
     selector: 'form [type="submit"]',
-    handler: (event: Event) => {
+    click: (event: Event) => {
       event.preventDefault();
       const selector = 'form [type="submit"]',
         $submit = (<HTMLElement> event.target).closest(selector),
@@ -109,19 +109,30 @@ const routers = [
   {
     // links
     selector: 'a[href]:not([href^="#"]):not([href*=":"])',
-    handler: (event: Event) => {
+    click: (event: Event) => {
       event.preventDefault();
       if (!event.target) return;
       const selector = 'a[href]:not([href^="#"]):not([href*=":"])',
         $anchor = (<HTMLElement> event.target).closest(selector),
         href = (<HTMLElement> $anchor).getAttribute("href") as string;
-      if (location.pathname !== href) triggerRouteChange(fetch(href));
+      if (location.pathname !== href) {
+        triggerRouteChange(_requestCache.get(href) ?? fetch(href));
+      }
+    },
+    hover: (event: Event) => {
+      if (!event.target) return;
+      const selector = 'a[href]:not([href^="#"]):not([href*=":"])',
+        $anchor = (<HTMLElement> event.target).closest(selector),
+        href = (<HTMLElement> $anchor).getAttribute("href") as string;
+      if (location.pathname !== href && !_requestCache.has(href)) {
+        _requestCache.set(href, fetch(href));
+      }
     },
   },
   {
     // ids
     selector: 'a[href^="#"]',
-    handler: (event: Event) => {
+    click: (event: Event) => {
       event.preventDefault();
       if (!event.target) return;
       const selector = 'a[href^="#"]',
@@ -150,8 +161,14 @@ const documentObserverEvents: MutationRecord[] = [],
       if ($target instanceof HTMLElement) {
         for (const router of routers) {
           $target.querySelectorAll(router.selector).forEach(($trigger) => {
-            $trigger.removeEventListener("click", router.handler);
-            $trigger.addEventListener("click", router.handler);
+            if (router.click) {
+              $trigger.removeEventListener("click", router.click);
+              $trigger.addEventListener("click", router.click);
+            }
+            if (router.hover) {
+              $trigger.removeEventListener("click", router.hover);
+              $trigger.addEventListener("click", router.hover);
+            }
           });
         }
       }
@@ -171,4 +188,10 @@ documentObserver.observe(document.documentElement, {
   attributes: true,
 });
 
-postRouteCleanup();
+let _readyStateCalled = false;
+document.addEventListener("readystatechange", (_ev) => {
+  if (document.readyState === "complete" && !_readyStateCalled) {
+    requestIdleCallback(postRouteCleanup);
+    _readyStateCalled = true;
+  }
+});

@@ -43,21 +43,31 @@ export default defineConfig({
       dark:(bg-dark-700 text-light-900 hover:bg-dark-600)
     `,
 
+    "text-primary": `text-violet-600 dark:text-violet-300`,
+    "text-dim": `text-gray-700 dark:text-gray-400`,
+
+    "border-primary": `border-violet-600 dark:border-violet-300`,
+    "border-dim": `border-gray-300 dark:border-dark-400`,
+
     "button": `
       transition
-      flex space-x-3 items-center px-4 py-3 rounded-md border
-      bg-interactive border-dark-100 dark:border-dark-50
+      flex space-x-3 items-center px-4 py-3 rounded-md
+      bg-interactive border border-dim
+    `,
+    "button-floating": `
+      box-content h-4 w-4 p-2 mt-2 shadow rounded-full
+      relative bg-interactive border border-dim
+    `,
+
+    "tooltip": `
+      absolute pointer-events-none rounded px-2 py-1 w-max
+      text-sm font-medium transition bg-dark-900 text-light-900
+      dark:(bg-light-900 text-dark-900)
     `,
 
     "feather": `
       w-4 h-4 fill-none stroke-current
       stroke-2 stroke-cap-round stroke-join-round
-    `,
-
-    "tooltip": `
-      absolute pointer-events-none rounded px-2 py-1 w-max
-      text-sm font-medium opacity-0 group-hover:opacity-100
-      transition bg-dark-900 text-light-900 dark:(bg-light-900 text-dark-900)
     `,
 
     "link": `

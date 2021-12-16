@@ -3,12 +3,6 @@ site_name: notion-enhancer
 site_description: an enhancer/customiser for the all-in-one productivity workspace notion.so
 
 nav:
-  - text: Installation
-    icon: download
-    url: /getting-started/installation
-  - text: Documentation
-    icon: book
-    url: /documentation/general-concepts
   - text: Community
     icon: message-circle
     url: https://discord.gg/sFWPXtA

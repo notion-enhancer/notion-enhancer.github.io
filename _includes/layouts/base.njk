@@ -7,37 +7,57 @@
 
     <title>{% if title %}{{ title }} | {% endif %}notion-enhancer</title>
     <link href="/media/colour-x32.png" rel="icon" type="image/png" sizes="32x32">
-    <meta name="description" content="{{ description }}">
+    <meta name="description" {% if description %}
+      content="{{ description }}" {% else %} content="{{ site_description }}"
+    {% endif %}>
     
-    <meta property="og:image" content="{{ '/media/colour-x512.png' | url }}">
+    <meta property="og:image" content="https://notion-enhancer.github.io/media/colour-x512.png">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="{{ '/' | url }}">
+    <meta name="twitter:url" content="https://notion-enhancer.github.io/">
     <meta name="twitter:title" content="{{ title }}">
-    <meta name="twitter:description" content="{{ description }}">
-    <meta name="twitter:image" content="{{ '/media/colour-x512.png' | url }}">
+    <meta name="twitter:description" {% if description %}
+      content="{{ description }}" {% else %} content="{{ site_description }}"
+    {% endif %}>
+    <meta name="twitter:image" content="https://notion-enhancer.github.io/media/colour-x512.png">
     <meta name="twitter:creator" content="@dragonwocky">
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/windi.css' | url }}">
+    <link rel="stylesheet" href="/windi.css">
+    <script type="module" src="/app.js"></script>
   </head>
 
   <body class="min-h-full w-full flex flex-col font-sans bg-main">
     {{ content | safe }}
 
-    <button id="toggle-theme" class="
-      box-content z-9 bottom-4 right-4 h-4 w-4 fixed
-      shadow p-2 group bg-interactive rounded-full
-      border border-dark-100 dark:border-dark-50
-    ">
-      <span class="tooltip right-10 bottom-0.5">Toggle theme</span>
-      <svg class="feather">
-        <use href="{{ '/dep/feather-sprite.svg' | url }}#sun"/>
-      </svg>
-    </button>
+    <div id="floating-buttons" class="fixed bottom-4 right-4 z-9 flex flex-col">
+      <button id="toggle-search" class="button-floating group">
+        <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+          Search
+        </span>
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#search"/>
+        </svg>
+      </button>
+      <button id="toggle-menu" class="button-floating group md:hidden">
+        <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+          Toggle menu
+        </span>
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#menu"/>
+        </svg>
+      </button>
+      <button id="toggle-theme" class="button-floating group">
+        <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+          Toggle theme
+        </span>
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#moon"/>
+        </svg>
+      </button>
+    </div>
+
   </body>
-  
-  <script type="module" src="{{ '/scripts/app.js' | url }}"></script>
 </html>

@@ -1,6 +1,5 @@
 import lume from "https:/deno.land/x/lume@v1.3.1/mod.ts";
 
-import relativeUrls from "https:/deno.land/x/lume@v1.3.1/plugins/relative_urls.ts";
 import resolveUrls from "https:/deno.land/x/lume@v1.3.1/plugins/resolve_urls.ts";
 
 import bundler from "https:/deno.land/x/lume@v1.3.1/plugins/bundler.ts";
@@ -19,7 +18,6 @@ site.copy("_includes/media", "media");
 site.copy("_includes/screenshots", "screenshots");
 site.loadAssets([".ts"]);
 
-site.use(relativeUrls());
 site.use(resolveUrls());
 
 site.use(bundler());

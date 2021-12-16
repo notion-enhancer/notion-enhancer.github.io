@@ -2,6 +2,14 @@
 layout: layouts/base.njk
 description: an enhancer/customiser for the all-in-one productivity workspace notion.so
 
+buttons:
+  - text: Installation
+    icon: download
+    url: /getting-started/installation
+  - text: Documentation
+    icon: book
+    url: /documentation/general-concepts
+
 features:
   - In-app tabs
   - colour themes
@@ -24,19 +32,29 @@ screenshots:
 summary: Available on Mac, Windows, Linux or in the browser.
 ---
 
-<header class="flex flex-col items-center px-6 pt-24 pb-9 sm:pb-18 bg-secondary">
+<header class="flex flex-col items-center px-6 pt-24 pb-9 sm:pb-18 bg-secondary border-b-1 border-dim">
   <div class="items-center <sm:(text-center flex flex-col) sm:grid">
-    <img src="{{ site_icon | url }}" class="col-span-1 row-span-2 h-36 w-36 <sm:mb-4 sm:mr-6">
+    <img src="{{ site_icon }}" class="col-span-1 row-span-2 h-36 w-36 <sm:mb-4 sm:mr-6">
     <h1 class="col-start-2 mt-auto font-mono font-bold text-2xl sm:text-3xl">{{ site_name }}</h1>
     <p class="col-start-2 mb-auto text-lg max-w-xs sm:max-w-sm">{{ site_description }}</p>
   </div>
   <nav>
     <ul class="flex flex-row flex-wrap justify-center mt-6 sm:mt-9 <lg:max-w-prose">
+      {% for btn in buttons %}
+      <li class="p-1">
+        <a href="{{ btn.url }}" class="button">
+          <svg class="feather">
+            <use href="/dep/feather-sprite.svg#{{ btn.icon }}"/>
+          </svg>
+          <span>{{ btn.text }}</span>
+        </a>
+      </li>
+      {% endfor %}
       {% for btn in nav %}
       <li class="p-1">
-        <a href="{{ btn.url | url }}" class="button">
+        <a href="{{ btn.url }}" class="button">
           <svg class="feather">
-            <use href="{{ '/dep/feather-sprite.svg' | url }}#{{ btn.icon }}"/>
+            <use href="/dep/feather-sprite.svg#{{ btn.icon }}"/>
           </svg>
           <span>{{ btn.text }}</span>
         </a>
@@ -51,10 +69,9 @@ summary: Available on Mac, Windows, Linux or in the browser.
 
   {% for img in screenshots %}
     <div class="w-full row-span-3" data-tilt>
-      <img src="{{ img.src | url }}" title="" class="w-full">
+      <img src="{{ img.src }}" title="" class="w-full">
     </div>
   {% endfor %}
-  <script type="module" src="{{ '/scripts/tilt-element.js' | url }}"></script>
   
   <footer class="text-md px-4.5 row-span-3">
     {{ summary }} <br>
