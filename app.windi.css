@@ -5,7 +5,7 @@
  */
 
 ::selection {
-  @apply text-white bg-violet-600 dark:(text-black bg-violet-300);
+  @apply bg-primary;
 }
 
 ::-webkit-scrollbar {
@@ -16,6 +16,18 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-hover bg-gray-400 dark:bg-dark-300;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+aside[aria-label='search'] [aria-label='results']:empty::after {
+  content: 'No results found. Try entering a different search term?';
+  @apply text-sm text-dim;
 }
 
 /* pad elem #hash scroll at top */

@@ -10,45 +10,45 @@
 
 const menuSelector = "aside[aria-label='menu']",
   btnSelector = "[data-action='toggle-menu']",
-  isMenuOpen = () => {
+  isOpen = () => {
     const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     return !!$menu.style.getPropertyValue("--tw-translate-x");
   },
-  openMenu = () => {
+  open = () => {
     const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     $menu.style.setProperty("--tw-translate-x", "0");
   },
-  closeMenu = () => {
+  close = () => {
     const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     $menu.style.removeProperty("--tw-translate-x");
   },
-  toggleMenu = () => {
-    if (isMenuOpen()) {
-      closeMenu();
-    } else openMenu();
+  toggle = () => {
+    if (isOpen()) {
+      close();
+    } else open();
   };
 
 export const initMenuToggle = () => {
-  const $toggleMenu = <HTMLElement> document.querySelector(btnSelector),
+  const $menuToggle = <HTMLElement> document.querySelector(btnSelector),
     $menu = <HTMLElement> document.querySelector(menuSelector),
     $header = <HTMLElement> document.querySelector("header"),
     $article = <HTMLElement> document.querySelector("article");
 
   if (!$menu) {
-    $toggleMenu.style.display = "none";
+    $menuToggle.style.display = "none";
     return;
-  } else $toggleMenu.style.display = "";
+  } else $menuToggle.style.display = "";
 
-  $toggleMenu.addEventListener("click", toggleMenu);
+  $menuToggle.addEventListener("click", toggle);
   $menu.querySelectorAll("a").forEach(($a) => {
-    $a.removeEventListener("click", closeMenu);
-    $a.addEventListener("click", closeMenu);
+    $a.removeEventListener("click", close);
+    $a.addEventListener("click", close);
   });
-  $header.removeEventListener("click", closeMenu);
-  $header.addEventListener("click", closeMenu);
-  $article.removeEventListener("click", closeMenu);
-  $article.addEventListener("click", closeMenu);
+  $header.removeEventListener("click", close);
+  $header.addEventListener("click", close);
+  $article.removeEventListener("click", close);
+  $article.addEventListener("click", close);
 };

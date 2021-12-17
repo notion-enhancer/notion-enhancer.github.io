@@ -30,9 +30,14 @@ const _requestCache = new Map(),
     _currentRoute = location.pathname;
     _routeListeners.forEach((handler) => handler());
     // remove e.g. success messages from url
-    history.replaceState(null, "", location.pathname);
+    if (location.hash) {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView(true);
+      history.replaceState(null, "", location.hash);
+    } else {
+      history.replaceState(null, "", location.pathname);
+    }
   },
-  triggerRouteChange = async (destination: Promise<Response>) => {
+  triggerRouteChange = async (destination: string, res: Promise<Response>) => {
     const $progressBar = document.createElement("div");
     document.body.append($progressBar);
     $progressBar.style.position = "absolute";
@@ -49,14 +54,13 @@ const _requestCache = new Map(),
       $progressBar.style.width = `${percentage}%`;
     };
 
-    let body = _responseCache.get(destination);
-    const animation = body ? 1 : animateProgress(100),
-      res = (await destination);
+    let body = _responseCache.get(res);
+    const animation = body ? 0 : animateProgress(100);
     if (!body) {
-      body = await res.text();
-      _responseCache.set(destination, body);
+      body = await (await res).text();
+      _responseCache.set(res, body);
     }
-    history.pushState(null, "", res.url);
+    history.pushState(null, "", destination);
 
     (<HTMLElement> document.activeElement)?.blur?.();
     const $destinationDocument = document.implementation.createHTMLDocument();
@@ -76,7 +80,6 @@ const _requestCache = new Map(),
         $originMain.replaceWith($destinationMain);
       }
     } else document.body.replaceWith($destinationDocument.body);
-    console.log(semanticReplacement);
 
     requestAnimationFrame(async () => {
       await animation;
@@ -104,6 +107,7 @@ const routers: Router[] = [
         $submit = (<HTMLElement> event.target).closest(selector),
         $form = (<HTMLInputElement> $submit).form as HTMLFormElement;
       triggerRouteChange(
+        $form.target,
         fetch($form.target, {
           body: new FormData($form),
           method: $form.method,
@@ -121,7 +125,7 @@ const routers: Router[] = [
         $anchor = (<HTMLElement> event.target).closest(selector),
         href = (<HTMLElement> $anchor).getAttribute("href") as string;
       if (location.pathname !== href) {
-        triggerRouteChange(_requestCache.get(href) ?? fetch(href));
+        triggerRouteChange(href, _requestCache.get(href) ?? fetch(href));
       }
     },
     hover: (event: Event) => {
@@ -155,7 +159,7 @@ globalThis.addEventListener("popstate", (_event) => {
       document.getElementById(location.hash.slice(1))?.scrollIntoView(true);
     }
     document.documentElement.scrollTop = 0;
-  } else triggerRouteChange(fetch(location.href));
+  } else triggerRouteChange(location.href, fetch(location.href));
 });
 
 const documentObserverEvents: MutationRecord[] = [],

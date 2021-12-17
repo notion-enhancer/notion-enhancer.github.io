@@ -9,7 +9,7 @@ sidebar:
   - tools
 ---
 
-<header class="flex <sm:flex-col sm:flex-row px-6 py-6 bg-secondary border-b-1 border-dim">
+<header class="flex <sm:flex-col sm:flex-row px-6 py-6 bg-header border-b-1 border-dim">
   <a href="/" class="flex-shrink-0 items-center <sm:(text-center flex flex-col) sm:grid">
     <img src="{{ site_icon }}" class="col-span-1 row-span-2 h-18 w-18 <sm:mb-4 sm:mr-4">
     <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
@@ -34,7 +34,7 @@ sidebar:
 <main class="flex-grow flex <md:flex-col overflow-hidden">
 
   <aside aria-label="menu" class="
-    pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-main
+    pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-body
     <md:(absolute top-0 left-0 transform -translate-x-64) flex-shrink-0
     overflow-y-auto
   ">
@@ -48,12 +48,12 @@ sidebar:
           {% if page.data.url == url %}
             <a aria-current="page" aria-description="{{ page.data.description }}" href="{{ page.data.url }}" 
               class="border-l border-primary pl-3 py-1 text-sm text-primary"
-            >{{ page.data.title | md(true) | safe }}</a>
+            >{{ page.data.title }}</a>
           {% else %}
             <a aria-description="{{ page.data.description }}" href="{{ page.data.url }}" class="
               border-l border-dim pl-3 py-1 text-sm transition duration-200
               text-dim hover:text-primary
-            ">{{ page.data.title | md(true) | safe }}</a>
+            ">{{ page.data.title }}</a>
           {% endif %}
           </li>
         {% endfor %}
@@ -69,13 +69,14 @@ sidebar:
     </div>
 
     {% if edit_url %}
-      <a href="{{ edit_url }}{{ filename }}" class="mt-8 link flex items-center space-x-3">
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#edit-3"/>
-        </svg>
-        <span>Edit this page</span>
-      </a>
+    <a href="{{ edit_url }}{{ filename }}" class="link flex items-center space-x-3">
+      <svg class="feather">
+        <use href="/dep/feather-sprite.svg#edit-3"/>
+      </svg>
+      <span>Edit this page</span>
+    </a>
     {% endif %}
+
 
     <footer class="max-w-prose flex border-dim border-t mt-8 pt-8">
       {%- set prev = search.previousPage(url, "url!=/", "section_order order title") %}
@@ -84,14 +85,14 @@ sidebar:
         <svg class="feather">
           <use href="/dep/feather-sprite.svg#arrow-left"/>
         </svg>
-        <span>{{ prev.data.title | md(true) | safe }}</span>
+        <span>{{ prev.data.title }}</span>
       </a>
       {% endif %}
 
       {%- set next = search.nextPage(url, "url!=/", "section_order order title") %}
       {%- if next %}
       <a href="{{ next.data.url }}" rel="next" class="ml-auto link flex items-center space-x-3">
-        <span>{{ next.data.title | md(true) | safe }}</span>
+        <span>{{ next.data.title }}</span>
         <svg class="feather">
           <use href="/dep/feather-sprite.svg#arrow-right"/>
         </svg>
@@ -101,10 +102,10 @@ sidebar:
   </article>
 
   <aside aria-label="table of contents" class="
-    pt-2 pb-8 px-4 w-64 min-h-full border-r-1 border-dim text-base bg-main
+    pt-2 pb-8 px-4 w-64 min-h-full border-r-1 border-dim text-base bg-body
     <lg:hidden flex-shrink-0 overflow-y-auto
   ">
-    <p class="mt-6 mb-2 ml-3"><strong>Table Of Contents</strong></p>
+    <p class="mt-6 mb-2 ml-3"><strong>Table of Contents</strong></p>
     <ul>
     {% for heading in table_of_contents %}
       <li>
@@ -113,7 +114,7 @@ sidebar:
           inline-flex w-full items-center justify-between
           text-sm text-dim py-2 px-3 rounded-md
           hover:(text-primary bg-light-600 dark:bg-dark-500)
-        ">{{ heading.text | md(true) | safe }}</a>
+        ">{{ heading.text }}</a>
       </li>
     {% endfor %}
     </ul>

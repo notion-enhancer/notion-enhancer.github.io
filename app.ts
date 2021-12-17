@@ -9,10 +9,12 @@
 "use strict";
 
 import { onRouteChange } from "./_includes/scripts/router.ts";
-import { initMenuToggle } from "./_includes/scripts/menu-toggle.ts";
-import { initThemeToggle } from "./_includes/scripts/theme-toggle.ts";
-import { tiltElements } from "./_includes/scripts/tilt-element.ts";
+import { initSearch } from "./_includes/scripts/search.ts";
+import { initMenuToggle } from "./_includes/scripts/menu.ts";
+import { initThemeToggle } from "./_includes/scripts/theme.ts";
+import { tiltElements } from "./_includes/scripts/tilt.ts";
 
+onRouteChange(initSearch);
 onRouteChange(initMenuToggle);
 onRouteChange(initThemeToggle);
 onRouteChange(tiltElements);

@@ -6,6 +6,8 @@
 
 import MarkdownIt from "https://cdn.skypack.dev/markdown-it?dts";
 
+// displays language or additional meta e.g. filename
+// at the top of code blocks
 export default (md: MarkdownIt) => {
   const fence = md.renderer.rules.fence!;
   // deno-lint-ignore no-explicit-any

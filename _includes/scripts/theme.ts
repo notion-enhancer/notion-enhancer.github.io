@@ -8,7 +8,7 @@
 
 "use strict";
 
-const onClick = () => {
+const toggle = () => {
     document.documentElement.classList.toggle("dark");
     const mode = document.documentElement.classList.contains("dark");
     localStorage["theme"] = mode ? "dark" : "light";
@@ -25,6 +25,6 @@ export const initThemeToggle = () => {
   if (storedMode === "dark" || (!storedMode && mediaMode === "dark")) {
     document.documentElement.classList.add("dark");
   }
-  $themeToggle.removeEventListener("click", onClick);
-  $themeToggle.addEventListener("click", onClick);
+  $themeToggle.removeEventListener("click", toggle);
+  $themeToggle.addEventListener("click", toggle);
 };

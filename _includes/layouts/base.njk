@@ -30,7 +30,7 @@
     <script type="module" src="/app.js"></script>
   </head>
 
-  <body class="min-h-full w-full flex flex-col font-sans bg-main h-full overflow-hidden">
+  <body class="min-h-full w-full flex flex-col font-sans bg-body h-full overflow-hidden">
     {{ content | safe }}
 
     <div class="fixed bottom-4 right-4 z-9 flex flex-col">
@@ -60,10 +60,48 @@
       </button>
     </div>
 
-    <aside aria-label="search" class="fixed top-0">
-      <div data-action="close-search" class="fixed top-0 w-full h-full z-50 bg-white
-      bg-opacity-20 dark:(bg-black bg-opacity-60)"></div>
-      <div class="z-51 w-prose h-2/3 bg-dark-900 rounded-md">
+    <aside aria-label="search" class="
+      fixed top-0 h-full w-full flex justify-center p-4 z-10
+      sm:(py-12 px-8) opacity-0 pointer-events-none transition duration-50
+    ">
+      <div data-action="close-search" class="
+        fixed top-0 w-full h-full bg-white
+        bg-opacity-60 dark:(bg-black bg-opacity-60)
+      "></div>
+      <div class="z-11 max-w-prose w-full max-h-128 bg-body rounded-md shadow-lg overflow-hidden">
+        <label class="block m-4 relative">
+          <input type="search" name="site-search" aria-label="search the notion-enhancer documentation" class="
+            block w-full text-lg rounded-md bg-light-600 dark:bg-dark-500 py-3 pl-4 pr-22
+            transition ring-dim focus:ring-primary appearance-none placeholder-shown:sibling:opacity-0
+          " placeholder="Search docs...">
+          <svg data-action="clear-search" class="
+            feather absolute right-12 bottom-0 w-12 pl-3 pr-3 py-4
+            h-full transition hover:text-primary cursor-pointer
+          "><use href="/dep/feather-sprite.svg#x"/></svg>
+          <svg class="
+            feather absolute right-0 bottom-0 w-12 pl-3 pr-3 py-4
+            h-full bg-body rounded-r-md
+          "><use href="/dep/feather-sprite.svg#search"/></svg>
+        </label>
+
+        <div aria-label="results" class="px-4 mt-2 children:last:mb-2 h-full max-h-107 overflow-y-auto">
+          <ul>
+            <li data-placeholder class="search-result-section">Section</p>
+            <li data-placeholder>
+              <a href="/" class="search-result group">
+                <svg class="search-result-icon">
+                  <use href="/dep/feather-sprite.svg#file-text"/>
+                </svg>
+                <div class="font-medium">
+                  <p class="text-sm">Matching line of text with a
+                    <mark class="search-result-highlight">keywo</mark>rd
+                  </p>
+                  <p class="text-xs">Page</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </aside>
 

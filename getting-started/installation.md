@@ -47,6 +47,7 @@ _italicized text_
 - First item
 - Second item
 - Third item
+  - Nested item
 
 ### Code
 
