@@ -49,7 +49,7 @@ export const tiltElements = () => {
           `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
       $tilt.style.transform = transform;
     });
-    $tilt.addEventListener("mouseleave", (ev) => {
+    $tilt.addEventListener("mouseleave", (_ev) => {
       $tilt.style.transitionDuration = `${returnDuration}ms`;
       $tilt.style.transform = "";
     });
@@ -61,7 +61,7 @@ export const tiltElements = () => {
         $glow.style.top = `${ev.clientY - mouseGlow.height / 2}px`;
         $glow.style.left = `${ev.clientX - mouseGlow.width / 2}px`;
       });
-      $tilt.addEventListener("mouseleave", (ev) => {
+      $tilt.addEventListener("mouseleave", (_ev) => {
         $glow.style.transitionDuration = `${returnDuration}ms`;
         $glow.style.opacity = "0";
       });

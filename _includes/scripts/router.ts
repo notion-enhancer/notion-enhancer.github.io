@@ -59,19 +59,24 @@ const _requestCache = new Map(),
     history.pushState(null, "", res.url);
 
     (<HTMLElement> document.activeElement)?.blur?.();
-    const $destinationDocument = document.implementation.createHTMLDocument(),
-      $destinationHeader = $destinationDocument.querySelector("header"),
+    const $destinationDocument = document.implementation.createHTMLDocument();
+    $destinationDocument.documentElement.innerHTML = body;
+    const $destinationHeader = $destinationDocument.querySelector("header"),
       $destinationMain = $destinationDocument.querySelector("main"),
       $originHeader = document.querySelector("header"),
       $originMain = document.querySelector("main"),
       semanticReplacement = $destinationHeader && $destinationMain &&
         $originHeader && $originMain;
-    $destinationDocument.documentElement.innerHTML = body;
     document.title = $destinationDocument.title;
     if (semanticReplacement) {
-      $originHeader.replaceWith($destinationHeader);
-      $originMain.replaceWith($destinationMain);
+      if ($originHeader.innerHTML !== $destinationHeader.innerHTML) {
+        $originHeader.replaceWith($destinationHeader);
+      }
+      if ($originMain.innerHTML !== $destinationMain.innerHTML) {
+        $originMain.replaceWith($destinationMain);
+      }
     } else document.body.replaceWith($destinationDocument.body);
+    console.log(semanticReplacement);
 
     requestAnimationFrame(async () => {
       await animation;
@@ -156,7 +161,7 @@ globalThis.addEventListener("popstate", (_event) => {
 const documentObserverEvents: MutationRecord[] = [],
   handleDocumentMutations = (queue: MutationRecord[]) => {
     while (queue.length) {
-      const mutation = queue.shift() as MutationRecord,
+      const mutation = <MutationRecord> queue.shift(),
         $target = mutation.target;
       if ($target instanceof HTMLElement) {
         for (const router of routers) {

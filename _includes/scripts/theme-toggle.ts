@@ -9,13 +9,14 @@
 "use strict";
 
 const onClick = () => {
-  document.documentElement.classList.toggle("dark");
-  const mode = document.documentElement.classList.contains("dark");
-  localStorage["theme"] = mode ? "dark" : "light";
-};
+    document.documentElement.classList.toggle("dark");
+    const mode = document.documentElement.classList.contains("dark");
+    localStorage["theme"] = mode ? "dark" : "light";
+  },
+  btnSelector = "[data-action='toggle-theme']";
 
 export const initThemeToggle = () => {
-  const $$themeToggle = document.querySelector("#toggle-theme") as HTMLElement,
+  const $themeToggle = <HTMLElement> document.querySelector(btnSelector),
     mediaMode = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "",
@@ -24,6 +25,6 @@ export const initThemeToggle = () => {
   if (storedMode === "dark" || (!storedMode && mediaMode === "dark")) {
     document.documentElement.classList.add("dark");
   }
-  $$themeToggle.removeEventListener("click", onClick);
-  $$themeToggle.addEventListener("click", onClick);
+  $themeToggle.removeEventListener("click", onClick);
+  $themeToggle.addEventListener("click", onClick);
 };

@@ -1,5 +1,5 @@
 section: Developer Tools
-section_order: 4
+section_order: 5
 
 layout: layouts/docs.njk
 tags: tools

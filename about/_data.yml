@@ -1,5 +1,5 @@
 section: About
-section_order: 2
+section_order: 3
 
 layout: layouts/docs.njk
 tags: about

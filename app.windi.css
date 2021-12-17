@@ -18,6 +18,12 @@
   @apply bg-hover bg-gray-400 dark:bg-dark-300;
 }
 
+/* pad elem #hash scroll at top */
+.prose [id]::before {
+  content: ' ';
+  @apply block -mt-7.5 h-7.5 invisible pointer-events-none;
+}
+
 .prose hr {
   @apply border-dim !important;
 }
@@ -30,7 +36,8 @@
 }
 
 .prose code {
-  @apply bg-card font-normal text-dim text-[0.95em] py-1 px-2 rounded-md;
+  @apply bg-light-600 dark:bg-dark-500 rounded-md;
+  @apply font-normal text-dim text-[0.95em] py-1 px-2;
 }
 
 .prose blockquote {
@@ -51,7 +58,8 @@
 }
 
 .prose pre {
-  @apply bg-card text-dim rounded-md relative;
+  @apply transition bg-light-600 dark:bg-dark-500;
+  @apply text-dim rounded-md relative;
 }
 
 .prose pre[data-has-meta] {
@@ -59,7 +67,7 @@
 }
 .prose pre[data-has-meta] > div:first-child {
   @apply top-0 left-0 text-xs absolute py-0.75 px-2 rounded-br-sm;
-  @apply transition bg-light-600 dark:bg-dark-300;
+  @apply transition bg-light-700 dark:bg-dark-300;
 }
 
 /* https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css */

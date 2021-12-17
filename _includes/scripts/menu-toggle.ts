@@ -8,18 +8,20 @@
 
 "use strict";
 
-const isMenuOpen = () => {
-    const $menu = document.querySelector("aside#menu") as HTMLElement;
+const menuSelector = "aside[aria-label='menu']",
+  btnSelector = "[data-action='toggle-menu']",
+  isMenuOpen = () => {
+    const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     return !!$menu.style.getPropertyValue("--tw-translate-x");
   },
   openMenu = () => {
-    const $menu = document.querySelector("aside#menu") as HTMLElement;
+    const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     $menu.style.setProperty("--tw-translate-x", "0");
   },
   closeMenu = () => {
-    const $menu = document.querySelector("aside#menu") as HTMLElement;
+    const $menu = <HTMLElement> document.querySelector(menuSelector);
     if (!$menu) return false;
     $menu.style.removeProperty("--tw-translate-x");
   },
@@ -30,10 +32,10 @@ const isMenuOpen = () => {
   };
 
 export const initMenuToggle = () => {
-  const $toggleMenu = document.querySelector("#toggle-menu") as HTMLElement,
-    $menu = document.querySelector("aside#menu") as HTMLElement,
-    $header = document.querySelector("header") as HTMLElement,
-    $article = document.querySelector("article") as HTMLElement;
+  const $toggleMenu = <HTMLElement> document.querySelector(btnSelector),
+    $menu = <HTMLElement> document.querySelector(menuSelector),
+    $header = <HTMLElement> document.querySelector("header"),
+    $article = <HTMLElement> document.querySelector("article");
 
   if (!$menu) {
     $toggleMenu.style.display = "none";

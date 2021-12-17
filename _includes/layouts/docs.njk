@@ -3,6 +3,7 @@ layout: layouts/base.njk
 
 sidebar:
   - getting-started
+  - advanced
   - about
   - documentation
   - tools
@@ -14,7 +15,7 @@ sidebar:
     <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
     <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
   </a>
-  <nav class="sm:ml-auto">
+  <nav class="sm:ml-auto" aria-label="links">
     <ul class="flex flex-row flex-wrap justify-center sm:(items-center h-full) <sm:(mt-6 max-w-prose)">
       {% for btn in nav %}
       <li class="p-1">
@@ -32,7 +33,7 @@ sidebar:
 
 <main class="flex-grow flex <md:flex-col overflow-hidden">
 
-  <aside id="menu" class="
+  <aside aria-label="menu" class="
     pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-main
     <md:(absolute top-0 left-0 transform -translate-x-64) flex-shrink-0
     overflow-y-auto
@@ -68,7 +69,7 @@ sidebar:
     </div>
 
     {% if edit_url %}
-      <a href="{{ edit_url }}{{ sourceFile }}" class="link flex mt-8 items-center space-x-3">
+      <a href="{{ edit_url }}{{ filename }}" class="mt-8 link flex items-center space-x-3">
         <svg class="feather">
           <use href="/dep/feather-sprite.svg#edit-3"/>
         </svg>
@@ -79,18 +80,43 @@ sidebar:
     <footer class="max-w-prose flex border-dim border-t mt-8 pt-8">
       {%- set prev = search.previousPage(url, "url!=/", "section_order order title") %}
       {%- if prev %}
-      <a href="{{ prev.data.url }}" rel="prev" class="link">
-        ← {{ prev.data.title | md(true) | safe }}
+      <a href="{{ prev.data.url }}" rel="prev" class="link flex items-center space-x-3">
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#arrow-left"/>
+        </svg>
+        <span>{{ prev.data.title | md(true) | safe }}</span>
       </a>
       {% endif %}
 
       {%- set next = search.nextPage(url, "url!=/", "section_order order title") %}
       {%- if next %}
-      <a href="{{ next.data.url }}" rel="next" class="link ml-auto">
-        {{ next.data.title | md(true) | safe }} →
+      <a href="{{ next.data.url }}" rel="next" class="ml-auto link flex items-center space-x-3">
+        <span>{{ next.data.title | md(true) | safe }}</span>
+        <svg class="feather">
+          <use href="/dep/feather-sprite.svg#arrow-right"/>
+        </svg>
       </a>
       {% endif %}
     </footer>
   </article>
+
+  <aside aria-label="table of contents" class="
+    pt-2 pb-8 px-4 w-64 min-h-full border-r-1 border-dim text-base bg-main
+    <lg:hidden flex-shrink-0 overflow-y-auto
+  ">
+    <p class="mt-6 mb-2 ml-3"><strong>Table Of Contents</strong></p>
+    <ul>
+    {% for heading in table_of_contents %}
+      <li>
+        <a href="#{{ heading.slug }}" class="
+          py-1 transition duration-100
+          inline-flex w-full items-center justify-between
+          text-sm text-dim py-2 px-3 rounded-md
+          hover:(text-primary bg-light-600 dark:bg-dark-500)
+        ">{{ heading.text | md(true) | safe }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </aside>
 
 </main>

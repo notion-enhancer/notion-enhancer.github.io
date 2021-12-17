@@ -33,8 +33,8 @@
   <body class="min-h-full w-full flex flex-col font-sans bg-main h-full overflow-hidden">
     {{ content | safe }}
 
-    <div id="floating-buttons" class="fixed bottom-4 right-4 z-9 flex flex-col">
-      <button id="toggle-search" class="button-floating group">
+    <div class="fixed bottom-4 right-4 z-9 flex flex-col">
+      <button data-action="open-search" class="button-floating group">
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Search
         </span>
@@ -42,7 +42,7 @@
           <use href="/dep/feather-sprite.svg#search"/>
         </svg>
       </button>
-      <button id="toggle-menu" class="button-floating group md:hidden">
+      <button data-action="toggle-menu" class="button-floating group md:hidden">
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Toggle menu
         </span>
@@ -50,7 +50,7 @@
           <use href="/dep/feather-sprite.svg#menu"/>
         </svg>
       </button>
-      <button id="toggle-theme" class="button-floating group">
+      <button data-action="toggle-theme" class="button-floating group">
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Toggle theme
         </span>
@@ -59,6 +59,13 @@
         </svg>
       </button>
     </div>
+
+    <aside aria-label="search" class="fixed top-0">
+      <div data-action="close-search" class="fixed top-0 w-full h-full z-50 bg-white
+      bg-opacity-20 dark:(bg-black bg-opacity-60)"></div>
+      <div class="z-51 w-prose h-2/3 bg-dark-900 rounded-md">
+      </div>
+    </aside>
 
   </body>
 </html>
