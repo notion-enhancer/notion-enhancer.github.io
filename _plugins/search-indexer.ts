@@ -8,6 +8,7 @@ import { Site } from "https://deno.land/x/lume@v1.3.1/core.ts";
 import { SitePage } from "https://deno.land/x/lume@v1.3.1/core/filesystem.ts";
 import { extname } from "https://deno.land/x/lume@v1.3.1/deps/path.ts";
 import { Element } from "https://deno.land/x/lume@v1.3.1/deps/dom.ts";
+import { createSlugifier } from "https://deno.land/x/lume@v1.3.1/plugins/slugify_urls.ts";
 
 interface SearchResult {
   url: string;
@@ -16,6 +17,16 @@ interface SearchResult {
   page?: string;
   text: string;
 }
+
+const slugify = createSlugifier(),
+  slugifyString = (str: string, cache: string[] = []): string => {
+    let dups = 0;
+    const baseSlug = slugify(str.slice(0, 16)),
+      computedSlug = () => (dups ? `${baseSlug}-${dups}` : baseSlug);
+    while (cache.find((slug) => slug === computedSlug())) dups++;
+    cache.push(computedSlug());
+    return computedSlug();
+  };
 
 // generates an index for consumption by search engines
 export default (output = "/search-index.json") => {
@@ -41,45 +52,65 @@ export default (output = "/search-index.json") => {
           };
         index.push(title);
 
-        const indexContainer = ($container: Element) => {
-          for (const $element of $container.children) {
-            const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"],
-              listTags = ["ul", "ol"],
-              isHeading = headingTags.includes($element.nodeName.toLowerCase()),
-              isList = listTags.includes($element.nodeName.toLowerCase()),
-              isListItem = $element.nodeName.toLowerCase() === "li",
-              isCodeWithMeta = $element.matches("pre[data-has-meta]");
+        const slugCache: string[] = [],
+          indexContainer = ($container: Element) => {
+            for (let $element of $container.children) {
+              const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"],
+                listTags = ["ul", "ol"],
+                isHeading = headingTags.includes(
+                  $element.nodeName.toLowerCase(),
+                ),
+                isList = listTags.includes($element.nodeName.toLowerCase()),
+                isListItem = $element.nodeName.toLowerCase() === "li",
+                isWrapper = $element.matches("blockquote") ||
+                  $element.children[0]?.nodeName === "IMG",
+                isCodeWithMeta = $element.matches("pre[data-has-meta]");
 
-            const id = $element.getAttribute("id") || crypto.randomUUID(),
-              result: Partial<SearchResult> = {
-                url: `${url}#${id}`,
+              if (isList) {
+                indexContainer($element);
+                continue;
+              }
+
+              const result: Partial<SearchResult> = {
                 type: "inline",
                 section: <string> page.data.section,
                 page: <string> page.data.title,
               };
-            $element.setAttribute("id", id);
 
-            if (isList) {
-              indexContainer($element);
-            } else if (isListItem) {
-              result.text = $element.childNodes[0].textContent;
+              if (isListItem) {
+                result.text = $element.childNodes[0].textContent;
+              } else if (isCodeWithMeta) {
+                const meta = $element.children[0].innerText,
+                  code = $element.children[1].innerText;
+                result.text = `${meta}: ${code}`;
+              } else {
+                if (isWrapper) $element = $element.children[0];
+                if (isHeading) result.type = "heading";
+                result.text = $element.innerText;
+              }
+
+              const id = $element.getAttribute("id") ||
+                slugifyString(result.text, slugCache);
+              $element.setAttribute("id", id);
+              result.url = `${url}#${id}`;
               index.push(result as SearchResult);
-              indexContainer($element);
-            } else if (isCodeWithMeta) {
-              const meta = $element.children[0].innerText,
-                code = $element.children[1].innerText;
-              result.text = `${meta}: ${code}`;
-              index.push(result as SearchResult);
-            } else {
-              if (isHeading) result.type = "heading";
-              result.text = $element.innerText;
-              index.push(result as SearchResult);
+
+              if (isListItem) indexContainer($element);
             }
-          }
-        };
+          };
         if (page.document) {
           const $post = page.document.querySelector(".prose");
-          if ($post) indexContainer($post);
+          if ($post) {
+            // strangely, * and [id] didn't work
+            $post.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(
+              ($node) => {
+                const $element = <Element> $node,
+                  id = $element.getAttribute("id");
+                if (id) slugCache.push(id);
+              },
+            );
+            indexContainer($post);
+          }
         }
       }
 

@@ -30,7 +30,7 @@
     <script type="module" src="/app.js"></script>
   </head>
 
-  <body class="min-h-full w-full flex flex-col font-sans bg-body h-full overflow-hidden">
+  <body class="min-h-full w-full flex flex-col font-sans bg-body h-full">
     {{ content | safe }}
 
     <div class="fixed bottom-4 right-4 z-9 flex flex-col">
@@ -38,25 +38,19 @@
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Search
         </span>
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#search"/>
-        </svg>
+          {{ 'search' | feather | safe }}
       </button>
       <button data-action="toggle-menu" class="button-floating group md:hidden">
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Toggle menu
         </span>
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#menu"/>
-        </svg>
+        {{ 'menu' | feather | safe }}
       </button>
       <button data-action="toggle-theme" class="button-floating group">
         <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
           Toggle theme
         </span>
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#moon"/>
-        </svg>
+        {{ 'moon' | feather | safe }}
       </button>
     </div>
 
@@ -74,24 +68,24 @@
             block w-full text-lg rounded-md bg-light-600 dark:bg-dark-500 py-3 pl-4 pr-22
             transition ring-dim focus:ring-primary appearance-none placeholder-shown:sibling:opacity-0
           " placeholder="Search docs...">
-          <svg data-action="clear-search" class="
+          
+          {{ 'x' | feather({ 'data-action': 'clear-search', class: '
             feather absolute right-12 bottom-0 w-12 pl-3 pr-3 py-4
             h-full transition hover:text-primary cursor-pointer
-          "><use href="/dep/feather-sprite.svg#x"/></svg>
-          <svg class="
+          ' }) | safe }}
+          {{ 'search' | feather({ class: '
             feather absolute right-0 bottom-0 w-12 pl-3 pr-3 py-4
             h-full bg-body rounded-r-md
-          "><use href="/dep/feather-sprite.svg#search"/></svg>
+          ' }) | safe }}
         </label>
 
         <div aria-label="results" class="px-4 mt-2 children:last:mb-2 h-full max-h-107 overflow-y-auto">
           <ul>
+            {# placeholders force windi to generate css #}
             <li data-placeholder class="search-result-section">Section</p>
             <li data-placeholder>
               <a href="/" class="search-result group">
-                <svg class="search-result-icon">
-                  <use href="/dep/feather-sprite.svg#file-text"/>
-                </svg>
+                {{ 'align-left' | feather({ class: 'search-result-icon' }) | safe }}
                 <div class="font-medium">
                   <p class="text-sm">Matching line of text with a
                     <mark class="search-result-highlight">keywo</mark>rd

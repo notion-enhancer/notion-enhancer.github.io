@@ -9,6 +9,7 @@ import minify from "https://raw.githubusercontent.com/lumeland/experimental-plug
 
 import windicss from "https://raw.githubusercontent.com/lumeland/experimental-plugins/main/windicss/windicss.ts";
 import postcss from "https://deno.land/x/lume@v1.3.1/plugins/postcss.ts";
+import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
 import windiConfig from "./_plugins/windi.config.ts";
 import markdownPlugin from "./_plugins/markdown.ts";
@@ -20,11 +21,14 @@ export const site = lume({}, {
 });
 
 site.ignore("README.md");
-site.copy("_includes/dep", "dep");
 site.copy("_includes/media", "media");
 site.copy("_includes/screenshots", "screenshots");
 site.use(resolveUrls());
 site.loadAssets([".ts"]);
+
+const feather = (value: string, attrs = {}) =>
+  featherIcons.icons[value].toSvg(attrs);
+site.filter("feather", feather);
 
 site.use(tableOfContentsPlugin());
 site.use(codeHighlight());

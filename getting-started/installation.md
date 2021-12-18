@@ -80,7 +80,7 @@ These elements extend the basic syntax by adding additional features. Not all Ma
 
 ```typescript
 {
-  "firstName": "John",
+  "firstName": "John","firstName": "John","firstName": "John","firstName": "John","firstName": "John",
   "lastName": "Smith",
   "age": 25
 }

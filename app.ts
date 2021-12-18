@@ -8,18 +8,19 @@
 
 "use strict";
 
-import { onRouteChange } from "./_includes/scripts/router.ts";
+import { handlePostRoute, onRouteChange } from "./_includes/scripts/router.ts";
 import { initSearch } from "./_includes/scripts/search.ts";
-import { initMenuToggle } from "./_includes/scripts/menu.ts";
-import { initThemeToggle } from "./_includes/scripts/theme.ts";
+import { initMenu } from "./_includes/scripts/menu.ts";
+import { initTheme } from "./_includes/scripts/theme.ts";
 import { tiltElements } from "./_includes/scripts/tilt.ts";
 
 onRouteChange(initSearch);
-onRouteChange(initMenuToggle);
-onRouteChange(initThemeToggle);
+onRouteChange(initMenu);
+onRouteChange(initTheme);
 onRouteChange(tiltElements);
 
 // prevent flash of unthemed content on load
 requestAnimationFrame(() => {
   document.documentElement.classList.remove("hidden");
+  handlePostRoute();
 });

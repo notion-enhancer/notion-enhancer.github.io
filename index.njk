@@ -32,30 +32,28 @@ screenshots:
 summary: Available on Mac, Windows, Linux or in the browser.
 ---
 
-<header class="flex flex-col items-center px-6 pt-24 pb-9 sm:pb-18 bg-header border-b-1 border-dim">
-  <div class="items-center <sm:(text-center flex flex-col) sm:grid">
-    <img src="{{ site_icon }}" class="col-span-1 row-span-2 h-36 w-36 <sm:mb-4 sm:mr-6">
-    <h1 class="col-start-2 mt-auto font-mono font-bold text-2xl sm:text-3xl">{{ site_name }}</h1>
-    <p class="col-start-2 mb-auto text-lg max-w-xs sm:max-w-sm">{{ site_description }}</p>
+<header class="flex flex-col <sm:p-4 sm:(pt-24 pb-18 px-6 items-center) bg-header border-b-1 border-dim">
+  <div class="items-center grid w-max max-w-full">
+    <div class="col-span-1 row-span-2 <sm:(mr-4 h-18 w-18) sm:(mr-6 h-36 w-36)">
+      <img src="{{ site_icon }}" class="w-full h-auto">
+    </div>
+    <h1 class="col-start-2 mt-auto font-mono font-bold <sm:text-lg sm:text-3xl">{{ site_name }}</h1>
+    <p class="col-start-2 mb-auto <sm:(text-xs max-w-56) sm:(text-lg max-w-sm)">{{ site_description }}</p>
   </div>
   <nav>
-    <ul class="flex flex-row flex-wrap justify-center mt-6 sm:mt-9 <lg:max-w-prose">
+    <ul class="flex flex-row flex-wrap <sm:mt-4 sm:(justify-center mt-9 <lg:max-w-prose)">
       {% for btn in buttons %}
-      <li class="p-1">
-        <a href="{{ btn.url }}" class="button">
-          <svg class="feather">
-            <use href="/dep/feather-sprite.svg#{{ btn.icon }}"/>
-          </svg>
+      <li class="<sm:(p-0.5 flex-grow) sm:p-1">
+        <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center)">
+          {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}
           <span>{{ btn.text }}</span>
         </a>
       </li>
       {% endfor %}
       {% for btn in nav %}
-      <li class="p-1">
-        <a href="{{ btn.url }}" class="button">
-          <svg class="feather">
-            <use href="/dep/feather-sprite.svg#{{ btn.icon }}"/>
-          </svg>
+      <li class="<sm:(p-0.5 flex-grow) sm:p-1">
+        <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center)">
+          {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}
           <span>{{ btn.text }}</span>
         </a>
       </li>
@@ -64,7 +62,7 @@ summary: Available on Mac, Windows, Linux or in the browser.
   </nav>
 </header>
 
-<main class="<md:text-center md:grid grid-cols-2 justify-center px-6 pb-4 pt-10 w-4/5 mx-auto">
+<main class="<md:text-center md:grid grid-cols-2 justify-center px-6 pb-16 pt-10 w-4/5 mx-auto">
   <p class="text-md px-4.5 pb-4">{{ features | join(', ') }}</p>
 
   {% for img in screenshots %}

@@ -25,7 +25,6 @@ $glow.style.filter = "blur(5rem)";
 $glow.style.backgroundColor = "white";
 $glow.style.pointerEvents = "none";
 $glow.style.opacity = "0";
-if (mouseGlow.enabled) document.body.append($glow);
 
 const offsetTop = ($target: Element | null, offset = 0): number => {
     if (!($target instanceof HTMLElement)) return offset;
@@ -36,35 +35,50 @@ const offsetTop = ($target: Element | null, offset = 0): number => {
     return offsetLeft($target.offsetParent, offset + $target.offsetLeft);
   };
 
+const getTilt = (event: MouseEvent) => {
+    return (<HTMLElement> event.target).closest("[data-tilt]") as HTMLElement;
+  },
+  mousemoveTilt = (event: MouseEvent) => {
+    const $tilt = getTilt(event);
+    $tilt.style.transitionDuration = "";
+    const { width, height } = $tilt.getBoundingClientRect(),
+      offsetY = Math.abs(event.clientY - offsetTop($tilt)),
+      offsetX = Math.abs(event.clientX - offsetLeft($tilt)),
+      rotateX = (height / 2 - offsetY) * tiltMultiplier,
+      rotateY = (width / 2 - offsetX) * -tiltMultiplier,
+      transform =
+        `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
+    $tilt.style.transform = transform;
+  },
+  mouseleaveTilt = (event: MouseEvent) => {
+    const $tilt = getTilt(event);
+    $tilt.style.transitionDuration = `${returnDuration}ms`;
+    $tilt.style.transform = "";
+  },
+  mousemoveGlow = (event: MouseEvent) => {
+    $glow.style.transitionDuration = "";
+    $glow.style.opacity = "0.1";
+    $glow.style.top = `${event.clientY - mouseGlow.height / 2}px`;
+    $glow.style.left = `${event.clientX - mouseGlow.width / 2}px`;
+  },
+  mouseleaveGlow = (_event: MouseEvent) => {
+    $glow.style.transitionDuration = `${returnDuration}ms`;
+    $glow.style.opacity = "0";
+  };
+
 export const tiltElements = () => {
   for (const $tilt of document.querySelectorAll<HTMLElement>("[data-tilt]")) {
-    $tilt.addEventListener("mousemove", (ev) => {
-      $tilt.style.transitionDuration = "";
-      const { width, height } = $tilt.getBoundingClientRect(),
-        offsetY = Math.abs(ev.clientY - offsetTop($tilt)),
-        offsetX = Math.abs(ev.clientX - offsetLeft($tilt)),
-        rotateX = (height / 2 - offsetY) * tiltMultiplier,
-        rotateY = (width / 2 - offsetX) * -tiltMultiplier,
-        transform =
-          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
-      $tilt.style.transform = transform;
-    });
-    $tilt.addEventListener("mouseleave", (_ev) => {
-      $tilt.style.transitionDuration = `${returnDuration}ms`;
-      $tilt.style.transform = "";
-    });
+    $tilt.removeEventListener("mousemove", mousemoveTilt);
+    $tilt.removeEventListener("mouseleave", mouseleaveTilt);
+    $tilt.addEventListener("mousemove", mousemoveTilt);
+    $tilt.addEventListener("mouseleave", mouseleaveTilt);
 
     if (mouseGlow.enabled) {
-      $tilt.addEventListener("mousemove", (ev) => {
-        $glow.style.transitionDuration = "";
-        $glow.style.opacity = "0.1";
-        $glow.style.top = `${ev.clientY - mouseGlow.height / 2}px`;
-        $glow.style.left = `${ev.clientX - mouseGlow.width / 2}px`;
-      });
-      $tilt.addEventListener("mouseleave", (_ev) => {
-        $glow.style.transitionDuration = `${returnDuration}ms`;
-        $glow.style.opacity = "0";
-      });
+      $tilt.removeEventListener("mousemove", mousemoveGlow);
+      $tilt.removeEventListener("mouseleave", mouseleaveGlow);
+      $tilt.addEventListener("mousemove", mousemoveGlow);
+      $tilt.addEventListener("mouseleave", mouseleaveGlow);
+      document.body.append($glow);
     }
   }
 };

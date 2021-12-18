@@ -9,20 +9,20 @@ sidebar:
   - tools
 ---
 
-<header class="flex <sm:flex-col sm:flex-row px-6 py-6 bg-header border-b-1 border-dim">
-  <a href="/" class="flex-shrink-0 items-center <sm:(text-center flex flex-col) sm:grid">
-    <img src="{{ site_icon }}" class="col-span-1 row-span-2 h-18 w-18 <sm:mb-4 sm:mr-4">
+<header class="flex <sm:(flex-col p-4) sm:(flex-row p-6) bg-header border-b-1 border-dim">
+  <a href="/" class="flex-shrink-0 grid w-max max-w-full">
+    <div class="col-span-1 row-span-2 h-18 w-18 mr-4">
+      <img src="{{ site_icon }}" class="w-full h-auto">
+    </div>
     <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
     <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
   </a>
   <nav class="sm:ml-auto" aria-label="links">
-    <ul class="flex flex-row flex-wrap justify-center sm:(items-center h-full) <sm:(mt-6 max-w-prose)">
+    <ul class="flex flex-row flex-wrap sm:(items-center h-full justify-end) <sm:mt-4">
       {% for btn in nav %}
-      <li class="p-1">
-        <a href="{{ btn.url }}" class="button text-sm">
-          <svg class="feather">
-            <use href="/dep/feather-sprite.svg#{{ btn.icon }}"/>
-          </svg>
+      <li class="<sm:(p-0.5 flex-grow text-center) sm:p-1">
+        <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center) sm:text-sm">
+          {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}
           <span>{{ btn.text }}</span>
         </a>
       </li>
@@ -31,12 +31,12 @@ sidebar:
   </nav>
 </header>
 
-<main class="flex-grow flex <md:flex-col overflow-hidden">
+<main class="flex-grow flex <md:flex-col sm:overflow-hidden">
 
   <aside aria-label="menu" class="
-    pt-2 pb-8 px-10 w-64 min-h-full border-r-1 border-dim text-base bg-body
-    <md:(absolute top-0 left-0 transform -translate-x-64) flex-shrink-0
-    overflow-y-auto
+    pt-2 sm:pb-8 px-10 w-64 max-h-full min-h-full border-r-1 border-dim
+    <md:(fixed top-0 left-0 transform -translate-x-64 pb-16) flex-shrink-0
+    overflow-y-auto z-1 text-base bg-body
   ">
     <ul>
     {% for section in sidebar %}
@@ -64,27 +64,22 @@ sidebar:
   </aside>
 
   <article class="px-10 py-8 w-full min-h-full flex flex-col <md:flex-grow overflow-y-auto">
-    <div class="prose flex-grow">
+    <div class="prose flex-grow relative">
       {{ content | safe }}
     </div>
 
     {% if edit_url %}
-    <a href="{{ edit_url }}{{ filename }}" class="link flex items-center space-x-3">
-      <svg class="feather">
-        <use href="/dep/feather-sprite.svg#edit-3"/>
-      </svg>
+    <a href="{{ edit_url }}{{ filename }}" class="mt-8 link flex items-center space-x-3">
+      {{ 'edit-3' | feather | safe }}
       <span>Edit this page</span>
     </a>
     {% endif %}
-
 
     <footer class="max-w-prose flex border-dim border-t mt-8 pt-8">
       {%- set prev = search.previousPage(url, "url!=/", "section_order order title") %}
       {%- if prev %}
       <a href="{{ prev.data.url }}" rel="prev" class="link flex items-center space-x-3">
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#arrow-left"/>
-        </svg>
+        {{ 'arrow-left' | feather | safe }}
         <span>{{ prev.data.title }}</span>
       </a>
       {% endif %}
@@ -93,9 +88,7 @@ sidebar:
       {%- if next %}
       <a href="{{ next.data.url }}" rel="next" class="ml-auto link flex items-center space-x-3">
         <span>{{ next.data.title }}</span>
-        <svg class="feather">
-          <use href="/dep/feather-sprite.svg#arrow-right"/>
-        </svg>
+        {{ 'arrow-right' | feather | safe }}
       </a>
       {% endif %}
     </footer>

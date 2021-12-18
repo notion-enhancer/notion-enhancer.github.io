@@ -18,6 +18,8 @@
   @apply bg-hover bg-gray-400 dark:bg-dark-300;
 }
 
+/* SEARCH */
+
 input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-cancel-button,
 input[type='search']::-webkit-search-results-button,
@@ -30,11 +32,7 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply text-sm text-dim;
 }
 
-/* pad elem #hash scroll at top */
-.prose [id]::before {
-  content: ' ';
-  @apply block -mt-7.5 h-7.5 invisible pointer-events-none;
-}
+/* MARKDOWN */
 
 .prose hr {
   @apply border-dim !important;
@@ -56,8 +54,14 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply border-dim text-dim;
 }
 
-.prose :is(ol, ul) > li::before {
+.prose ol > li::before {
   @apply text-dim !important;
+}
+.prose ul > li::before {
+  @apply bg-dim !important;
+}
+.prose li > ul {
+  @apply my-0 !important;
 }
 
 .prose thead,
@@ -75,12 +79,14 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
 }
 
 .prose pre[data-has-meta] {
-  @apply pt-9 overflow-hidden;
+  @apply pt-9;
 }
 .prose pre[data-has-meta] > div:first-child {
   @apply top-0 left-0 text-xs absolute py-0.75 px-2 rounded-br-sm;
   @apply transition bg-light-700 dark:bg-dark-300;
 }
+
+/* CODE HIGHLIGHT */
 
 /* https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css */
 .hljs-doctag,

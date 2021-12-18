@@ -37,6 +37,7 @@ export default defineConfig({
     `,
 
     "bg-primary": `text-white bg-violet-600 dark:(text-black bg-violet-300)`,
+    "bg-dim": `bg-gray-700 dark:bg-gray-400`,
 
     "text-primary": `text-violet-600 dark:text-violet-300`,
     "text-dim": `text-gray-700 dark:text-gray-400`,
