@@ -36,16 +36,16 @@ export default defineConfig({
       dark:(bg-dark-500 text-light-900)
     `,
 
-    "bg-primary": `text-white bg-violet-600 dark:(text-black bg-violet-300)`,
+    "bg-primary": `text-white bg-violet-400 dark:(text-black bg-violet-300)`,
     "bg-dim": `bg-gray-700 dark:bg-gray-400`,
 
-    "text-primary": `text-violet-600 dark:text-violet-300`,
+    "text-primary": `text-violet-400 dark:text-violet-300`,
     "text-dim": `text-gray-700 dark:text-gray-400`,
 
-    "border-primary": `border-violet-600 dark:border-violet-300`,
+    "border-primary": `border-violet-400 dark:border-violet-300`,
     "border-dim": `border-gray-300 dark:border-dark-400`,
 
-    "ring-primary": `outline-none ring-2 ring-violet-600 dark:ring-violet-300`,
+    "ring-primary": `outline-none ring-2 ring-violet-400 dark:ring-violet-300`,
     "ring-dim": `outline-none ring-2 ring-gray-300 dark:ring-dark-400`,
 
     "button": `
@@ -55,8 +55,9 @@ export default defineConfig({
       border border-dim focus:ring-dim
     `,
     "button-floating": `
-      box-content h-4 w-4 p-2 mt-2 shadow rounded-full focus:ring-dim
-      relative bg-card hover:(bg-light-600 dark:bg-dark-600) border border-dim
+      box-content h-4 w-4 p-2 mt-2 shadow rounded-full
+      focus:ring-dim border border-dim relative bg-card
+      hover:(bg-light-600 dark:bg-dark-600) duration-100
     `,
 
     "tooltip": `

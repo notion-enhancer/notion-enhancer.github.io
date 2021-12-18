@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: base.njk
 
 sidebar:
   - getting-started
@@ -19,6 +19,18 @@ sidebar:
   </a>
   <nav class="sm:ml-auto" aria-label="links">
     <ul class="flex flex-row flex-wrap sm:(items-center h-full justify-end) <sm:mt-4">
+      {% for btn in action_buttons %}
+      {% if btn.sm_only !== true %}
+      <li class="<sm:hidden p-1 group relative flex justify-center">
+        <button data-action="{{ btn.action }}" class="button !bg-opacity-0 !hover:bg-opacity-50 sm:text-sm">
+          {{ btn.icon | feather | safe }}
+        </button>
+        <span class="tooltip opacity-0 group-hover:opacity-100 -bottom-7.5">
+          {{ btn.tooltip }}
+        </span>
+      </li>
+      {% endif %}
+      {% endfor %}
       {% for btn in nav %}
       <li class="<sm:(p-0.5 flex-grow text-center) sm:p-1">
         <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center) sm:text-sm">

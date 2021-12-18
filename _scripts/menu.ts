@@ -23,7 +23,7 @@ gui.toggle = () => gui.isOpen() ? gui.close() : gui.open();
 
 export const initMenu = () => {
   if (!$.menu()) {
-    $.btn().style.display = "none";
+    if ($.btn()) $.btn().style.display = "none";
     return;
   } else $.btn().style.display = "";
 

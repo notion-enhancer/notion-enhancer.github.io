@@ -34,6 +34,9 @@ export default (output = "/search-index.json") => {
     site.addEventListener("beforeSave", () => {
       const index: SearchResult[] = [],
         pages = site.pages.sort((a, b) =>
+          (a.data.order as number ?? 0) -
+          (b.data.order as number ?? 0)
+        ).sort((a, b) =>
           (a.data.section_order as number ?? 0) -
           (b.data.section_order as number ?? 0)
         );

@@ -1,5 +1,5 @@
 section: Advanced Usage
 section_order: 2
 
-layout: layouts/docs.njk
+layout: docs.njk
 tags: advanced

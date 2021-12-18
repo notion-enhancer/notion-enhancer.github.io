@@ -1,5 +1,5 @@
 section: Developer Documentation
 section_order: 4
 
-layout: layouts/docs.njk
+layout: docs.njk
 tags: documentation

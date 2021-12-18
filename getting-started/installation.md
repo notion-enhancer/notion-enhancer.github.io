@@ -6,7 +6,7 @@ order: 1
 
 # Markdown Cheat Sheet
 
-![](/screenshots/cherry-cola.png)
+![](../assets/nord.png)
 
 Thanks for visiting [The Markdown Guide](https://www.markdownguide.org)!
 

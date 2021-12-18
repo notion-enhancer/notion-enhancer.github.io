@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="en" class="h-full w-full hidden">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% if title %}{{ title }} | {% endif %}{{ site_name }}</title>
+    <link href="{{ site_favicon }}" rel="icon" type="image/png" sizes="32x32">
+    <meta name="description" {% if description %}
+      content="{{ description }}" {% else %} content="{{ site_description }}"
+    {% endif %}>
+    
+    <meta property="og:image" content="{{ site_root }}{{ site_embed }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ site_root }}">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" {% if description %}
+      content="{{ description }}" {% else %} content="{{ site_description }}"
+    {% endif %}>
+    <meta name="twitter:image" content="{{ site_root }}{{ site_embed }}">
+    <meta name="twitter:creator" content="@dragonwocky">
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/windi.css">
+    <link rel="stylesheet" href="/app.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+
+  <body class="min-h-full w-full flex flex-col font-sans bg-body h-full">
+    {{ content | safe }}
+
+    <div class="fixed bottom-4 right-4 z-9 flex flex-col">
+      {% for btn in action_buttons %}
+      <button data-action="{{ btn.action }}" class="button-floating group {{ btn.sm_class }}">
+        <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+          {{ btn.tooltip }}
+        </span>
+        {{ btn.icon | feather | safe }}
+      </button>
+      {% endfor %}
+    </div>
+
+    {% include "search.njk" %}
+
+  </body>
+</html>

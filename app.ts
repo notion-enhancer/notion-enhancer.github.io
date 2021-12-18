@@ -8,11 +8,11 @@
 
 "use strict";
 
-import { handlePostRoute, onRouteChange } from "./_includes/scripts/router.ts";
-import { initSearch } from "./_includes/scripts/search.ts";
-import { initMenu } from "./_includes/scripts/menu.ts";
-import { initTheme } from "./_includes/scripts/theme.ts";
-import { tiltElements } from "./_includes/scripts/tilt.ts";
+import { handlePostRoute, onRouteChange } from "./_scripts/router.ts";
+import { initSearch } from "./_scripts/search.ts";
+import { initMenu } from "./_scripts/menu.ts";
+import { initTheme } from "./_scripts/theme.ts";
+import { tiltElements } from "./_scripts/tilt.ts";
 
 onRouteChange(initSearch);
 onRouteChange(initMenu);

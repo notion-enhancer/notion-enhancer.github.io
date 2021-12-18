@@ -1,8 +1,8 @@
 ---
-layout: layouts/base.njk
+layout: base.njk
 description: an enhancer/customiser for the all-in-one productivity workspace notion.so
 
-buttons:
+landing_nav:
   - text: Installation
     icon: download
     url: /getting-started/installation
@@ -20,19 +20,19 @@ features:
   - and more...
 
 screenshots:
-  - src: /screenshots/pastel-dark.png
+  - src: ./assets/pastel-dark.png
     title: outliner & the pastel dark theme
-  - src: /screenshots/nord.png
+  - src: ./assets/nord.png
     title: notion-enhancer menu & the nord theme
-  - src: /screenshots/material-ocean.png
+  - src: ./assets/material-ocean.png
     title: compact tabs & the material ocean theme 
-  - src: /screenshots/pinky-boom.png
+  - src: ./assets/pinky-boom.png
     title: weekly calendar view & the pinky boom theme
 
 summary: Available on Mac, Windows, Linux or in the browser.
 ---
 
-<header class="flex flex-col <sm:p-4 sm:(pt-24 pb-18 px-6 items-center) bg-header border-b-1 border-dim">
+<header class="flex flex-col <sm:p-4 sm:(pt-20 pb-18 px-6 items-center) bg-header border-b-1 border-dim">
   <div class="items-center grid w-max max-w-full">
     <div class="col-span-1 row-span-2 <sm:(mr-4 h-18 w-18) sm:(mr-6 h-36 w-36)">
       <img src="{{ site_icon }}" class="w-full h-auto">
@@ -42,7 +42,7 @@ summary: Available on Mac, Windows, Linux or in the browser.
   </div>
   <nav>
     <ul class="flex flex-row flex-wrap <sm:mt-4 sm:(justify-center mt-9 <lg:max-w-prose)">
-      {% for btn in buttons %}
+      {% for btn in landing_nav %}
       <li class="<sm:(p-0.5 flex-grow) sm:p-1">
         <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center)">
           {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}

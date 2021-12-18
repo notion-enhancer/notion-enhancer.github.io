@@ -1,5 +1,5 @@
 section: Getting Started
 section_order: 1
 
-layout: layouts/docs.njk
+layout: docs.njk
 tags: getting-started

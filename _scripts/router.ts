@@ -37,14 +37,11 @@ const getScrollParent = ($element: HTMLElement) => {
     }
     return document.body;
   },
-  scrollTo = (hash: string, smooth = false) => {
+  scrollTo = (hash: string) => {
     const $target = document.getElementById(hash);
     if ($target) {
       const $scrollParent = getScrollParent($target);
-      $scrollParent.scrollTo({
-        top: $target.offsetTop,
-        behavior: smooth ? "smooth" : "auto",
-      });
+      $scrollParent.scrollTo({ top: $target.offsetTop });
     }
   };
 
@@ -159,7 +156,7 @@ const mouseRouters: MouseRouter[] = [
       if (sameOrigin) {
         event.preventDefault();
         if (samePath && sameQuery) {
-          scrollTo(url.hash.slice(1), true);
+          scrollTo(url.hash.slice(1));
           setTimeout(() => {
             // unfortunately no way in the spec
             // to detect end of scroll yet
@@ -192,7 +189,7 @@ const mouseRouters: MouseRouter[] = [
       if (!event.target) return;
       const $anchor = (<HTMLElement> event.target).closest(this.selector),
         hash = (<HTMLElement> $anchor).getAttribute("href")?.slice(1);
-      scrollTo(hash as string, true);
+      scrollTo(hash as string);
       history.replaceState(null, "", `#${hash}`);
     },
   },
@@ -204,7 +201,7 @@ for (const router of mouseRouters) {
 
 globalThis.addEventListener("popstate", (_event) => {
   if (_currentRoute === location.pathname) {
-    scrollTo(location.hash.slice(1) as string, true);
+    scrollTo(location.hash.slice(1) as string);
   } else triggerRouteChange(location.href, fetch(location.href));
 });
 

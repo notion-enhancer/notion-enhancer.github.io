@@ -18,6 +18,12 @@
   @apply bg-hover bg-gray-400 dark:bg-dark-300;
 }
 
+html,
+body,
+.overflow-y-auto {
+  scroll-behavior: smooth;
+}
+
 /* SEARCH */
 
 input[type='search']::-webkit-search-decoration,

@@ -1,4 +1,8 @@
 site_icon: /media/animated.gif
+site_favicon: /media/colour-x32.png
+site_embed: /media/colour-x512.png
+
+site_root: https://notion-enhancer.github.io
 site_name: notion-enhancer
 site_description: an enhancer/customiser for the all-in-one productivity workspace notion.so
 edit_url: https://github.com/notion-enhancer/notion-enhancer.github.io/blob/main
@@ -13,3 +17,34 @@ nav:
   - text: Donate
     icon: coffee
     url: https://buy.stripe.com/00gdR93R6csIgDKeUV
+
+action_buttons:
+  - action: toggle-menu
+    icon: menu
+    tooltip: Toggle menu
+    sm_only: true
+    sm_class: md:(pointer-events-none opacity-0)
+  - action: open-search
+    icon: search
+    tooltip: Search
+    sm_only: false
+    sm_class: sm:(pointer-events-none opacity-0)
+  - action: toggle-theme
+    icon: moon
+    tooltip: Toggle theme
+    sm_only: false
+    sm_class: sm:(pointer-events-none opacity-0)
+
+hotkeys:
+  - keys: ctrl/⌘ + k
+    text: to search
+  - keys: arrows ↑ ↓
+    text: to navigate
+  - keys: enter ↵
+    text: to select
+  - keys: /
+    text: to focus
+  - keys: esc
+    text: to close
+  - keys: ctrl/⌘ + shift + l
+    text: to toggle theme

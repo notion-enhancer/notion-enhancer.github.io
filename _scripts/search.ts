@@ -20,19 +20,23 @@ interface SearchResult {
   text: string;
 }
 
-const $: Record<string, () => HTMLElement> = {};
-$.open = () =>
-  <HTMLElement> document.querySelector('[data-action="open-search"]');
-$.container = () =>
-  <HTMLElement> document.querySelector('aside[aria-label="search"]');
-$.input = () =>
-  <HTMLInputElement> $.container().querySelector('input[type="search"]');
-$.clear = () =>
-  <HTMLElement> $.container().querySelector('[data-action="clear-search"]');
-$.close = () =>
-  <HTMLElement> $.container().querySelector('[data-action="close-search"]');
-$.results = () =>
-  <HTMLElement> $.container().querySelector('[aria-label="results"]');
+const $ = {
+  triggers: () => document.querySelectorAll('[data-action="open-search"]'),
+  header: () => <HTMLElement> document.querySelector("header"),
+  showTrigger: ($t: Element) =>
+    !$.header().contains($t) && location.pathname !== "/" ? "add" : "remove",
+  container: () =>
+    <HTMLElement> document.querySelector('aside[aria-label="search"]'),
+  input: () =>
+    <HTMLInputElement> $.container().querySelector('input[type="search"]'),
+  clear: () =>
+    <HTMLElement> $.container().querySelector('[data-action="clear-search"]'),
+  close: () =>
+    <HTMLElement> $.container().querySelector('[data-action="close-search"]'),
+  resultsList: () =>
+    <HTMLElement> $.container().querySelector('[aria-label="results"]'),
+  results: () => Array.from($.resultsList().querySelectorAll("a")),
+};
 
 const gui: Record<string, () => unknown> = {};
 gui.isOpen = () => !$.container().classList.contains("opacity-0");
@@ -47,32 +51,39 @@ gui.close = () => {
 gui.toggle = () => gui.isOpen() ? gui.close() : gui.open();
 gui.clear = () => {
   (<HTMLInputElement> $.input()).value = "";
-  $.results().innerHTML = "";
+  $.resultsList().innerHTML = "";
 };
+
+gui.scrollResultsToTop = () => $.resultsList().scrollTo({ top: 0 });
+gui.scrollActiveToCenter = () =>
+  document.activeElement?.scrollIntoView?.({ block: "center" });
 gui.focusPrev = () => {
   if (!gui.isOpen()) return;
+  const $results = $.results(),
+    i = $results.findIndex(($r) => $r === document.activeElement);
   if (document.activeElement === $.input()) {
-    $.results().lastElementChild?.querySelector("a")?.focus();
-  } else if ($.results().contains(document.activeElement)) {
-    ((<HTMLElement> document.activeElement).closest("li")
-      ?.previousElementSibling?.querySelector("a") ?? $.input())?.focus();
+    $results[$results.length - 1]?.focus({ preventScroll: true });
+  } else if (i > 0) {
+    $results[i - 1]?.focus({ preventScroll: true });
+  } else {
+    $.input().focus();
+    gui.scrollResultsToTop();
   }
-  requestAnimationFrame(() => {
-    (<HTMLElement> document.activeElement).scrollIntoView();
-  });
+  gui.scrollActiveToCenter();
 };
 gui.focusNext = () => {
   if (!gui.isOpen()) return;
-  const $first = $.results().querySelector("a");
+  const $results = $.results(),
+    i = $results.findIndex(($r) => $r === document.activeElement);
   if (document.activeElement === $.input()) {
-    $first?.focus();
-  } else if ($.results().contains(document.activeElement)) {
-    ((<HTMLElement> document.activeElement).closest("li")
-      ?.nextElementSibling?.querySelector("a") ?? $first)?.focus();
+    $results[0]?.focus({ preventScroll: true });
+  } else if (i > -1 && i < $results.length - 1) {
+    $results[i + 1]?.focus({ preventScroll: true });
+  } else {
+    $.input().focus();
+    gui.scrollResultsToTop();
   }
-  requestAnimationFrame(() => {
-    (<HTMLElement> document.activeElement).scrollIntoView();
-  });
+  gui.scrollActiveToCenter();
 };
 
 // deno-lint-ignore no-explicit-any
@@ -153,35 +164,35 @@ const _matchCache = { query: "", results: [] as SearchResult[] },
     _matchCache.query = query;
     _matchCache.results = matches;
 
-    $.results().innerHTML = "";
+    $.resultsList().innerHTML = "";
     for (const section in grouped) {
-      $.results().append(widgets.section(section, grouped[section], query));
+      $.resultsList().append(widgets.section(section, grouped[section], query));
     }
   };
 
 const hotkeys = [
   // toggle
   (event: KeyboardEvent) => {
-    const hotkey: Partial<KeyboardEvent> = {
-      metaKey: false,
-      ctrlKey: true,
-      shiftKey: false,
-      altKey: false,
-      key: "k",
-    };
-    for (const prop in hotkey) {
-      const key = <keyof KeyboardEvent> prop;
-      if (event[key] !== hotkey[key]) return;
+    const pressed = !event.shiftKey && !event.altKey &&
+      (event.metaKey || event.ctrlKey) && !(event.metaKey && event.ctrlKey) &&
+      event.key === "k";
+    if (pressed) {
+      event.preventDefault();
+      gui.toggle();
     }
-    event.preventDefault();
-    gui.toggle();
   },
   // navigation
   (event: KeyboardEvent) => {
     if (!gui.isOpen()) return;
     if (event.key === "Escape") gui.close();
-    if (event.key === "ArrowUp") gui.focusPrev();
-    if (event.key === "ArrowDown") gui.focusNext();
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      gui.focusPrev();
+    }
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      gui.focusNext();
+    }
     if (event.key === "/" && document.activeElement !== $.input()) {
       event.preventDefault();
       $.input().focus();
@@ -200,8 +211,13 @@ export const initSearch = () => {
     if (!(<HTMLInputElement> $.input()).value) search();
   });
 
-  $.open().removeEventListener("click", gui.open);
-  $.open().addEventListener("click", gui.open);
+  $.triggers().forEach(($t) => {
+    $t.removeEventListener("click", gui.open as EventListener);
+  });
+  $.triggers().forEach(($t) => {
+    $t.classList[$.showTrigger($t)]("sm:pointer-events-none", "sm:opacity-0");
+    $t.addEventListener("click", gui.open as EventListener);
+  });
   $.close().removeEventListener("click", gui.close);
   $.close().addEventListener("click", gui.close);
   $.clear().removeEventListener("click", gui.clear);
