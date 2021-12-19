@@ -53,7 +53,7 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
 
 .prose code {
   @apply bg-light-600 dark:bg-dark-500 rounded-md;
-  @apply font-normal text-dim text-[0.95em] py-1 px-2;
+  @apply font-normal text-dim py-0.5 px-1.5;
 }
 
 .prose blockquote {

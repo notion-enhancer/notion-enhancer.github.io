@@ -28,6 +28,7 @@ const slugify = createSlugifier(),
       computedSlug = () => (dups ? `${baseSlug}-${dups}` : baseSlug);
     while (cache.find(({ slug }) => slug === computedSlug())) dups++;
     heading.slug = computedSlug();
+    cache.push(heading as Heading);
     return heading;
   };
 
@@ -54,7 +55,6 @@ export default () => {
             if (id) heading.slug = id.name;
           }
           slugifyHeading(heading, tableOfContents);
-          tableOfContents.push(heading as Heading);
         }
         page.data.table_of_contents = tableOfContents;
       }

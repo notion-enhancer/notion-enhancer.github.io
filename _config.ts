@@ -13,8 +13,8 @@ import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
 import windiConfig from "./_windi.config.ts";
 import markdownPlugin from "./_plugins/markdown.ts";
-import tableOfContentsPlugin from "./_plugins/table-of-contents.ts";
-import searchIndexer from "./_plugins/search-indexer.ts";
+import tableOfContentsPlugin from "./_plugins/table_of_contents.ts";
+import searchIndexer from "./_plugins/search_indexer.ts";
 
 export const site = lume({}, {
   nunjucks: { includes: "_layouts" },
@@ -22,6 +22,7 @@ export const site = lume({}, {
 });
 
 site.ignore("README.md");
+site.copy("favicon.ico", "favicon.ico");
 site.copy("media", "media");
 site.copy("assets", "assets");
 site.use(resolveUrls());

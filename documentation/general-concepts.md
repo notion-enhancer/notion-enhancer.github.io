@@ -5,3 +5,7 @@ order: 1
 ---
 
 # General Concepts
+
+simple alongside technical
+
+## Dependencies

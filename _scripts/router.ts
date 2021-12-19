@@ -119,6 +119,13 @@ const triggerRouteChange = async (
   });
 };
 
+const normalisePathname = (pathname: string) =>
+    pathname.replace(/\/$/, "") +
+    (pathname.split("/").reverse()[0].includes(".") ? "" : "/"),
+  isHtmlPage = (pathname: string) =>
+    normalisePathname(pathname).endsWith("/") ||
+    normalisePathname(pathname).endsWith(".html");
+
 interface MouseRouter {
   selector: string;
   click?: EventListener;
@@ -149,11 +156,12 @@ const mouseRouters: MouseRouter[] = [
       const $anchor = (<HTMLElement> event.target).closest(this.selector),
         url = new URL((<HTMLAnchorElement> $anchor).href),
         sameOrigin = location.origin === url.origin,
-        locationPathname = location.pathname.replace(/\/$/, "") || "/",
-        urlPathname = url.pathname.replace(/\/$/, "") || "/",
+        locationPathname = normalisePathname(location.pathname),
+        urlPathname = normalisePathname(url.pathname),
         samePath = locationPathname === urlPathname,
-        sameQuery = location.search === url.search;
-      if (sameOrigin) {
+        sameQuery = location.search === url.search,
+        isHtml = isHtmlPage(urlPathname);
+      if (sameOrigin && isHtml) {
         event.preventDefault();
         if (samePath && sameQuery) {
           scrollTo(url.hash.slice(1));
@@ -173,10 +181,12 @@ const mouseRouters: MouseRouter[] = [
       const $anchor = (<HTMLElement> event.target).closest(this.selector),
         url = new URL((<HTMLAnchorElement> $anchor).href),
         sameOrigin = location.origin === url.origin,
-        locationPathname = location.pathname.replace(/\/$/, "") || "/",
-        urlPathname = url.pathname.replace(/\/$/, "") || "/",
-        samePath = locationPathname === urlPathname;
-      if (sameOrigin && !samePath && !_responseCache.has(urlPathname)) {
+        locationPathname = normalisePathname(location.pathname),
+        urlPathname = normalisePathname(url.pathname),
+        samePath = locationPathname === urlPathname,
+        isHtml = isHtmlPage(urlPathname),
+        isCached = _responseCache.has(urlPathname);
+      if (sameOrigin && isHtml && !samePath && !isCached) {
         _responseCache.set(urlPathname, fetch(urlPathname));
       }
     },
