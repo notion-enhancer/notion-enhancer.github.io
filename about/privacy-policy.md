@@ -42,8 +42,7 @@ through its use:
   allows customisation of components of the Notion client.
 
 Unless provided/collected as one of the above, no other data is
-collected (e.g. don't set a credit card number as a custom linked
-database title). Notion content remains safe and encrypted under
+collected. Notion content remains safe and encrypted under
 [Notion's privacy and security measures](https://www.notion.so/help/security-and-privacy).
 
 ### Usage

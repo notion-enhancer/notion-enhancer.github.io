@@ -5,12 +5,15 @@
  */
 
 import { Site } from "https://deno.land/x/lume@v1.3.1/core.ts";
-import { Element } from "https://deno.land/x/lume@v1.3.1/deps/dom.ts";
+import {
+  DOMParser,
+  Element,
+} from "https://deno.land/x/lume@v1.3.1/deps/dom.ts";
 import { createSlugifier } from "https://deno.land/x/lume@v1.3.1/plugins/slugify_urls.ts";
 import {
-  Ast,
-  parse1 as parseley,
-} from "https://deno.land/x/parseley@v0.9.1/parseley.ts";
+  markdownIt,
+  markdownItAttrs,
+} from "https://deno.land/x/lume@v1.3.1/deps/markdown_it.ts";
 
 interface Heading {
   level: number;
@@ -18,7 +21,9 @@ interface Heading {
   text: string;
 }
 
-const slugify = createSlugifier(),
+// @ts-ignore: expression not callable
+const md = markdownIt(),
+  slugify = createSlugifier(),
   slugifyHeading = (
     heading: Partial<Heading>,
     cache: Heading[] = [],
@@ -31,29 +36,28 @@ const slugify = createSlugifier(),
     cache.push(heading as Heading);
     return heading;
   };
+md.use(markdownItAttrs);
 
-// for sidebar toc and "edit this page" links
+// for sidebar toc
 export default () => {
   return (site: Site) => {
     site.preprocess([".html"], (page) => {
       const filename = page.src.path + page.src.ext;
+      // filename also used for "edit this page" links
       page.data.filename = filename;
       if (!page.data.table_of_contents) {
         const content = Deno.readTextFileSync(site.src(filename)),
           tableOfContents: Heading[] = [];
         for (const match of content.matchAll(/\n(#+) (.+)/g)) {
-          const attrs = match[2].match(/ {.+}$/)?.[0],
+          const $h = new DOMParser().parseFromString(
+              md.render(`${match[1]} ${match[2]}`),
+              "text/html",
+            )!.querySelector(`h${match[1].length}`)!,
             heading: Partial<Heading> = {
               level: match[1].length,
-              text: attrs ? match[2].slice(0, -attrs.length) : match[2],
+              text: $h.innerText,
+              slug: $h.getAttribute("id") ?? "",
             };
-          if (attrs) {
-            const parsedAttrs = parseley(attrs.slice(2, -1)).list,
-              id = <Ast.IdSelector> parsedAttrs.find(({ type }) =>
-                type === "id"
-              );
-            if (id) heading.slug = id.name;
-          }
           slugifyHeading(heading, tableOfContents);
         }
         page.data.table_of_contents = tableOfContents;

@@ -20,9 +20,9 @@ report to let the developers know.
 Bug reports should be made in the relevant GitHub repository
 and marked with the `bug` tag.
 
-- If an **individual mod** isn't working, create an issue
-  in the [notion-enhancer/repo](https://github.com/notion-enhancer/repo/issues)
-  repository.
+- If an **individual mod** isn't working or the issue occurs in **multiple environments**,
+  create an issue in the [notion-enhancer/repo](https://github.com/notion-enhancer/repo/issues)
+  repository ← _If in doubt, choose this one_.
 
 - If there's an **environment-specific problem**
   (e.g. something wrong with installing the notion-enhancer),
@@ -267,9 +267,10 @@ readability and security.
 
 - The notion-enhancer uses [Semantic Versioning](https://semver.org/)
   (MAJOR.MINOR.PATCH) for itself and its mods.
-- Mods can be versioned separately to the notion-enhancer,
-  but should only be incremented once for every notion-enhancer
-  update, regardless of the number of changes the mod experiences.
+- Mods are versioned separately to the notion-enhancer, but their
+  versions may only be incremented once for every notion-enhancer
+  update. Increments should represent the full scale of the
+  changes a mod has experienced since the last release.
 - Until the notion-enhancer reaches v1.0.0 and is fully
   stable (in terms of consistency of internal APIs) no
   individual mod can reach v1.0.0.
@@ -278,7 +279,7 @@ readability and security.
 
 #### Code Style
 
-- Explicit file extensions (`.mjs` or `.cjs`, not `.js`) are used
+- Descriptive file extensions (`.mjs` or `.cjs`, not `.js`) are used
   to differentiate between the different types of files executed
   by different parts of the notion-enhancer.
 - [Prettier](https://prettier.io/) is used to format notion-enhancer source code

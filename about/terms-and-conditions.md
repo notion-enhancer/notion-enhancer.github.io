@@ -13,9 +13,9 @@ the notion-enhancer's [Privacy Policy](./privacy-policy.md).
 
 The notion-enhancer does not provide any guarantees of future
 compatibility or availablility. Though the authors have no plans
-to stop working on it in the forseeable future, the notion-enhancer
+to stop working on it for the forseeable future, the notion-enhancer
 does not take priority over other areas of their lives and may
-experience periods of neglection. If you would like to support
+experience periods of neglect. If you would like to support
 continued work on this project, consider donating.
 
 ## Media
@@ -42,7 +42,7 @@ In short:
   its authors and an attributive license statement must be
   preserved in all copies or derivatives of it or part of it.
 
-The full text of the license can be read below:
+The full text of the license can be read below →
 
 ```
 MIT License

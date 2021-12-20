@@ -58,16 +58,15 @@ export default (output = "/search-index.json") => {
         const slugCache: string[] = [],
           indexContainer = ($container: Element) => {
             for (let $element of $container.children) {
-              const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"],
-                listTags = ["ul", "ol"],
-                isHeading = headingTags.includes(
-                  $element.nodeName.toLowerCase(),
-                ),
-                isList = listTags.includes($element.nodeName.toLowerCase()),
-                isListItem = $element.nodeName.toLowerCase() === "li",
-                isWrapper = $element.matches("blockquote") ||
+              const headingTags = ["H1", "H2", "H3", "H4", "H5", "H6"],
+                isHeading = headingTags.includes($element.nodeName),
+                isList = ["UL", "OL"].includes($element.nodeName),
+                isListItem = $element.nodeName === "LI",
+                hasChildren = $element.childNodes[0]?.nodeName === "P",
+                isWrapper = $element.nodeName === "BLOCKQUOTE" ||
                   $element.children[0]?.nodeName === "IMG",
-                isCodeWithMeta = $element.matches("pre[data-has-meta]");
+                isCodeWithMeta = $element.matches("pre[data-has-meta]"),
+                isDiv = $element.nodeName === "DIV";
 
               if (isList) {
                 indexContainer($element);
@@ -81,7 +80,7 @@ export default (output = "/search-index.json") => {
               };
 
               if (isListItem) {
-                result.text = $element.childNodes[0].textContent;
+                if (!hasChildren) result.text = $element.innerText;
               } else if (isCodeWithMeta) {
                 const meta = $element.children[0].innerText,
                   code = $element.children[1].innerText;
@@ -92,13 +91,16 @@ export default (output = "/search-index.json") => {
                 result.text = $element.innerText;
               }
 
-              const id = $element.getAttribute("id") ||
-                slugifyString(result.text, slugCache);
-              $element.setAttribute("id", id);
-              result.url = `${url}#${id}`;
-              index.push(result as SearchResult);
-
-              if (isListItem) indexContainer($element);
+              if (result.text) {
+                const id = $element.getAttribute("id") ||
+                  slugifyString(result.text, slugCache);
+                $element.setAttribute("id", id);
+                result.url = `${url}#${id}`;
+                index.push(result as SearchResult);
+              }
+              if ((isListItem && hasChildren) || isDiv) {
+                indexContainer($element);
+              }
             }
           };
         if (page.document) {

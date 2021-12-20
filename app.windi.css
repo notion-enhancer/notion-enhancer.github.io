@@ -44,6 +44,10 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply border-dim !important;
 }
 
+.prose img.inline-block {
+  @apply my-0 !important;
+}
+
 .prose code::before,
 .prose code::after,
 .prose blockquote p::before,
