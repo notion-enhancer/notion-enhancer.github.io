@@ -40,6 +40,10 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
 
 /* MARKDOWN */
 
+.prose .inline-icon {
+  @apply inline-block w-6 my-0 pb-2 !important;
+}
+
 .prose hr {
   @apply border-dim !important;
 }

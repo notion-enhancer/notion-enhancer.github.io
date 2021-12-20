@@ -1,14 +1,14 @@
 ---
-title: Authors
+title: Credits
 description: The people behind the notion-enhancer.
 order: 1
 ---
 
-# Authors
+# Credits
 
 ## Active Team Members
 
-### ![](https://avatars.githubusercontent.com/u/16874139?v=4){.rounded-full .inline-block .w-6 .pb-0.5 .mr-1} dragonwocky
+### ![](https://avatars.githubusercontent.com/u/16874139?v=4){.inline-icon .rounded-full .mr-1} dragonwocky
 
 dragonwocky is an Australian teenager and the primary developer
 and maintainer of the notion-enhancer.
@@ -18,7 +18,7 @@ or by emailing [thedragonring.bod@gmail.com](thedragonring.bod@gmail.com).
 You can check out their other work on their [website](https://dragonwocky.me/)
 or their [GitHub profile](https://github.com/dragonwocky/).
 
-### ![](https://avatars.githubusercontent.com/u/5949554?v=4){.rounded-full .inline-block .w-6 .pb-0.5 .mr-1} jamezrin
+### ![](https://avatars.githubusercontent.com/u/5949554?v=4){.inline-icon .rounded-full .mr-1} jamezrin
 
 jamezrin is a Spanish developer and the maintainer of
 the [notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notion-repackaged)
@@ -29,7 +29,7 @@ or by emailing [jaime@jamezrin.name](jaime@jamezrin.name).
 You can check out their other work on their [website](https://jamezrin.name/)
 or their [GitHub profile](https://github.com/jamezrin/).
 
-### ![](https://avatars.githubusercontent.com/u/12666855?v=4){.rounded-full .inline-block .w-6 .pb-0.5 .mr-1} TorchAtlas
+### ![](https://avatars.githubusercontent.com/u/12666855?v=4){.inline-icon .rounded-full .mr-1} TorchAtlas
 
 TorchAtlas takes care of community support and moderation for
 the notion-enhancer.
@@ -37,7 +37,7 @@ the notion-enhancer.
 → You can get in touch with them on Discord at `TorchAtlas#8962`,
 or check out their [GitHub profile](https://github.com/torchatlas).
 
-### ![](https://avatars.githubusercontent.com/u/54142180?v=4){.rounded-full .inline-block .w-6 .pb-0.5 .mr-1} CloudHill
+### ![](https://avatars.githubusercontent.com/u/54142180?v=4){.inline-icon .rounded-full .mr-1} CloudHill
 
 CloudHill works on bringing particularly complex and useful features to the
 notion-enhancer, including the _outliner_, _simpler databases_ and _collapsible headers_ mods.
@@ -85,6 +85,10 @@ without these tools and modules.
 - [chalk](https://github.com/chalk/chalk)
 - [asar](https://github.com/electron/asar)
 - [mime-db](https://github.com/jshttp/mime-db)
+
+[notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notion-repackaged) →
+
+- [Electron Builder](https://www.electron.build/)
 
 [notion-enhancer.github.io](https://github.com/notion-enhancer/notion-enhancer.github.io) →
 

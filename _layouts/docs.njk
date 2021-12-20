@@ -9,46 +9,51 @@ sidebar:
   - tools
 ---
 
-<header class="flex <sm:(flex-col p-4) sm:(flex-row p-6) bg-header border-b-1 border-dim">
-  <a href="/" class="flex-shrink-0 grid w-max max-w-full">
-    <div class="col-span-1 row-span-2 h-18 w-18 mr-4">
-      <img src="{{ site_icon }}" class="w-full h-auto">
-    </div>
-    <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
-    <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
-  </a>
-  <nav class="sm:ml-auto" aria-label="links">
-    <ul class="flex flex-row flex-wrap sm:(items-center h-full justify-end) <sm:mt-4">
-      {% for btn in action_buttons %}
-      {% if btn.sm_only !== true %}
-      <li class="<sm:hidden p-1 group relative flex justify-center">
-        <button data-action="{{ btn.action }}" class="button !bg-opacity-0 !hover:bg-opacity-50 sm:text-sm">
-          {{ btn.icon | feather | safe }}
-        </button>
-        <span class="tooltip opacity-0 group-hover:opacity-100 -bottom-7.5">
-          {{ btn.tooltip }}
-        </span>
-      </li>
-      {% endif %}
-      {% endfor %}
-      {% for btn in nav %}
-      <li class="<sm:(p-0.5 flex-grow text-center) sm:p-1">
-        <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center) sm:text-sm">
-          {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}
-          <span>{{ btn.text }}</span>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </nav>
+<header class="bg-header border-b-1 border-dim flex justify-center <sm:(pb-4 pt-4.5) sm:py-6">
+  <div class="
+    flex <sm:(flex-col px-4) sm:(flex-row px-6) flex-grow
+    <lg:max-w-[93ch] lg:max-w-[132ch] xl:max-w-[144ch]
+  ">
+    <a href="/" class="flex-shrink-0 grid w-max max-w-full pr-2 flex items-center">
+      <div class="col-span-1 row-span-2 w-18 mr-4">
+        <img src="{{ site_icon }}" class="h-18 w-full">
+      </div>
+      <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
+      <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
+    </a>
+    <nav class="sm:ml-auto" aria-label="links">
+      <ul class="flex flex-row flex-wrap sm:(items-center h-full justify-end) <sm:mt-4">
+        {% for btn in action_buttons %}
+        {% if btn.sm_only !== true %}
+        <li class="<sm:hidden p-1 group relative flex justify-center">
+          <button data-action="{{ btn.action }}" class="button !bg-opacity-0 !hover:bg-opacity-50 sm:text-sm">
+            {{ btn.icon | feather | safe }}
+          </button>
+          <span class="tooltip opacity-0 group-hover:opacity-100 -bottom-7.5">
+            {{ btn.tooltip }}
+          </span>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% for btn in nav %}
+        <li class="<sm:(p-0.5 flex-grow text-center) sm:p-1">
+          <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center) sm:text-sm">
+            {{ btn.icon | feather({ class: "<sm:(h-3 w-3)" }) | safe }}
+            <span>{{ btn.text }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<main class="flex-grow flex <md:flex-col sm:overflow-hidden">
+<main class="flex-grow flex <md:flex-col sm:overflow-hidden justify-center">
 
   <aside aria-label="menu" class="
-    pt-2 sm:pb-8 px-10 w-64 max-h-full min-h-full border-r-1 border-dim
-    <md:(fixed top-0 left-0 transform -translate-x-64 pb-16) flex-shrink-0
-    overflow-y-auto z-1 text-base bg-body
+    pt-2 sm:pb-8 md:pl-6 pr-10 <xl:w-[28ch] xl:w-[32ch] max-h-full min-h-full
+    <md:(fixed top-0 left-0 transform -translate-x-[28ch] pb-16 pl-10) flex-shrink-0
+    overflow-y-auto z-1 text-base bg-body border-r-1 border-dim
   ">
     <ul>
     {% for section in sidebar %}
@@ -75,7 +80,10 @@ sidebar:
     </ul>
   </aside>
 
-  <article class="px-10 py-8 w-full min-h-full flex flex-col <md:flex-grow overflow-y-auto">
+  <article class="
+    px-10 py-8 w-full md:<lg:max-w-prose lg:max-w-[80ch] min-h-full
+    flex flex-col <md:flex-grow overflow-y-auto
+  ">
     <div class="prose flex-grow relative">
       {{ content | safe }}
     </div>
@@ -87,7 +95,7 @@ sidebar:
     </a>
     {% endif %}
 
-    <footer class="max-w-prose flex border-dim border-t mt-8 pt-8">
+    <footer class="flex border-dim border-t mt-8 pt-8">
       {%- set prev = search.previousPage(url, "url!=/", "section_order order title") %}
       {%- if prev %}
       <a href="{{ prev.data.url }}" rel="prev" class="link flex items-center space-x-3">
@@ -107,15 +115,15 @@ sidebar:
   </article>
 
   <aside aria-label="table of contents" class="
-    pt-2 pb-8 px-4 w-64 min-h-full border-r-1 border-dim text-base bg-body
-    <lg:hidden flex-shrink-0 overflow-y-auto
+    pt-2 pb-8 px-4 min-h-full text-base bg-body overflow-y-auto
+    <lg:hidden lg:w-[24ch] xl:w-[32ch] flex-shrink-0
   ">
     <p class="mt-6 mb-2 ml-3"><strong>Table of Contents</strong></p>
     <ul>
     {% for heading in table_of_contents %}
       <li>
         <a href="#{{ heading.slug }}" class="
-          py-1 transition duration-100
+          py-1.5 transition duration-100
           inline-flex w-full items-center justify-between
           text-sm text-dim py-2 px-3 rounded-md
           hover:(text-primary bg-light-600 dark:bg-dark-500)
