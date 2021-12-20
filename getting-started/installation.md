@@ -16,7 +16,7 @@ will never be supported.
 Once you've installed the notion-enhancer, read the
 [Basic Usage](./basic-usage.md) page to get started with it.
 
-> Note: Though it is possible to have both vanilla Notion
+> Note: though it is possible to have both vanilla Notion
 > and enhanced Notion installed at once, running both at
 > once may cause problems and should never be done.
 
@@ -61,7 +61,7 @@ updated with each new release of Notion and/or the notion-enhancer.
 
 As it is a modified version of the Notion app,
 it is unsigned. It may be detected as malware or
-unable to be opened. To fix this, try follow
+unable to be opened. To fix this, try following
 [Apple's official instructions](https://support.apple.com/en-us/HT202491).
 
 ### ![](../assets/tux.svg){.inline-icon .mr-1} Linux
