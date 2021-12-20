@@ -13,6 +13,8 @@ be an extra option in the Notion sidebar labelled
 Clicking this will open the notion-enhancer menu, the entry point
 to all notion-enhancer features and configuration.
 
+![](../assets/first-open.png)
+
 ## Configuration
 
 ### Mods
@@ -24,6 +26,8 @@ will open its options in the sidebar. The available options will provide
 a variety of appearances and uses for every mod, and often can be hovered
 over to bring up additional information about what they do. To enable
 a mod, click the toggle on it.
+
+![](../assets/menu-options.png)
 
 There are 4 different types of mods that come with the notion-enhancer:
 
@@ -47,9 +51,9 @@ There are a few, however, that are only available in certain environments. These
 usually addresss problems specific to that environment (e.g. adding a graphical
 zoom in/out slider to the app) or are only possible in that environment (e.g. tabs).
 
-You can check out all available mods for the notion-enhancer on the [Features](./features.md)
-page - the best way to see what the notion-enhancer can do, though, is
-to download it and try it out!
+You can check out all the available mods for the notion-enhancer on the
+[Features](./features.md) page - the best way to see what the notion-enhancer can do,
+though, is to download it and try it out!
 
 ### Profiles
 
@@ -70,7 +74,12 @@ an input, and 4 buttons.
 - The save button will save your changes and reload Notion to load the new profile.
 - The delete button will delete the currently selected profile.
 
+![](../assets/menu-profiles.png)
+
 ## FAQ
+
+If you have any questions that aren't answered anywhere on this website,
+the best place to find help is our community [Discord](https://discord.gg/sFWPXtA).
 
 - _Why aren't themes working?_
 
@@ -82,7 +91,7 @@ an input, and 4 buttons.
 - _Is this against Notion's Terms of Service? Can I get in trouble for using it?_
 
   Definitely not! Before releasing the notion-enhancer, we checked with Notion's
-  support team and go the following responses.
+  support team and received the following responses.
 
   > "Userscripts and userstyles are definitely cool ideas and would be helpful for many users!"
   >
