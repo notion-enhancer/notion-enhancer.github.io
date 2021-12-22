@@ -63,12 +63,11 @@ export default (output = "/search-index.json") => {
                 isList = ["UL", "OL"].includes($element.nodeName),
                 isListItem = $element.nodeName === "LI",
                 hasChildren = $element.childNodes[0]?.nodeName === "P",
-                isWrapper = $element.nodeName === "BLOCKQUOTE" ||
-                  $element.children[0]?.nodeName === "IMG",
+                isBlockquote = $element.nodeName === "BLOCKQUOTE",
                 isCodeWithMeta = $element.matches("pre[data-has-meta]"),
                 isDiv = $element.nodeName === "DIV";
 
-              if (isList) {
+              if (isList || isDiv) {
                 indexContainer($element);
                 continue;
               }
@@ -86,7 +85,7 @@ export default (output = "/search-index.json") => {
                   code = $element.children[1].innerText;
                 result.text = `${meta}: ${code}`;
               } else {
-                if (isWrapper) $element = $element.children[0];
+                if (isBlockquote) $element = $element.children[0];
                 if (isHeading) result.type = "heading";
                 result.text = $element.innerText;
               }
@@ -98,9 +97,7 @@ export default (output = "/search-index.json") => {
                 result.url = `${url}#${id}`;
                 index.push(result as SearchResult);
               }
-              if ((isListItem && hasChildren) || isDiv) {
-                indexContainer($element);
-              }
+              if (isListItem && hasChildren) indexContainer($element);
             }
           };
         if (page.document) {

@@ -4,6 +4,8 @@
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
+/// <reference lib="dom" />
+
 export const safe = (str: string) =>
   str
     .replace(/&/g, "&amp;")

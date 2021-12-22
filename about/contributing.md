@@ -155,7 +155,7 @@ this should not be a problem, but it is something to be aware of.
 1. Make a fork of the repository you would like to contribute to
    (e.g. [notion-enhancer/repo](https://github.com/notion-enhancer/repo/fork)).
 
-   ![](../assets/git-fork.png)
+   ![](../assets/screenshots/git-fork.png)
 
 2. Open a command line and clone either the
    [notion-enhancer/desktop](https://github.com/notion-enhancer/desktop) or
@@ -190,7 +190,7 @@ this should not be a problem, but it is something to be aware of.
 
 6. Open your fork of the repository and create a pull request:
 
-   ![](../assets/git-pr.png)
+   ![](../assets/screenshots/git-pr.png)
 
    Pull requests should contain the following. Pull requests
    without enough information may be ignored or rejected.
@@ -219,7 +219,7 @@ and select the folder you cloned [notion-enhancer/extension](https://github.com/
 to. The extension should now be running with your changes included,
 and should remain after a browser restart.
 
-![](../assets/extension-testing-chrome.png)
+![](../assets/screenshots/extension-testing-chrome.png)
 
 In Firefox, go to the "This Firefox" page by typing `about:debugging#/runtime/this-firefox`
 into the address bar. Press "Load Temporary Add-on..." and select the `manifest.json`
@@ -227,7 +227,7 @@ file within the folder you cloned [notion-enhancer/extension](https://github.com
 to. The extension should now be running with your changes included,
 but will disappear after a browser restart.
 
-![](../assets/extension-testing-firefox.png)
+![](../assets/screenshots/extension-testing-firefox.png)
 
 #### Desktop Testing
 

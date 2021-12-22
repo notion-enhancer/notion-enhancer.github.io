@@ -1,0 +1,71 @@
+---
+title: Features
+description: A summary of the features and mods currently available through the notion-enhancer.
+order: 3
+
+table_of_contents:
+- level: 1
+  slug: features
+  text: Features
+- level: 3
+  slug: core
+  text: Core
+- level: 3
+  slug: extensions
+  text: Extensions
+- level: 3
+  slug: themes
+  text: Themes
+- level: 3
+  slug: integrations
+  text: Integrations
+---
+
+<h1>Features</h1>
+<p>
+  The notion-enhancer's features are separated into configurable mods.
+  For an overview of what's available, have a scroll through this page.
+  The best way to see what the notion-enhancer can do, though,
+  is to download it and try it out!
+</p>
+<p>
+  Expanded mod functionality and varied appearances are discoverable
+  through the notion-enhancer menu. To learn about using mods,
+  read the <a href="./basic-usage.md">Basic Usage</a> page.
+</p>
+
+{% for group in mods %}
+  <h3>{{ group.category }}</h3>
+  <div class="flex flex-row flex-wrap -m-2">
+    {% for mod in group.mods %}
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 p-2">
+      <div class="
+        h-full w-full flex flex-col overflow-hidden rounded-lg shadow-lg
+        bg-card border-dim
+      ">
+        {% if mod.preview %}
+          <img src="/assets/mods/{{ mod.preview }}" class="!my-0 object-cover w-full h-32">
+        {% endif %}
+        <div class="px-4 py-2 break-words">
+          <h4 class="!mt-2 flex items-center">
+            <span>{{ mod.name }}</span>
+            <span class="bg-dim text-xs rounded-sm ml-2 px-0.5 font-medium">v{{ mod.version }}</span>
+          </h4>
+          {% if mod.tags %}
+            <p class="text-xs text-dim !-mt-1 !mb-2">{{ mod.tags }}</p>
+          {% endif %}
+          <p class="text-sm !mt-0">{{ mod.description | md(true) | safe }}</p>
+          {% for author in mod.authors %}
+            <p class="text-xs">
+              <a href="{[ author.homepage }}" class="!no-underline flex items-center">
+                <img src="{{ author.avatar }}" class="inline-block rounded-full !my-0 w-4">
+                <span class="ml-1.5">{{ author.name }}</span>
+              </a>
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endfor %}

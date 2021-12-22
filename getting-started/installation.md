@@ -25,11 +25,11 @@ Once you've installed the notion-enhancer, read the
 Once installed, the browser extension should
 update automatically.
 
-### ![](../assets/firefox.svg){.inline-icon .mr-1} Firefox →
+### ![](../assets/icons/firefox.svg){.inline-icon .mr-1} Firefox →
 
 Go to the [Firefox Add-on Store](//todo) and click "Add to Firefox".
 
-### ![](../assets/chrome.svg){.inline-icon .mr-1} Google Chrome, ![](../assets/edge.svg){.inline-icon .mx-1} Microsoft Edge →
+### ![](../assets/icons/chrome.svg){.inline-icon .mr-1} Google Chrome, ![](../assets/icons/edge.svg){.inline-icon .mx-1} Microsoft Edge →
 
 Go to the [Chrome Web Store](//todo) and click "Add to Chrome".
 
@@ -42,12 +42,12 @@ This is the recommended method of installation.
 Installations via notion-repackaged will need to be manually
 updated with each new release of Notion and/or the notion-enhancer.
 
-### ![](../assets/windows.svg){.inline-icon .mr-1} Windows →
+### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows →
 
 - Installer: [`.exe`](//todo)
 - Portable build: [`.zip`](//todo)
 
-### ![](../assets/apple.svg){.inline-icon .mr-1} MacOS →
+### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS →
 
 > Unfortunately, the M1 (arm64) build is currently non-functional
 > due to a bug in the packager we depend on
@@ -64,7 +64,7 @@ it is unsigned. It may be detected as malware or
 unable to be opened. To fix this, try following
 [Apple's official instructions](https://support.apple.com/en-us/HT202491).
 
-### ![](../assets/tux.svg){.inline-icon .mr-1} Linux
+### ![](../assets/icons/tux.svg){.inline-icon .mr-1} Linux
 
 Both `vanilla` and `enhanced` variants are available for Linux,
 as there is no official vanilla Notion app for Linux-based operating
@@ -84,7 +84,7 @@ try one of the below:
 - arm64 build (vanilla): [`.zip`](//todo)
 - arm64 build (enhanced): [`.zip`](//todo)
 
-#### ![](../assets/debian.svg){.inline-icon .mr-1} Debian, ![](../assets/ubuntu.svg){.inline-icon .mx-1} Ubuntu, ![](../assets/pop-os.png){.inline-icon .mx-1} Pop!\_OS, ![](../assets/linux-mint.svg){.inline-icon .mx-1} Linux Mint →
+#### ![](../assets/icons/debian.svg){.inline-icon .mr-1} Debian, ![](../assets/icons/ubuntu.svg){.inline-icon .mx-1} Ubuntu, ![](../assets/icons/pop-os.png){.inline-icon .mx-1} Pop!\_OS, ![](../assets/icons/linux-mint.svg){.inline-icon .mx-1} Linux Mint →
 
 To add notion-repackaged to your package manager:
 
@@ -112,7 +112,7 @@ Otherwise, you can download the `.deb` and install it manually:
 sudo dpkg -i <downloaded file>.deb
 ```
 
-#### ![](../assets/fedora.svg){.inline-icon .mr-1} Fedora →
+#### ![](../assets/icons/fedora.svg){.inline-icon .mr-1} Fedora →
 
 Add notion-repackaged to your package manager by creating the file
 `/etc/yum.repos.d/notion-repackaged.repo` with the following contents:
@@ -146,7 +146,7 @@ Otherwise, you can download the `.rpm` and install it manually:
 sudo rpm -i <downloaded file>.rpm
 ```
 
-#### ![](../assets/arch-linux.svg){.inline-icon .mr-1} Arch Linux, ![](../assets/manjaro.svg){.inline-icon .mx-1} Manjaro →
+#### ![](../assets/icons/arch-linux.svg){.inline-icon .mr-1} Arch Linux, ![](../assets/icons/manjaro.svg){.inline-icon .mx-1} Manjaro →
 
 To install the app via package manager:
 
@@ -188,7 +188,7 @@ with each new release of Notion and/or the notion-enhancer.
 - [Node.js](https://nodejs.org/en/) v16.0.0+
 - A default installation of the [official Notion app](https://www.notion.so/desktop)
 
-#### ![](../assets/npm.svg){.inline-icon .mr-1} Installation →
+#### ![](../assets/icons/npm.svg){.inline-icon .mr-1} Enhancement →
 
 1. Open a command line and install the
    [notion-enhancer NPM package](https://www.npmjs.com/package/notion-enhancer):

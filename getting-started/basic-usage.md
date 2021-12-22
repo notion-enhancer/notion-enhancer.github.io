@@ -13,7 +13,7 @@ be an extra option in the Notion sidebar labelled
 Clicking this will open the notion-enhancer menu, the entry point
 to all notion-enhancer features and configuration.
 
-![](../assets/first-open.png)
+![](../assets/screenshots/first-open.png)
 
 ## Configuration
 
@@ -27,7 +27,7 @@ a variety of appearances and uses for every mod, and often can be hovered
 over to bring up additional information about what they do. To enable
 a mod, click the toggle on it.
 
-![](../assets/menu-options.png)
+![](../assets/screenshots/menu-options.png)
 
 There are 4 different types of mods that come with the notion-enhancer:
 
@@ -74,7 +74,7 @@ an input, and 4 buttons.
 - The save button will save your changes and reload Notion to load the new profile.
 - The delete button will delete the currently selected profile.
 
-![](../assets/menu-profiles.png)
+![](../assets/screenshots/menu-profiles.png)
 
 ## FAQ
 
