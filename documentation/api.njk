@@ -1,5 +1,62 @@
 ---
 title: API
 description: the utility/helper api available to notion-enhancer mods
-order: 5
+order: 3
+
+table_of_contents:
+- level: 1
+  slug: api
+  text: API
+- level: 3
+  slug: components
+  text: components
+- level: 3
+  slug: electron
+  text: electron
+- level: 3
+  slug: env
+  text: env
+- level: 3
+  slug: fmt
+  text: fmt
+- level: 3
+  slug: fs
+  text: fs
+- level: 3
+  slug: notion
+  text: notion
+- level: 3
+  slug: registry
+  text: registry
+- level: 3
+  slug: storage
+  text: storage
+- level: 3
+  slug: web
+  text: web
 ---
+
+<h1>API</h1>
+<p>
+  The notion-enhancer comes with a large set of helpers
+  built-in. These are used internally by the modloader and
+  are made available to simplify common tasks. Where possible,
+  mods <b>must</b> depend on this API to improve mod quality
+  and maintainability.
+</p>
+<p>
+  Type &amp; usage details have been generated from
+  JSDoc comments in the <a href="https://github.com/notion-enhancer/api">notion-enhancer/api</a>
+  repository and provided below.
+</p>
+<hr>
+
+{% for group in api %}
+  <h3 class="!mb-0">{{ group.namespace }}</h3>
+  <p class="text-dim">{{ group.description }}</p>
+  
+  {% for export in group.exports %}
+  <pre><code><h4 class="!my-0">{{ group.namespace }}.{{ export.name }} <span class="text-dim">{</span><span class="text-blue-600 dark:text-blue-300">{{ export.type }}</span><span class="text-dim">}</span> </h4>{{ export.doc }}{% for tag in export.tags %}
+<span class="text-primary">@{{ tag.kind }}</span>{% if tag.type %} {<span class="text-blue-600 dark:text-blue-300">{{ tag.type }}</span>}{% endif %}{% if tag.name %} <h4 class="inline !font-medium">{{ tag.name }}</h4>{% endif %} {{ tag.doc }}{% endfor %}</code></pre>
+  {% endfor %}
+{% endfor %}

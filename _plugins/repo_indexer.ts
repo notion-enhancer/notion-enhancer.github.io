@@ -4,11 +4,6 @@
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-// generates
-
-// usage: deno run -A /path/to/repo/dir
-// (no closing /)
-
 type Env = "linux" | "win32" | "darwin" | "extension";
 
 interface BaseOption {

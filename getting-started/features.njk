@@ -33,12 +33,13 @@ table_of_contents:
   through the notion-enhancer menu. To learn about using mods,
   read the <a href="./basic-usage.md">Basic Usage</a> page.
 </p>
+<hr>
 
 {% for group in mods %}
   <h3>{{ group.category }}</h3>
   <div class="flex flex-row flex-wrap -m-2">
     {% for mod in group.mods %}
-    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 p-2">
+    <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 p-2" id="{{ mod.id }}">
       <div class="
         h-full w-full flex flex-col overflow-hidden rounded-lg shadow-lg
         bg-card border-dim
@@ -58,7 +59,7 @@ table_of_contents:
           {% for author in mod.authors %}
             <p class="text-xs">
               <a href="{[ author.homepage }}" class="!no-underline flex items-center">
-                <img src="{{ author.avatar }}" class="inline-block rounded-full !my-0 w-4">
+                <img src="{{ author.avatar }}" class="inline-block rounded-full !my-0 w-4 h-4">
                 <span class="ml-1.5">{{ author.name }}</span>
               </a>
             </p>

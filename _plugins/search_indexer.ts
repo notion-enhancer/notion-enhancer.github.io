@@ -64,6 +64,7 @@ export default (output = "/search-index.json") => {
                 isListItem = $element.nodeName === "LI",
                 hasChildren = $element.childNodes[0]?.nodeName === "P",
                 isBlockquote = $element.nodeName === "BLOCKQUOTE",
+                preserveWhitespace = $element.nodeName === "PRE",
                 isCodeWithMeta = $element.matches("pre[data-has-meta]"),
                 isDiv = $element.nodeName === "DIV";
 
@@ -91,6 +92,9 @@ export default (output = "/search-index.json") => {
               }
 
               if (result.text) {
+                if (preserveWhitespace) {
+                  result.text = result.text.replace(/\n+/g, " ");
+                }
                 const id = $element.getAttribute("id") ||
                   slugifyString(result.text, slugCache);
                 $element.setAttribute("id", id);

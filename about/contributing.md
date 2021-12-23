@@ -107,7 +107,7 @@ without enough information may be ignored or rejected.
   mockups would be appreciated.
 
 It may be worth reading through the
-[General Concepts](../documentation/general-concepts.md)
+[Concepts](../documentation/concepts.md)
 page to gain an understanding of the notion-enhancer's
 abilities and limitations.
 

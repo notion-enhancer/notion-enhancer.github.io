@@ -1,10 +1,10 @@
 ---
-title: General Concepts
+title: Concepts
 description: an overview of how the notion-enhancer and its mods work
 order: 1
 ---
 
-# General Concepts
+# Concepts
 
 simple alongside technical
 
