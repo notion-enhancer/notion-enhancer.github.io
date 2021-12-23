@@ -27,6 +27,10 @@ a variety of appearances and uses for every mod, and often can be hovered
 over to bring up additional information about what they do. To enable
 a mod, click the toggle on it.
 
+For new configurations to take effect, Notion will need to be refreshed.
+This can be done by relaunching the app, reloading the website, or clicking
+the "Reload to apply changes" button within the menu.
+
 ![](../assets/screenshots/menu-options.png)
 
 There are 4 different types of mods that come with the notion-enhancer:

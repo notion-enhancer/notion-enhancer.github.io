@@ -69,15 +69,11 @@ const index = jsDoc.map((namespace) => {
 
 await Deno.writeTextFile(
   `${__dirname}/../documentation/_data.json`,
-  JSON.stringify(
-    {
-      section: "Developer Documentation",
-      section_order: 4,
-      layout: "docs.njk",
-      tags: "documentation",
-      api: index,
-    },
-    null,
-    2,
-  ),
+  JSON.stringify({
+    section: "Developer Documentation",
+    section_order: 4,
+    layout: "docs.njk",
+    tags: "documentation",
+    api: index,
+  }),
 );
