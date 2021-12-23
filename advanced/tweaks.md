@@ -1,6 +1,6 @@
 ---
 title: Tweaks
-description: insert custom code through the notion-enhancer
+description: Insert custom styling into Notion.
 order: 1
 ---
 

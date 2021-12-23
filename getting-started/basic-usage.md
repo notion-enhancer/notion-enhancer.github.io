@@ -1,6 +1,6 @@
 ---
 title: Basic Usage
-description: an overview of what to expect and recommendations on how to use the notion-enhancer
+description: An overview of how to use the notion-enhancer and what to expect.
 order: 2
 ---
 

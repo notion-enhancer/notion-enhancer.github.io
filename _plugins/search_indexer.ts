@@ -58,17 +58,26 @@ export default (output = "/search-index.json") => {
         const slugCache: string[] = [],
           indexContainer = ($container: Element) => {
             for (let $element of $container.children) {
-              const headingTags = ["H1", "H2", "H3", "H4", "H5", "H6"],
+              const containerTags = [
+                  "UL",
+                  "OL",
+                  "DIV",
+                  "TABLE",
+                  "THEAD",
+                  "TBODY",
+                  "TR",
+                ],
+                headingTags = ["H1", "H2", "H3", "H4", "H5", "H6"],
+                isContainer = containerTags.includes($element.nodeName),
                 isHeading = headingTags.includes($element.nodeName),
-                isList = ["UL", "OL"].includes($element.nodeName),
                 isListItem = $element.nodeName === "LI",
-                hasChildren = $element.childNodes[0]?.nodeName === "P",
+                isNestedListParent = isListItem &&
+                  $element.childNodes[0]?.nodeName === "P",
                 isBlockquote = $element.nodeName === "BLOCKQUOTE",
                 preserveWhitespace = $element.nodeName === "PRE",
-                isCodeWithMeta = $element.matches("pre[data-has-meta]"),
-                isDiv = $element.nodeName === "DIV";
+                isCodeWithMeta = $element.matches("pre[data-has-meta]");
 
-              if (isList || isDiv) {
+              if (isContainer) {
                 indexContainer($element);
                 continue;
               }
@@ -80,7 +89,7 @@ export default (output = "/search-index.json") => {
               };
 
               if (isListItem) {
-                if (!hasChildren) result.text = $element.innerText;
+                if (!isNestedListParent) result.text = $element.innerText;
               } else if (isCodeWithMeta) {
                 const meta = $element.children[0].innerText,
                   code = $element.children[1].innerText;
@@ -101,7 +110,7 @@ export default (output = "/search-index.json") => {
                 result.url = `${url}#${id}`;
                 index.push(result as SearchResult);
               }
-              if (isListItem && hasChildren) indexContainer($element);
+              if (isNestedListParent) indexContainer($element);
             }
           };
         if (page.document) {

@@ -1,6 +1,6 @@
 ---
 title: API
-description: the utility/helper api available to notion-enhancer mods
+description: Documentation of the helper API available to notion-enhancer mods.
 order: 3
 
 table_of_contents:
@@ -56,7 +56,7 @@ table_of_contents:
   <p class="text-dim">{{ group.description }}</p>
   
   {% for export in group.exports %}
-  <pre><code><h4 class="!my-0">{{ group.namespace }}.{{ export.name }} <span class="text-dim">{</span><span class="text-blue-600 dark:text-blue-300">{{ export.type }}</span><span class="text-dim">}</span> </h4>{{ export.doc }}{% for tag in export.tags %}
+  <pre><code><h4 class="!my-0">{{ group.namespace }}.{{ export.name }} <span class="text-dim">{</span><span class="text-blue-600 dark:text-blue-300">{{ export.type }}</span><span class="text-dim">} </span></h4>{{ export.doc }}{% for tag in export.tags %}
 <span class="text-primary">@{{ tag.kind }}{% if tag.optional %}?{% endif %}</span>{% if tag.type %} {<span class="text-blue-600 dark:text-blue-300">{{ tag.type }}</span>}{% endif %}{% if tag.name %} <h4 class="inline !font-medium">{{ tag.name }}</h4>{% endif %} {{ tag.doc }}{% endfor %}</code></pre>
   {% endfor %}
 {% endfor %}

@@ -48,7 +48,7 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply border-dim !important;
 }
 
-.prose img:not(.inline-icon) {
+.prose img:not(.inline-icon):not(.inline-block) {
   @apply w-full rounded-md;
 }
 
