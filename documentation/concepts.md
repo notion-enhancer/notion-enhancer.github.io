@@ -49,10 +49,12 @@ through a build process that transpiles them into runnable code.
   e.g. rendering/generating page content, displaying interactive menus and saving user data.
 
 The **Notion backend** handles Notion's hosting & provision. It is written with
-[Node.js](https://nodejs.org/en/) and hosted on [AWS](https://aws.amazon.com/).
+either [Node.js](https://nodejs.org/en/) or [Ruby on Rails](https://rubyonrails.org/)
+and hosted on [AWS](https://aws.amazon.com/).
 
 - It serves the **Notion client** to the [https://www.notion.so/](https://www.notion.so/)
   domain.
+- It handles user authorisation requests.
 - It accepts user-uploaded files to add to an authorisation-protected space on one of
   Notion's **AWS** servers (e.g. images).
 - It runs a [**PostgreSQL**](https://www.postgresql.org/) object-relational database
@@ -85,9 +87,9 @@ for dependency-free installation and brings the Notion app to Linux.
 1. The official Windows build of the Notion app is downloaded
    and its source code is extracted.
 
-2. Runs the notion-enhancer CLI from
+2. The notion-enhancer CLI from
    [notion-enhancer/desktop](https://github.com/notion-enhancer/desktop/)
-   on the extracted sources.
+   is run on the extracted app sources.
 
 3. The app icon is replaced with the notion-enhancer logo.
 
@@ -98,10 +100,10 @@ as if it were any other normal app. The autoupdater is a little unreliable at th
 working for some platforms but not others - reinstalling when a new release is
 available is recommended.
 
-As this process essentially hacks the app, it will be unsigned and may be detected
-as malware by antivirus software. The entire build process is done publicly through
-[GitHub Actions](https://github.com/features/actions) and can be inspected in the
-[notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notion-repackaged/)
+As this process essentially hacks the app, the re-compiled executables are unsigned and
+may be detected as malware by antivirus software. This warning can be safely ignored -
+the entire build process is done publicly through [GitHub Actions](https://github.com/features/actions)
+and can be inspected in the [notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notion-repackaged/)
 repository.
 
 ## How The notion-enhancer Works

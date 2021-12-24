@@ -9,7 +9,6 @@ import typography from "https://cdn.skypack.dev/windicss@3.3.0/plugin/typography
 
 export default defineConfig({
   preflight: true,
-  attributify: true,
   theme: {
     extend: {
       fontFamily: {

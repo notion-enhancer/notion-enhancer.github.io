@@ -142,31 +142,41 @@ const _fuzzyCache: Record<string, Record<string, number>> = {},
   exactMatch = (a: string, b: string): boolean =>
     a.toLowerCase().includes(b.toLowerCase());
 
-const _matchCache = { query: "", results: [] as SearchResult[] },
+const _history = [{
+    query: "",
+    results: (await fetchIndex()).filter((result) => result.type === "page"),
+    time: Date.now(),
+  }],
   search = async () => {
-    const query = (<HTMLInputElement> $.input()).value.toLowerCase(),
-      index = query
-        ? (_matchCache.results.length && _matchCache.query &&
-            query.startsWith(_matchCache.query)
-          ? _matchCache.results
-          : (await fetchIndex()))
-        : (await fetchIndex()).filter((result) => result.type === "page"),
-      exact = index.filter((result) => exactMatch(result.text, query)),
-      fuzzy = index.filter((result) => !exact.includes(result))
-        .filter((result) => fuzzyMatch(result.text, query))
-        .sort((a, b) => fuzzyMatch(a.text, query) - fuzzyMatch(b.text, query)),
-      matches = [...exact, ...fuzzy],
-      grouped = matches.reduce((groups, result) => {
-        if (!groups[result.section]) groups[result.section] = [];
-        groups[result.section].push(result);
-        return groups;
-      }, {} as Record<string, SearchResult[]>);
-    _matchCache.query = query;
-    _matchCache.results = matches;
+    const time = Date.now(),
+      query = (<HTMLInputElement> $.input()).value.toLowerCase(),
+      historyIndex = _history.findIndex((cached) => cached.query === query);
+    let results;
+    if (historyIndex < 0) {
+      const prev = _history[0],
+        index = prev && prev.query && query.startsWith(prev.query)
+          ? prev.results
+          : (await fetchIndex()),
+        exact = index.filter((result) => exactMatch(result.text, query)),
+        fuzzy = index.filter((result) => !exact.includes(result))
+          .filter((result) => fuzzyMatch(result.text, query))
+          .sort((a, b) =>
+            fuzzyMatch(a.text, query) - fuzzyMatch(b.text, query)
+          );
+      results = [...exact, ...fuzzy];
+    } else results = _history.splice(historyIndex, 1)[0].results;
+    _history.unshift({ query, results, time });
 
+    const grouped = results.reduce((groups, result) => {
+      if (!groups[result.section]) groups[result.section] = [];
+      groups[result.section].push(result);
+      return groups;
+    }, {} as Record<string, SearchResult[]>);
     $.resultsList().innerHTML = "";
     for (const section in grouped) {
+      if (_history[0]?.time !== time) return;
       $.resultsList().append(widgets.section(section, grouped[section], query));
+      await new Promise((res, _rej) => requestIdleCallback(res));
     }
   };
 

@@ -12,13 +12,13 @@ import postcss from "https://deno.land/x/lume@v1.3.1/plugins/postcss.ts";
 import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
 import windiConfig from "./_windi.config.ts";
-import markdownPlugin from "./_plugins/markdown.ts";
+import codeLanguage from "./_plugins/code_language.ts";
 import tableOfContentsPlugin from "./_plugins/table_of_contents.ts";
 import searchIndexer from "./_plugins/search_indexer.ts";
 
 export const site = lume({}, {
   nunjucks: { includes: "_layouts" },
-  markdown: { plugins: [markdownPlugin], keepDefaultPlugins: true },
+  markdown: { plugins: [codeLanguage], keepDefaultPlugins: true },
 });
 
 site.ignore("README.md");

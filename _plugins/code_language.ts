@@ -14,14 +14,14 @@ export default (md: MarkdownIt) => {
   md.renderer.rules.fence = (...args: any) => {
     const token = args[0][args[1]],
       info = token.info.split(" "),
-      language = info.length ? info[0] : "",
-      filename = language.length && info[1] ? info[1] : null;
+      language = info.length ? info.shift() : "",
+      meta = info.join(" ");
     token.info = language;
     const html = fence(...args);
-    return filename || language
+    return meta || language
       ? html.replace(
         /^<pre>/,
-        `<pre data-has-meta><div>${filename || language}</div>`,
+        `<pre data-has-meta><div>${meta || language}</div>`,
       )
       : html;
   };

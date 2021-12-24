@@ -57,6 +57,7 @@ sidebar:
   ">
     <ul>
     {% for section in sidebar %}
+    {% if not search.data(section).draft %}
       <li>
         <p class="mt-6 mb-2"><strong>{{ search.data(section).section }}</strong></p>
         <ul>
@@ -76,6 +77,7 @@ sidebar:
         {% endfor %}
         </ul>
       </li>
+    {% endif %}
     {% endfor %}
     </ul>
   </aside>

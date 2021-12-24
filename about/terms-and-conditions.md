@@ -18,7 +18,18 @@ does not take priority over other areas of their lives and may
 experience periods of neglect. If you would like to support
 continued work on this project, consider donating.
 
-## Media
+## Branding
+
+The notion-enhancer project is stylised as the "notion-enhancer"
+\- i.e. it should not be referred to as the "Notion Enhancer".
+
+The notion-repackaged project is stylised as "notion-repackaged"
+\- i.e. it should not be referred to as "Notion Repackaged".
+
+- The vanilla notion-repackaged builds are referred to as either "Notion"
+  or "notion-app".
+- The enhanced notion-repackaged builds are referred to as either "Notion Enhanced"
+  or "notion-app-enhanced".
 
 The notion-enhancer logo is a derivative of the Notion logo,
 with a Notion-style frame and a custom interior.
@@ -26,6 +37,10 @@ It can be found in various resolutions and colours
 [here](https://github.com/notion-enhancer/media).
 It may be used or distributed exclusively with the purpose
 of representing the notion-enhancer.
+
+**Disclaimer:** Neither the notion-enhancer nor its authors
+or any of their subprojects claim ownership of the official Notion
+trademark or logo.
 
 ## License
 
@@ -44,9 +59,7 @@ In short:
 
 The full text of the license can be read below →
 
-```
-MIT License
-
+```plaintext MIT License
 Copyright (c) dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

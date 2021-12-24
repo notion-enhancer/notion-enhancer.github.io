@@ -26,15 +26,15 @@ The `.json` file should contain an array of icon set records
 under the `icons` key. Each record should include the following
 properties:
 
-| property               | description                                                                                                                                                       | type                |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `name`                 | display name                                                                                                                                                      | string              |
-| `source`               | if `sourceUrl` is defined: a list of icon filenames OR a file prefix for use with `count`. otherwise: a list of icon urls.                                        | strings[] \| string |
-| `extension` (optional) | the icons' file extension (not necessary if `source` is an array of urls), e.g. `png`, `svg`.                                                                     | string              |
-| `sourceUrl` (optional) | a base url for all icons in the set                                                                                                                               | string              |
-| `count` (optional)     | if `sourceUrl` is defined: the `source` filename will be iterated from `0` to `count` with an underscore `_` in between, i.e. `source_0`, `source_1`, `source_2`. | number              |
-| `author` (optional)    | name of the set's author.                                                                                                                                         | string              |
-| `authorUrl` (optional) | link to the set's author's site.                                                                                                                                  | string              |
+| Property               | Description                                                                                                                                                       | Type               |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `name`                 | display name                                                                                                                                                      | string             |
+| `source`               | if `sourceUrl` is defined: a list of icon filenames OR a file prefix for use with `count`. otherwise: a list of icon urls.                                        | string[] \| string |
+| `extension` (optional) | the icons' file extension (not necessary if `source` is an array of urls), e.g. `png`, `svg`.                                                                     | string             |
+| `sourceUrl` (optional) | a base url for all icons in the set                                                                                                                               | string             |
+| `count` (optional)     | if `sourceUrl` is defined: the `source` filename will be iterated from `0` to `count` with an underscore `_` in between, i.e. `source_0`, `source_1`, `source_2`. | number             |
+| `author` (optional)    | name of the set's author.                                                                                                                                         | string             |
+| `authorUrl` (optional) | link to the set's author's site.                                                                                                                                  | string             |
 
 #### Example
 

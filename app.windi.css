@@ -35,7 +35,6 @@ input[type='search']::-webkit-search-results-decoration {
 
 aside[aria-label='search'] [aria-label='results']:empty::after {
   content: 'No results found. Try entering a different search term?';
-  @apply text-sm text-dim;
 }
 
 /* MARKDOWN */

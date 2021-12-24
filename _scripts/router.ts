@@ -136,6 +136,7 @@ const mouseRouters: MouseRouter[] = [
     // forms
     selector: 'form [type="submit"]',
     click(event: Event) {
+      if ((<MouseEvent> event).ctrlKey) return;
       event.preventDefault();
       const $submit = (<HTMLElement> event.target).closest(this.selector),
         $form = (<HTMLInputElement> $submit).form as HTMLFormElement;
@@ -152,6 +153,7 @@ const mouseRouters: MouseRouter[] = [
     // links
     selector: 'a[href]:not([href^="#"])',
     click(event: Event) {
+      if ((<MouseEvent> event).ctrlKey) return;
       if (!event.target) return;
       const $anchor = (<HTMLElement> event.target).closest(this.selector),
         url = new URL((<HTMLAnchorElement> $anchor).href),
@@ -195,6 +197,7 @@ const mouseRouters: MouseRouter[] = [
     // ids
     selector: 'a[href^="#"]',
     click(event: Event) {
+      if ((<MouseEvent> event).ctrlKey) return;
       event.preventDefault();
       if (!event.target) return;
       const $anchor = (<HTMLElement> event.target).closest(this.selector),
