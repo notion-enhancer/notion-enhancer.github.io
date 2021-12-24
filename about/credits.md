@@ -88,7 +88,7 @@ without these tools and modules.
 
 [notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notion-repackaged) →
 
-- [Electron Builder](https://www.electron.build/)
+- [electron-builder](https://www.electron.build/)
 
 [notion-enhancer.github.io](https://github.com/notion-enhancer/notion-enhancer.github.io) →
 

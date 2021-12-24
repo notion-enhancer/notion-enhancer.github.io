@@ -91,6 +91,9 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply transition bg-light-600 dark:bg-dark-500;
   @apply text-dim rounded-md relative;
 }
+.prose pre code {
+  @apply block overflow-hidden w-max;
+}
 
 .prose pre[data-has-meta] {
   @apply pt-9;

@@ -23,7 +23,8 @@ the following format to the _icon sets_ integration's options in the menu.
 #### Schema
 
 The `.json` file should contain an array of icon set records
-under the `"icons"` key.
+under the `icons` key. Each record should include the following
+properties:
 
 | property               | description                                                                                                                                                       | type                |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
