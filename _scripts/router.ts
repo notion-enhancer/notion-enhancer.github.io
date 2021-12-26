@@ -11,16 +11,42 @@
 const _routeListeners: Array<() => void> = [];
 export const onRouteChange = (handler: () => void) => {
   _routeListeners.push(handler);
+  handler();
 };
 
-const promisifyAnimation = (
-  $element: HTMLElement,
-  animation: [Keyframe[], KeyframeAnimationOptions],
-) => {
-  return new Promise((res, _rej) => {
-    $element.animate(...animation).onfinish = () => res(true);
-  });
-};
+const normalisePathname = (pathname: string) =>
+    pathname.replace(/\/$/, "") +
+    (pathname.split("/").reverse()[0].includes(".") ? "" : "/"),
+  normaliseRoute = (url: URL) => normalisePathname(url.pathname) + url.search,
+  matchesOrigin = (url: URL) => location.origin === url.origin,
+  matchesPathname = (url: URL) =>
+    normalisePathname(location.pathname) === normalisePathname(url.pathname),
+  matchesQuery = (url: URL) => location.search === url.search,
+  isHtmlPage = (url: URL) => {
+    const path = normalisePathname(url.pathname);
+    return path.endsWith("/") || path.endsWith(".html");
+  },
+  isSamePage = (url: URL) =>
+    matchesOrigin(url) && matchesPathname(url) && matchesQuery(url),
+  isRoutablePage = (url: URL) => isHtmlPage(url) && matchesOrigin(url),
+  hasCachedRes = (url: URL) =>
+    _responseCache.has(normalisePathname(url.pathname)),
+  hasCachedBody = (res: Response) => _bodyCache.has(res);
+
+const _responseCache = new Map(),
+  _bodyCache = new Map(),
+  getRoutableRes = (url: URL) => {
+    if (!isRoutablePage(url)) return null;
+    const route = normaliseRoute(url);
+    if (!hasCachedRes(url)) _responseCache.set(route, fetch(route));
+    return _responseCache.get(route);
+  },
+  getRoutableBody = async (url: URL) => {
+    if (!isRoutablePage(url)) return null;
+    const res = getRoutableRes(url);
+    if (!hasCachedBody(res)) _bodyCache.set(res, await (await res).text());
+    return _bodyCache.get(res);
+  };
 
 const getScrollParent = ($element: HTMLElement) => {
     const position = getComputedStyle($element).position;
@@ -45,207 +71,106 @@ const getScrollParent = ($element: HTMLElement) => {
     }
   };
 
-let _currentRoute = location.pathname;
-const _responseCache = new Map(),
-  _bodyCache = new Map();
-
-export const handlePostRoute = () => {
-  _currentRoute = location.pathname;
-  _routeListeners.forEach((handler) => handler());
-  // remove e.g. success messages from url
-  if (location.hash) {
-    scrollTo(location.hash.slice(1) as string);
-    history.replaceState(null, "", location.hash);
-  } else {
-    history.replaceState(null, "", location.pathname);
-  }
-};
-
-const triggerRouteChange = async (
-  destination: string,
-  res: Promise<Response>,
-) => {
-  const $progressBar = document.createElement("div");
-  document.body.append($progressBar);
-  $progressBar.style.position = "absolute";
-  $progressBar.style.height = "2px";
-  $progressBar.style.width = "0%";
-  $progressBar.style.top = "0";
-  $progressBar.style.left = "0";
-  $progressBar.style.background = "rgba(147,197,253)";
-  const animateProgress = async (percentage: number, duration = 500) => {
-    await promisifyAnimation($progressBar, [
-      [{ width: $progressBar.style.width }, { width: `${percentage}%` }],
+const promisifyAnimation = (
+    $element: HTMLElement,
+    animation: [Keyframe[], KeyframeAnimationOptions],
+  ) => {
+    return new Promise((res, _rej) => {
+      $element.animate(...animation).onfinish = () => res(true);
+    });
+  },
+  animateProgress = (
+    start: number,
+    end: number,
+    duration: number,
+  ) => {
+    const $progressBar = document.createElement("div");
+    $progressBar.style.position = "absolute";
+    $progressBar.style.height = "2px";
+    $progressBar.style.width = `${start}%`;
+    $progressBar.style.top = "0";
+    $progressBar.style.left = "0";
+    $progressBar.style.background = "rgba(147,197,253)";
+    return {
+      $progressBar,
+      animationFinished: promisifyAnimation($progressBar, [
+        [{ width: `${start}%` }, { width: `${end}%` }],
+        { duration, easing: "ease-out" },
+      ]).then(() => $progressBar.style.width = `${end}%`),
+    };
+  },
+  animateFadeOut = async ($element: HTMLElement, duration: number) => {
+    await promisifyAnimation($element, [
+      [{ opacity: 1 }, { opacity: 0 }],
       { duration, easing: "ease-out" },
     ]);
-    $progressBar.style.width = `${percentage}%`;
+    $element.remove();
   };
 
-  let body = _bodyCache.get(res);
-  const animation = body ? 0 : animateProgress(100);
-  if (!body) {
-    body = await (await res).text();
-    _bodyCache.set(res, body);
-  }
-  history.pushState(null, "", destination);
+let _currentRoute = normaliseRoute(new URL(location.href));
+const navigateToRoute = async (url: URL) => {
+  const { $progressBar, animationFinished } = animateProgress(0, 100, 500);
+  document.body.append($progressBar);
 
   (<HTMLElement> document.activeElement)?.blur?.();
   const $destinationDocument = document.implementation.createHTMLDocument();
-  $destinationDocument.documentElement.innerHTML = body;
-  const $destinationHeader = $destinationDocument.querySelector("header"),
-    $destinationMain = $destinationDocument.querySelector("main"),
-    $originHeader = document.querySelector("header"),
-    $originMain = document.querySelector("main"),
-    semanticReplacement = $destinationHeader && $destinationMain &&
-      $originHeader && $originMain;
+  $destinationDocument.documentElement.innerHTML = await getRoutableBody(url);
   document.title = $destinationDocument.title;
-  if (semanticReplacement) {
-    if ($originHeader.innerHTML !== $destinationHeader.innerHTML) {
-      $originHeader.replaceWith($destinationHeader);
-    }
-    if ($originMain.innerHTML !== $destinationMain.innerHTML) {
-      $originMain.replaceWith($destinationMain);
-    }
-  } else document.body.replaceWith($destinationDocument.body);
+  document.body.replaceWith($destinationDocument.body);
+  document.body.append($progressBar);
 
-  requestAnimationFrame(async () => {
-    await animation;
-    await promisifyAnimation($progressBar, [
-      [{ opacity: 1 }, { opacity: 0 }],
-      { duration: 250, easing: "ease-out" },
-    ]);
-    $progressBar.remove();
-    handlePostRoute();
-  });
+  await animationFinished;
+  requestAnimationFrame(() => animateFadeOut($progressBar, 250));
+
+  if (url.hash) scrollTo(url.hash.slice(1));
+  _currentRoute = normaliseRoute(url);
+  _routeListeners.forEach((handler) => handler());
 };
 
-const normalisePathname = (pathname: string) =>
-    pathname.replace(/\/$/, "") +
-    (pathname.split("/").reverse()[0].includes(".") ? "" : "/"),
-  isHtmlPage = (pathname: string) =>
-    normalisePathname(pathname).endsWith("/") ||
-    normalisePathname(pathname).endsWith(".html");
-
-interface MouseRouter {
-  selector: string;
-  click?: EventListener;
-  hover?: EventListener;
-}
-const mouseRouters: MouseRouter[] = [
-  {
-    // forms
-    selector: 'form [type="submit"]',
-    click(event: Event) {
-      if ((<MouseEvent> event).ctrlKey) return;
-      event.preventDefault();
-      const $submit = (<HTMLElement> event.target).closest(this.selector),
-        $form = (<HTMLInputElement> $submit).form as HTMLFormElement;
-      triggerRouteChange(
-        $form.target,
-        fetch($form.target, {
-          body: new FormData($form),
-          method: $form.method,
-        }),
-      );
+const anchorSelector = "a[href]",
+  anchorRouter = {
+    onHover(event: Event) {
+      // cache potential destinations
+      if (!(event.target instanceof Element)) return;
+      const $anchor = event.target.closest(anchorSelector);
+      if (!($anchor instanceof HTMLAnchorElement)) return;
+      const url = new URL($anchor.href);
+      getRoutableRes(url);
     },
-  },
-  {
-    // links
-    selector: 'a[href]:not([href^="#"])',
-    click(event: Event) {
-      if ((<MouseEvent> event).ctrlKey) return;
-      if (!event.target) return;
-      const $anchor = (<HTMLElement> event.target).closest(this.selector),
-        url = new URL((<HTMLAnchorElement> $anchor).href),
-        sameOrigin = location.origin === url.origin,
-        locationPathname = normalisePathname(location.pathname),
-        urlPathname = normalisePathname(url.pathname),
-        samePath = locationPathname === urlPathname,
-        sameQuery = location.search === url.search,
-        isHtml = isHtmlPage(urlPathname);
-      if (sameOrigin && isHtml) {
+    onClick(event: Event) {
+      const openInNewTab = (event instanceof MouseEvent && event.ctrlKey);
+      if (openInNewTab || !(event.target instanceof Element)) return;
+      const $anchor = event.target.closest(anchorSelector);
+      if (!($anchor instanceof HTMLAnchorElement)) return;
+      const url = new URL($anchor.href);
+      if (isRoutablePage(url)) {
         event.preventDefault();
-        if (samePath && sameQuery) {
+        if (!isSamePage(url)) {
+          history.pushState(null, "", url);
+          navigateToRoute(url);
+        } else if (url.hash) {
+          history.replaceState(null, "", url);
           scrollTo(url.hash.slice(1));
-          setTimeout(() => {
-            // unfortunately no way in the spec
-            // to detect end of scroll yet
-            location.hash = url.hash;
-          }, 100);
-        } else {
-          const res = _responseCache.get(urlPathname) ?? fetch(urlPathname);
-          triggerRouteChange(url.href, res);
         }
       }
     },
-    hover(event: Event) {
-      if (!event.target) return;
-      const $anchor = (<HTMLElement> event.target).closest(this.selector),
-        url = new URL((<HTMLAnchorElement> $anchor).href),
-        sameOrigin = location.origin === url.origin,
-        locationPathname = normalisePathname(location.pathname),
-        urlPathname = normalisePathname(url.pathname),
-        samePath = locationPathname === urlPathname,
-        isHtml = isHtmlPage(urlPathname),
-        isCached = _responseCache.has(urlPathname);
-      if (sameOrigin && isHtml && !samePath && !isCached) {
-        _responseCache.set(urlPathname, fetch(urlPathname));
-      }
-    },
-  },
-  {
-    // ids
-    selector: 'a[href^="#"]',
-    click(event: Event) {
-      if ((<MouseEvent> event).ctrlKey) return;
-      event.preventDefault();
-      if (!event.target) return;
-      const $anchor = (<HTMLElement> event.target).closest(this.selector),
-        hash = (<HTMLElement> $anchor).getAttribute("href")?.slice(1);
-      scrollTo(hash as string);
-      history.replaceState(null, "", `#${hash}`);
-    },
-  },
-];
-for (const router of mouseRouters) {
-  if (router.click) router.click = router.click.bind(router);
-  if (router.hover) router.hover = router.hover.bind(router);
-}
-
+  };
 globalThis.addEventListener("popstate", (_event) => {
   if (_currentRoute === location.pathname) {
-    scrollTo(location.hash.slice(1) as string);
-  } else triggerRouteChange(location.href, fetch(location.href));
+    scrollTo(location.hash.slice(1));
+  } else navigateToRoute(new URL(location.href));
 });
 
-const documentObserverEvents: MutationRecord[] = [],
-  handleDocumentMutations = (queue: MutationRecord[]) => {
-    while (queue.length) {
-      const mutation = <MutationRecord> queue.shift(),
-        $target = mutation.target;
-      if ($target instanceof HTMLElement) {
-        for (const router of mouseRouters) {
-          $target.querySelectorAll(router.selector).forEach(($trigger) => {
-            if (router.click) {
-              $trigger.removeEventListener("click", router.click);
-              $trigger.addEventListener("click", router.click);
-            }
-            if (router.hover) {
-              $trigger.removeEventListener("click", router.hover);
-              $trigger.addEventListener("click", router.hover);
-            }
-          });
-        }
-      }
-    }
-  },
-  documentObserver = new MutationObserver((list, _observer) => {
-    if (!documentObserverEvents.length) {
-      requestIdleCallback(() =>
-        handleDocumentMutations(documentObserverEvents)
-      );
-    }
-    documentObserverEvents.push(...list);
+const routedSignature = "" + crypto.getRandomValues(new Uint32Array(1))[0],
+  unroutedSelector = `${anchorSelector}:not([data-${routedSignature}])`,
+  documentObserver = new MutationObserver((_list, _observer) => {
+    const $anchors = document.querySelectorAll(unroutedSelector);
+    $anchors.forEach(($a) => {
+      if (!($a instanceof HTMLAnchorElement)) return;
+      $a.dataset[routedSignature] = "";
+      $a.addEventListener("click", anchorRouter.onClick);
+      $a.addEventListener("hover", anchorRouter.onHover);
+    });
   });
 documentObserver.observe(document.documentElement, {
   childList: true,

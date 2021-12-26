@@ -25,26 +25,26 @@ site.ignore("README.md");
 site.copy("favicon.ico", "favicon.ico");
 site.copy("media", "media");
 site.copy("assets", "assets");
-site.use(resolveUrls());
 site.loadAssets([".ts"]);
+
+site.use(tableOfContentsPlugin());
+site.use(searchIndexer());
 
 const feather = (value: string, attrs = {}) =>
   featherIcons.icons[value].toSvg(attrs);
 site.filter("feather", feather);
-
-site.use(tableOfContentsPlugin());
 site.use(codeHighlight());
+
 site.use(windicss({
   minify: true,
   config: windiConfig,
-  windiLangFiles: "transpile",
+  windiLangFiles: "merge",
 }));
 site.use(postcss());
 
+site.use(resolveUrls());
 site.use(bundler());
 site.use(esbuild());
 site.use(minify());
-
-site.use(searchIndexer());
 
 export default site;

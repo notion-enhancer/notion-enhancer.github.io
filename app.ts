@@ -8,7 +8,7 @@
 
 "use strict";
 
-import { handlePostRoute, onRouteChange } from "./_scripts/router.ts";
+import { onRouteChange } from "./_scripts/router.ts";
 import { initSearch } from "./_scripts/search.ts";
 import { initMenu } from "./_scripts/menu.ts";
 import { initTheme } from "./_scripts/theme.ts";
@@ -20,7 +20,6 @@ onRouteChange(initTheme);
 onRouteChange(tiltElements);
 
 // prevent flash of unthemed content on load
-requestAnimationFrame(() => {
+onRouteChange(() => {
   document.documentElement.classList.remove("hidden");
-  handlePostRoute();
 });
