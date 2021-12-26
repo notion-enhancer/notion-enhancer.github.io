@@ -74,15 +74,10 @@ There are a number of installation methods available depending on the
 distribution you are using. For a portable, distribution-agnostic build,
 try one of the below:
 
-- x86_64 build (vanilla): [`.AppImage`](//todo)
-- x86_64 build (enhanced): [`.AppImage`](//todo)
-- arm64 build (vanilla): [`.AppImage`](//todo)
-- arm64 build (enhanced): [`.AppImage`](//todo)
-
-- x86_64 build (vanilla): [`.zip`](//todo)
-- x86_64 build (enhanced): [`.zip`](//todo)
-- arm64 build (vanilla): [`.zip`](//todo)
-- arm64 build (enhanced): [`.zip`](//todo)
+- x86_64 build (vanilla): [`.AppImage`](//todo), [`.zip`](//todo)
+- x86_64 build (enhanced): [`.AppImage`](//todo), [`.zip`](//todo)
+- arm64 build (vanilla): [`.AppImage`](//todo), [`.zip`](//todo)
+- arm64 build (enhanced): [`.AppImage`](//todo), [`.zip`](//todo)
 
 #### ![](../assets/icons/debian.svg){.inline-icon .mr-1} Debian, ![](../assets/icons/ubuntu.svg){.inline-icon .mx-1} Ubuntu, ![](../assets/icons/pop-os.png){.inline-icon .mx-1} Pop!\_OS, ![](../assets/icons/linux-mint.svg){.inline-icon .mx-1} Linux Mint →
 
@@ -158,7 +153,7 @@ sudo pacman -S notion-app-enhanced
 sudo pacman -S notion-app
 ```
 
-Otherwise, you can download the `.rpm` and install it manually:
+Otherwise, you can download the `.pacman` and install it manually:
 
 - x86_64 build (vanilla): [`.pacman`](//todo)
 - x86_64 build (enhanced): [`.pacman`](//todo)

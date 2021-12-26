@@ -7,6 +7,14 @@ site_name: notion-enhancer
 site_description: an enhancer/customiser for the all-in-one productivity workspace notion.so
 edit_url: https://github.com/notion-enhancer/notion-enhancer.github.io/blob/main
 
+landing_nav:
+  - text: Installation
+    icon: download
+    url: /getting-started/installation
+  - text: Documentation
+    icon: book
+    url: /documentation/concepts
+
 nav:
   - text: Community
     icon: message-circle

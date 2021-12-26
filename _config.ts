@@ -7,7 +7,7 @@ import bundler from "https:/deno.land/x/lume@v1.3.1/plugins/bundler.ts";
 import esbuild from "https://raw.githubusercontent.com/lumeland/experimental-plugins/main/esbuild/esbuild.ts";
 import minify from "https://raw.githubusercontent.com/lumeland/experimental-plugins/main/minify/minify.ts";
 
-import windicss from "https://raw.githubusercontent.com/lumeland/experimental-plugins/main/windicss/windicss.ts";
+import windicss from "./_plugins/windicss.ts";
 import postcss from "https://deno.land/x/lume@v1.3.1/plugins/postcss.ts";
 import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
@@ -34,7 +34,11 @@ site.filter("feather", feather);
 
 site.use(tableOfContentsPlugin());
 site.use(codeHighlight());
-site.use(windicss({ minify: true, config: windiConfig }));
+site.use(windicss({
+  minify: true,
+  config: windiConfig,
+  windiLangFiles: "transpile",
+}));
 site.use(postcss());
 
 site.use(bundler());

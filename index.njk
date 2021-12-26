@@ -1,35 +1,6 @@
 ---
 layout: base.njk
 description: an enhancer/customiser for the all-in-one productivity workspace notion.so
-
-landing_nav:
-  - text: Installation
-    icon: download
-    url: /getting-started/installation
-  - text: Documentation
-    icon: book
-    url: /documentation/concepts
-
-features:
-  - In-app tabs
-  - colour themes
-  - extra sidebar features
-  - right to left text
-  - database customisation
-  - icon upload history
-  - and more...
-
-screenshots:
-  - src: ./assets/screenshots/pastel-dark.png
-    title: outliner & the pastel dark theme
-  - src: ./assets/screenshots/nord.png
-    title: notion-enhancer menu & the nord theme
-  - src: ./assets/screenshots/material-ocean.png
-    title: compact tabs & the material ocean theme 
-  - src: ./assets/screenshots/pinky-boom.png
-    title: weekly calendar view & the pinky boom theme
-
-summary: Available on Mac, Windows, Linux or in the browser.
 ---
 
 <header class="flex flex-col <sm:p-4 sm:(pt-20 pb-18 px-6 items-center) bg-header border-b-1 border-dim">
@@ -38,7 +9,7 @@ summary: Available on Mac, Windows, Linux or in the browser.
       <img src="{{ site_icon }}" class="w-full h-auto">
     </div>
     <h1 class="col-start-2 mt-auto font-mono font-bold <sm:text-lg sm:text-3xl">{{ site_name }}</h1>
-    <p class="col-start-2 mb-auto <sm:(text-xs max-w-56) sm:(text-lg max-w-sm)">{{ site_description }}</p>
+    <h2 class="col-start-2 mb-auto <sm:(text-xs max-w-56) sm:(text-lg max-w-sm)">{{ site_description }}</h2>
   </div>
   <nav>
     <ul class="flex flex-row flex-wrap <sm:mt-4 sm:(justify-center mt-9 <lg:max-w-prose)">
@@ -62,18 +33,26 @@ summary: Available on Mac, Windows, Linux or in the browser.
   </nav>
 </header>
 
-<main class="<md:text-center md:grid grid-cols-2 justify-center px-6 pb-16 pt-10 w-4/5 mx-auto">
-  <p class="text-md px-4.5 pb-4">{{ features | join(', ') }}</p>
+<main class="<md:text-center md:(grid grid-cols-2) justify-center px-6 pb-16 pt-10 md:w-4/5 mx-auto">
+  <div>
+    <p class="text-md px-1/20 pb-1/24">
+      In-app tabs, colour themes, extra sidebar features, right to left text,
+      database customisation, icon upload history, and more...
+    </p>
 
-  {% for img in screenshots %}
-    <div class="w-full row-span-3" data-tilt>
-      <img src="{{ img.src }}" title="" class="w-full">
-    </div>
-  {% endfor %}
+    <img src="./assets/screenshots/pastel-dark.png" title="pastel dark theme" class="w-full" data-tilt>
+    <img src="./assets/screenshots/material-ocean.png" title="material ocean theme" class="w-full" data-tilt>
+  </div>
+
+  <div>
+    <img src="./assets/screenshots/nord.png" title="nord theme" class="w-full" data-tilt>
+    <img src="./assets/screenshots/pinky-boom.png" title="pinky boom theme" class="w-full" data-tilt>
+
+    <footer class="text-md px-1/20">
+      Available on Mac, Windows, Linux or in the browser.<br>
+      Created free and open source by <a href="https://dragonwocky.me/" class="link">dragonwocky</a>.
+    </footer>
+  </div>
   
-  <footer class="text-md px-4.5 row-span-3">
-    {{ summary }} <br>
-    Created free and open source by <a href="https://dragonwocky.me/" class="link">dragonwocky</a>.
-  </footer>
 </main>
 

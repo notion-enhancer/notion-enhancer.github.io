@@ -24,7 +24,7 @@ const $ = {
   triggers: () => document.querySelectorAll('[data-action="open-search"]'),
   header: () => <HTMLElement> document.querySelector("header"),
   showTrigger: ($t: Element) =>
-    !$.header().contains($t) && location.pathname !== "/" ? "add" : "remove",
+    !$.header().contains($t) && $.triggers().length !== 1 ? "add" : "remove",
   container: () =>
     <HTMLElement> document.querySelector('aside[aria-label="search"]'),
   input: () =>

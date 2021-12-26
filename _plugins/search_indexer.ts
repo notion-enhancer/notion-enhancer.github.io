@@ -33,7 +33,11 @@ export default (output = "/search-index.json") => {
   return (site: Site) => {
     site.addEventListener("beforeSave", () => {
       const index: SearchResult[] = [],
-        pages = site.pages.sort((a, b) =>
+        pages = site.pages.filter((p) =>
+          !p.data.draft &&
+          p.data.section &&
+          p.dest.ext === ".html"
+        ).sort((a, b) =>
           (a.data.order as number ?? 0) -
           (b.data.order as number ?? 0)
         ).sort((a, b) =>
@@ -43,7 +47,6 @@ export default (output = "/search-index.json") => {
 
       for (const page of pages) {
         if (page.dest.ext !== ".html") continue;
-        if (page.dest.path === "/index") continue;
         const url = page.dest.path.endsWith("/index")
             ? page.dest.path.slice(0, -"/index".length)
             : page.dest.path,

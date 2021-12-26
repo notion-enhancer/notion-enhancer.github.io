@@ -16,7 +16,7 @@ const toggle = () => {
   $btns = () => document.querySelectorAll("[data-action='toggle-theme']"),
   $header = () => <HTMLElement> document.querySelector("header"),
   showButton = ($b: Element) =>
-    !$header().contains($b) && location.pathname !== "/" ? "add" : "remove";
+    !$header().contains($b) && $btns().length !== 1 ? "add" : "remove";
 
 const hotkey = (event: KeyboardEvent) => {
   const pressed = event.shiftKey && !event.altKey &&
