@@ -143,15 +143,10 @@ sudo rpm -i <downloaded file>.rpm
 
 #### ![](../assets/icons/arch-linux.svg){.inline-icon .mr-1} Arch Linux, ![](../assets/icons/manjaro.svg){.inline-icon .mx-1} Manjaro →
 
-To install the app via package manager:
+The app can be installed from the AUR using an AUR helper (e.g. `yay`):
 
-```
-sudo pacman -Syu
-
-sudo pacman -S notion-app-enhanced
-// or
-sudo pacman -S notion-app
-```
+- [notion-app](https://aur.archlinux.org/packages/notion-app/)
+- [notion-app-enhanced](https://aur.archlinux.org/packages/notion-app-enhanced/)
 
 Otherwise, you can download the `.pacman` and install it manually:
 

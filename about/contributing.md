@@ -171,7 +171,6 @@ this should not be a problem, but it is something to be aware of.
    (e.g. `desktop/insert/repo` or `extension/repo`) and link it to your fork:
 
    ```
-   git checkout dev
    git remote set-url origin https://github.com/your_github_username/your_fork_name.git
    // e.g. git remote set-url origin https://github.com/dragonwocky/repo.git
    git fetch

@@ -93,7 +93,10 @@ for dependency-free installation and brings the Notion app to Linux.
 
 3. The app icon is replaced with the notion-enhancer logo.
 
-4. The app is re-compiled into exectuable form by the [electron-builder](https://www.electron.build/).
+4. The dependency cache (`node_modules`) is emptied & the correct dependencies for
+   the target platform downloaded.
+
+5. The app is re-compiled into exectuable form by the [electron-builder](https://www.electron.build/).
 
 The app can then be directly installed or uninstalled with the notion-enhancer included
 as if it were any other normal app. The autoupdater is a little unreliable at this stage,
