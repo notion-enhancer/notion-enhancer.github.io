@@ -8,44 +8,50 @@ order: 4
 
 The notion-enhancer organisation and community are
 purely for the purposes of involvement with and development
-of the notion-enhancer project. Though some general discussion
-may occur (e.g. in the Discord server), this community is not
-a place where arguments on unrelated/divisive topics are to be
-held and engaging with other members of the community should
-be a respectful, harassment-free experience.
+of the notion-enhancer project.
 
-Additionally, at this point the notion-enhancer is an English-only
-space. While we welcome people from all over the world, we are unable
-to properly understand or moderate discussion in other languages.
+> At this point the notion-enhancer is an English-only space.
 
 ## Standards
 
-### Forbidden Content
+Engaging with other members of the community should be a respectful,
+harassment-free experience.
 
-- Disruptive, meaningless or repetitive messages (i.e. spam).
+### Content
+
+- Do not send disruptive, meaningless or repetitive messages (i.e. spam).
   If you would like to agree with something but do not have anything
-  new to add, consider using an emoji reaction on the original message.
+  new to add, consider using an emoji reaction on the original message instead.
 
-- Unrelated, blatant or unsolicited advertisements.
+- Do not send unrelated, blatant or unsolicited advertisements.
+  These are usually distracting and annoying.
 
-- Sexualised or unsafe/inappropriate language or imagery.
+- Do not use sexualised/inappropriate language or imagery. The community
+  should be safe for anyone to join, and is not the place for that kind of content.
 
-- Sharing of private information without explicit permission.
+- Though some general discussion may occur, this community is primarily
+  for discussion of the notion-enhancer. It is not the place for personal
+  arguments on potentially divisive topics to take place.
 
-### Unaccceptable Conduct
+### Conduct
 
-- Acting spitefully/offensively/hatefully towards another person for any reason.
+- You may not spitefully/offensively/hatefully towards another person for any reason.
+  This includes treating another person differently according to their
+  age/race/gender/religion etc.
 
-- Treating another person differently based off stereotypes of age/race/gender/religion etc.
-
-- Targeting of other users with unwanted or repeated friend requests,
+- Do not target other people with unwanted or repeated friend requests,
   mentions or direct messages. Respect people's personal space.
+
+- Do not act in an otherwise illegal manner (e.g. sharing private information
+  without explicit permission).
+
+- Discuss constructively and attempt to consider what may appear best to
+  others beyond yourself. Empathy and kindness can go a long way.
 
 ### Etiquette
 
 - Use different repositories/channels appropriately according to their stated purposes,
-  e.g. ask for help in #support instead of #general and include the required information
-  when submitting a bug report (see the [Contributing](./contributing.md) guide).
+  e.g. ask for help in #support instead of #general.
 
 - Include context in your messages and get straight to the point - i.e. never say "can someone
   help me" and wait for a response. Instead, say something like "can someone help me do \_\_\_\_\_,
@@ -59,5 +65,5 @@ to properly understand or moderate discussion in other languages.
 These rules are not up for debate and their enforcement and interpretation
 are up to the notion-enhancer team. This may vary from case to case, depending
 on the severity and context: e.g. breaking the etiquette guidelines may only result
-in a warning or the message being ignored, while personally attacking another person
-may lead to a temporary ban.
+in a warning or the message being ignored, while attacking another person may
+lead to a temporary ban.
