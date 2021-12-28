@@ -5,7 +5,7 @@ site_embed: /media/colour-x512.png
 site_root: https://notion-enhancer.github.io
 site_name: notion-enhancer
 site_description: an enhancer/customiser for the all-in-one productivity workspace notion.so
-edit_url: https://github.com/notion-enhancer/notion-enhancer.github.io/blob/main
+edit_url: https://github.com/notion-enhancer/notion-enhancer.github.io/edit/main
 
 landing_nav:
   - text: Installation
@@ -22,9 +22,9 @@ nav:
   - text: Source Code
     icon: github
     url: https://github.com/notion-enhancer
-  - text: Donate
+  - text: Sponsor
     icon: coffee
-    url: https://buy.stripe.com/00gdR93R6csIgDKeUV
+    url: https://github.com/sponsors/dragonwocky
 
 action_buttons:
   - action: toggle-menu

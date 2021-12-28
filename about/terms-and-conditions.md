@@ -1,7 +1,7 @@
 ---
 title: Terms & Conditions
 description: The legal terms governing the use and distribution of the notion-enhancer.
-order: 5
+order: 6
 ---
 
 # Terms & Conditions

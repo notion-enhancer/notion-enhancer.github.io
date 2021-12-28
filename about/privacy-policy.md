@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: An explanation of how the notion-enhancer interacts with your data.
-order: 4
+order: 5
 ---
 
 # Privacy Policy

@@ -1,8 +1,8 @@
-# notion-enhancer
+# notion-enhancer/notion-enhancer.github.io
 
-an enhancer/customiser for the all-in-one productivity workspace notion.so
+the notion-enhancer project's website
 
-read the docs online at https://notion-enhancer.github.io
+[read the docs online](https://notion-enhancer.github.io)
 
 to build locally:
 `deno run -A https://deno.land/x/lume/ci.ts -s`
