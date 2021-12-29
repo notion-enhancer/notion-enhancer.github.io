@@ -1,0 +1,26 @@
+name: 'publish docs'
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: build
+        run: deno run -A https://deno.land/x/lume/ci.ts
+      - name: deploy
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          build_dir: _site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

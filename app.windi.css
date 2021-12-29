@@ -58,7 +58,7 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   content: none !important;
 }
 
-.prose code {
+.prose :not(pre) > code {
   @apply bg-light-600 dark:bg-dark-500 rounded-md;
   @apply font-normal text-dim py-0.5 px-1.5;
 }
@@ -88,7 +88,7 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
 
 .prose pre {
   @apply transition bg-light-600 dark:bg-dark-500;
-  @apply text-dim rounded-md relative;
+  @apply text-dim rounded-md relative border border-dim;
 }
 .prose pre code {
   @apply block overflow-hidden w-max;
