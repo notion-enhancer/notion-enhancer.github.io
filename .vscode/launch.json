@@ -4,7 +4,7 @@
     {
       "request": "launch",
       "type": "pwa-node",
-      "program": "https:/deno.land/x/lume@v1.3.1/cli.ts",
+      "program": "https:/deno.land/x/lume@v1.4.1/cli.ts",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "deno",
       "runtimeArgs": [
@@ -20,7 +20,7 @@
     {
       "request": "launch",
       "type": "pwa-node",
-      "program": "https:/deno.land/x/lume@v1.3.1/cli.ts",
+      "program": "https:/deno.land/x/lume@v1.4.1/cli.ts",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "deno",
       "runtimeArgs": [
@@ -32,9 +32,7 @@
       ],
       "attachSimplePort": 9229,
       "name": "Lume serve",
-      "args": [
-        "--serve"
-      ]
+      "args": ["--serve"]
     }
   ]
 }

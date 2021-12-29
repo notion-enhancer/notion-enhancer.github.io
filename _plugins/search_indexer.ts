@@ -4,11 +4,11 @@
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-import { Site } from "https://deno.land/x/lume@v1.3.1/core.ts";
-import { SitePage } from "https://deno.land/x/lume@v1.3.1/core/filesystem.ts";
-import { extname } from "https://deno.land/x/lume@v1.3.1/deps/path.ts";
-import { Element } from "https://deno.land/x/lume@v1.3.1/deps/dom.ts";
-import { createSlugifier } from "https://deno.land/x/lume@v1.3.1/plugins/slugify_urls.ts";
+import { Site } from "https://deno.land/x/lume@v1.4.1/core.ts";
+import { Page } from "https://deno.land/x/lume@v1.4.1/core/filesystem.ts";
+import { extname } from "https://deno.land/x/lume@v1.4.1/deps/path.ts";
+import { Element } from "https://deno.land/x/lume@v1.4.1/deps/dom.ts";
+import { createSlugifier } from "https://deno.land/x/lume@v1.4.1/plugins/slugify_urls.ts";
 
 interface SearchResult {
   url: string;
@@ -135,7 +135,7 @@ export default (output = "/search-index.json") => {
       // output index as a page
       const ext = extname(output),
         path = output.slice(0, -ext.length),
-        page = new SitePage({ path, ext });
+        page = new Page({ path, ext });
       page.content = JSON.stringify(index);
       site.pages.push(page);
     });

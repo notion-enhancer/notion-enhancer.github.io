@@ -4,16 +4,16 @@
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-import { Site } from "https://deno.land/x/lume@v1.3.1/core.ts";
+import { Site } from "https://deno.land/x/lume@v1.4.1/core.ts";
 import {
   DOMParser,
   Element,
-} from "https://deno.land/x/lume@v1.3.1/deps/dom.ts";
-import { createSlugifier } from "https://deno.land/x/lume@v1.3.1/plugins/slugify_urls.ts";
+} from "https://deno.land/x/lume@v1.4.1/deps/dom.ts";
+import { createSlugifier } from "https://deno.land/x/lume@v1.4.1/plugins/slugify_urls.ts";
 import {
   markdownIt,
   markdownItAttrs,
-} from "https://deno.land/x/lume@v1.3.1/deps/markdown_it.ts";
+} from "https://deno.land/x/lume@v1.4.1/deps/markdown_it.ts";
 
 interface Heading {
   level: number;
