@@ -27,11 +27,13 @@ update automatically.
 
 ### ![](../assets/icons/firefox.svg){.inline-icon .mr-1} Firefox →
 
-Go to the [Firefox Add-on Store](//todo) and click "Add to Firefox".
+Go to the [Firefox Add-on Store](https://addons.mozilla.org/en-US/firefox/addon/notion-enhancer/)
+and click "Add to Firefox".
 
 ### ![](../assets/icons/chrome.svg){.inline-icon .mr-1} Google Chrome, ![](../assets/icons/edge.svg){.inline-icon .mx-1} Microsoft Edge →
 
-Go to the [Chrome Web Store](//todo) and click "Add to Chrome".
+Go to the [Chrome Web Store](https://chrome.google.com/webstore/detail/notion-enhancer/dndcmiicjbkfcbpjincpefjkagflbbnl)
+and click "Add to Chrome".
 
 ## notion-repackaged
 
