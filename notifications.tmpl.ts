@@ -23,19 +23,11 @@ interface Notification {
     | "red";
   message: string;
   link?: string;
+  // semver e.g. 0.11.0
   version: string;
   environments?: environment[];
 }
 
-const notifications: Notification[] = [
-  {
-    "id": "46fd651e-2a9b-4a2c-8cc9-0d28ceec9aa7",
-    "icon": "cloud",
-    "color": "blue",
-    "message": "Test cloud notification.",
-    "link": "https://github.com/",
-    "version": "0.11.0",
-  },
-];
+const notifications: Notification[] = [];
 
 export default JSON.stringify(notifications);
