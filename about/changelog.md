@@ -8,7 +8,7 @@ order: 2
 
 A detailed chronological record of all notable changes to the notion-enhancer.
 
-### v0.11.0 (work-in-progress)
+### v0.11.0 (2021-12-31)
 
 a complete redesign & rewrite of the enhancer, with new features and a port to the browser as an extension.
 
