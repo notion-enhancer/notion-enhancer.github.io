@@ -46,8 +46,8 @@ updated with each new release of Notion and/or the notion-enhancer.
 
 ### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows →
 
-- Installer: [`.exe`](//todo)
-- Portable build: [`.zip`](//todo)
+- Installer: [`.exe`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-Setup-2.0.18-1.exe)
+- Portable build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-win.zip)
 
 ### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS →
 
@@ -58,8 +58,8 @@ updated with each new release of Notion and/or the notion-enhancer.
 > Until a solution is available, we recommend running the
 > Intel build through Rosetta or using the browser extension instead.
 
-- Intel installer: [`.dmg`](//todo)
-- Portable Intel build: [`.zip`](//todo)
+- Intel installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1.dmg)
+- Portable Intel build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-mac.zip)
 
 As it is a modified version of the Notion app,
 it is unsigned. It may be detected as malware or
@@ -76,10 +76,14 @@ There are a number of installation methods available depending on the
 distribution you are using. For a portable, distribution-agnostic build,
 try one of the below:
 
-- x86_64 build (vanilla): [`.AppImage`](//todo), [`.zip`](//todo)
-- x86_64 build (enhanced): [`.AppImage`](//todo), [`.zip`](//todo)
-- arm64 build (vanilla): [`.AppImage`](//todo), [`.zip`](//todo)
-- arm64 build (enhanced): [`.AppImage`](//todo), [`.zip`](//todo)
+- x86_64 build (vanilla): [`.AppImage`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-2.0.18-1.AppImage),
+  [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1.zip)
+- x86_64 build (enhanced): [`.AppImage`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1.AppImage),
+  [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1.zip)
+- arm64 build (vanilla): [`.AppImage`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-2.0.18-1-arm64.AppImage),
+  [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1-arm64.zip)
+- arm64 build (enhanced): [`.AppImage`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64.AppImage),
+  [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1-arm64.zip)
 
 #### ![](../assets/icons/debian.svg){.inline-icon .mr-1} Debian, ![](../assets/icons/ubuntu.svg){.inline-icon .mx-1} Ubuntu, ![](../assets/icons/pop-os.png){.inline-icon .mx-1} Pop!\_OS, ![](../assets/icons/linux-mint.svg){.inline-icon .mx-1} Linux Mint →
 
@@ -100,10 +104,10 @@ sudo apt install notion-app
 
 Otherwise, you can download the `.deb` and install it manually:
 
-- arm64 build (vanilla): [`.deb`](//todo)
-- arm64 build (enhanced): [`.deb`](//todo)
-- amd64 build (vanilla): [`.deb`](//todo)
-- amd64 build (enhanced): [`.deb`](//todo)
+- arm64 build (vanilla): [`.deb`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app_2.0.18-1_arm64.deb)
+- arm64 build (enhanced): [`.deb`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced_2.0.18-1_arm64.deb)
+- amd64 build (vanilla): [`.deb`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app_2.0.18-1_amd64.deb)
+- amd64 build (enhanced): [`.deb`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced_2.0.18-1_amd64.deb)
 
 ```
 sudo dpkg -i <downloaded file>.deb
@@ -134,10 +138,10 @@ sudo dnf install notion-app
 
 Otherwise, you can download the `.rpm` and install it manually:
 
-- x86_64 build (vanilla): [`.rpm`](//todo)
-- x86_64 build (enhanced): [`.rpm`](//todo)
-- aarch64 build (vanilla): [`.rpm`](//todo)
-- aarch64 build (enhanced): [`.rpm`](//todo)
+- x86_64 build (vanilla): [`.rpm`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1.x86_64.rpm)
+- x86_64 build (enhanced): [`.rpm`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1.x86_64.rpm)
+- aarch64 build (vanilla): [`.rpm`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1.aarch64.rpm)
+- aarch64 build (enhanced): [`.rpm`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1.aarch64.rpm)
 
 ```
 sudo rpm -i <downloaded file>.rpm
@@ -152,10 +156,10 @@ The app can be installed from the AUR using an AUR helper (e.g. `yay`):
 
 Otherwise, you can download the `.pacman` and install it manually:
 
-- x86_64 build (vanilla): [`.pacman`](//todo)
-- x86_64 build (enhanced): [`.pacman`](//todo)
-- aarch64 build (vanilla): [`.pacman`](//todo)
-- aarch64 build (enhanced): [`.pacman`](//todo)
+- x86_64 build (vanilla): [`.pacman`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1.pacman)
+- x86_64 build (enhanced): [`.pacman`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1.pacman)
+- aarch64 build (vanilla): [`.pacman`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1-aarch64.pacman)
+- aarch64 build (enhanced): [`.pacman`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-enhanced-2.0.18-1-aarch64.pacman)
 
 ```
 sudo pacman -U <downloaded file>.pacman
