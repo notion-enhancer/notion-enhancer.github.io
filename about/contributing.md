@@ -244,7 +244,7 @@ Once relaunched, Notion will be running a version of the
 notion-enhancer with your changes included. You will need to
 repeat this every time you make changes.
 
-> Note: this chain of arguments is intended for development/testing of
+> **Note:** this chain of arguments is intended for development/testing of
 > mods only. It overrides previous enhancements and skips backup to
 > re-insert the notion-enhancer quickly when modifying the contents
 > of the `desktop/insert` folder.

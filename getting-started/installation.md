@@ -16,7 +16,16 @@ will never be supported.
 Once you've installed the notion-enhancer, read the
 [Basic Usage](./basic-usage.md) page to get started with it.
 
-> Note: though it is possible to have both vanilla Notion
+> **Warning:** the new version of the notion-enhancer handles storing local
+> configuration differently to previous versions. If you used notion-enhancer
+> prior to v0.11.0, please delete the `.notion-enhancer` folder to prevent any
+> issues that may arise.
+>
+> It can be found within your home/user folder, e.g. `~` on macOS and Linux
+> or `C:\Users\YourName` on Windows (enabling the "show hidden files" option
+> in your file manager may be necessary).
+
+> **Warning:** though it is possible to have both vanilla Notion
 > and enhanced Notion installed at once, running both at
 > once may cause problems and should never be done.
 

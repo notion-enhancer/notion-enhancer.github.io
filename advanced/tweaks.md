@@ -20,7 +20,7 @@ injecting custom CSS into the client:
    its options in the sidebar. Click the "Upload file..." button beneath
    the "css insert" option and select the `.css` file you created.
 
-   > Note: previously, uploads were linked to the original files and
+   > **Note:** previously, uploads were linked to the original files and
    > would reflect changes. This is no longer the case - uploaded files are
    > stored in memory and must be re-uploaded to reflect edits.
    >
