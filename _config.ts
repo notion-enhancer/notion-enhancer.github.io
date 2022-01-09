@@ -1,14 +1,14 @@
-import lume from "https:/deno.land/x/lume@v1.4.1/mod.ts";
+import lume from "https:/deno.land/x/lume@v1.4.2/mod.ts";
 
-import resolveUrls from "https:/deno.land/x/lume@v1.4.1/plugins/resolve_urls.ts";
-import codeHighlight from "https:/deno.land/x/lume@v1.4.1/plugins/code_highlight.ts";
+import resolveUrls from "https:/deno.land/x/lume@v1.4.2/plugins/resolve_urls.ts";
+import codeHighlight from "https:/deno.land/x/lume@v1.4.2/plugins/code_highlight.ts";
 
-import bundler from "https:/deno.land/x/lume@v1.4.1/plugins/bundler.ts";
+import bundler from "https:/deno.land/x/lume@v1.4.2/plugins/bundler.ts";
 import esbuild from "https://raw.githubusercontent.com/lumeland/experimental-plugins/ad1d4d27ff435197cdb753183447849c7f518ea3/esbuild/esbuild.ts";
 import minify from "https://raw.githubusercontent.com/lumeland/experimental-plugins/ad1d4d27ff435197cdb753183447849c7f518ea3/minify/minify.ts";
 
 import windicss from "https://raw.githubusercontent.com/lumeland/experimental-plugins/ad1d4d27ff435197cdb753183447849c7f518ea3/windicss/windicss.ts";
-import postcss from "https://deno.land/x/lume@v1.4.1/plugins/postcss.ts";
+import postcss from "https://deno.land/x/lume@v1.4.2/plugins/postcss.ts";
 import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
 import windiConfig from "./_windi.config.ts";

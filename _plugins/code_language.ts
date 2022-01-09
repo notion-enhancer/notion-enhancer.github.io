@@ -6,6 +6,9 @@
 
 import MarkdownIt from "https://cdn.skypack.dev/markdown-it?dts";
 
+// invisible within pages, shows up in search index
+const colon = '<span style="display:none">:</span>';
+
 // displays language or additional meta e.g. filename
 // at the top of code blocks
 export default (md: MarkdownIt) => {
@@ -21,7 +24,7 @@ export default (md: MarkdownIt) => {
     return meta || language
       ? html.replace(
         /^<pre>/,
-        `<pre data-has-meta><div>${meta || language}</div>`,
+        `<pre data-has-meta><div>${meta || language}${colon}</div>`,
       )
       : html;
   };
