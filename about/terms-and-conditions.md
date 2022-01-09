@@ -16,7 +16,16 @@ compatibility or availablility. Though the authors have no plans
 to stop working on it for the forseeable future, the notion-enhancer
 does not take priority over other areas of their lives and may
 experience periods of neglect. If you would like to support
-continued work on this project, consider donating.
+continued work on this project, consider sponsoring it.
+
+## Complaints
+
+The notion-enhancer is created according to the priorities and preferences
+of the authors in order to be useful to a majority. It is not created specifically
+for any individual. As long as the authors are working on the notion-enhancer in
+their own time and you use it for free, you have no right to complain about the
+implementation or lack thereof of a feature. If you want to complain, you should
+sponsor the project first.
 
 ## Branding
 
