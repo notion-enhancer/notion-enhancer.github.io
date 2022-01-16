@@ -195,6 +195,14 @@ with each new release of Notion and/or the notion-enhancer.
 
 #### ![](../assets/icons/npm.svg){.inline-icon .mr-1} Enhancement →
 
+To insert notion-enhancer into Notion, simply open a command line and run:
+
+   ```
+   npx notion-enhancer apply
+   ```
+
+If `npx` is not available, refer to the following steps:
+
 1. Open a command line and install the
    [notion-enhancer NPM package](https://www.npmjs.com/package/notion-enhancer):
 
