@@ -1,15 +1,15 @@
 /**
  * notion-enhancer
- * (c) 2021 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
+ * (c) 2022 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-import MarkdownIt from "https://cdn.skypack.dev/markdown-it?dts";
+import type MarkdownIt from "https://cdn.skypack.dev/markdown-it?dts";
 
 // invisible within pages, shows up in search index
-const colon = '<span style="display:none">:</span>';
+const colon = '<span style="display:none">: </span>';
 
-// displays language or additional meta e.g. filename
+// displays language or other meta e.g. filename
 // at the top of code blocks
 export default (md: MarkdownIt) => {
   const fence = md.renderer.rules.fence!;
@@ -20,12 +20,10 @@ export default (md: MarkdownIt) => {
       language = info.length ? info.shift() : "",
       meta = info.join(" ");
     token.info = language;
-    const html = fence(...args);
+    const html = fence(...args),
+      label = `<div>${meta || language}${colon}</div>`;
     return meta || language
-      ? html.replace(
-        /^<pre>/,
-        `<pre data-has-meta><div>${meta || language}${colon}</div>`,
-      )
+      ? html.replace(/^<pre>/, `<pre data-labelled>${label}`)
       : html;
   };
 };

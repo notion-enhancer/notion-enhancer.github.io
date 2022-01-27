@@ -1,10 +1,9 @@
 /**
  * notion-enhancer
- * (c) 2021 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
+ * (c) 2022 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-/// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
 const scale = 1.01,
@@ -66,7 +65,7 @@ const getTilt = (event: MouseEvent) => {
     $glow.style.opacity = "0";
   };
 
-export const tiltElements = () => {
+const tiltElements = () => {
   for (const $tilt of document.querySelectorAll<HTMLElement>("[data-tilt]")) {
     $tilt.removeEventListener("mousemove", mousemoveTilt);
     $tilt.removeEventListener("mouseleave", mouseleaveTilt);
@@ -82,3 +81,5 @@ export const tiltElements = () => {
     }
   }
 };
+
+export { tiltElements };

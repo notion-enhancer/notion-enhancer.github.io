@@ -68,7 +68,7 @@ const index = jsDoc.map((namespace) => {
 }).sort((a, b) => a.namespace.localeCompare(b.namespace));
 
 await Deno.writeTextFile(
-  `${__dirname}/../documentation/_data.json`,
+  `${__dirname}/../../documentation/_data.json`,
   JSON.stringify({
     section: "Developer Documentation",
     section_order: 4,

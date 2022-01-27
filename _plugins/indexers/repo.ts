@@ -125,7 +125,7 @@ for (const mod of registry) {
       if (meta.preview) {
         await Deno.copyFile(
           `${repo}/${mod}/${meta.preview}`,
-          `${__dirname}/../assets/mods/${meta.preview}`,
+          `${__dirname}/../../assets/mods/${meta.preview}`,
         );
       }
       group.mods.push(meta);
@@ -136,7 +136,7 @@ for (const mod of registry) {
 for (const group of index) delete group.tag;
 
 await Deno.writeTextFile(
-  `${__dirname}/../getting-started/_data.json`,
+  `${__dirname}/../../getting-started/_data.json`,
   JSON.stringify({
     section: "Getting Started",
     section_order: 1,

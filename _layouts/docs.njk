@@ -1,12 +1,5 @@
 ---
 layout: base.njk
-
-sidebar:
-  - getting-started
-  - advanced
-  - about
-  - documentation
-  - tools
 ---
 
 <header class="bg-header border-b-1 border-dim flex justify-center <sm:(pb-4 pt-4.5) sm:py-6">
@@ -16,15 +9,15 @@ sidebar:
   ">
     <a href="/" class="flex-shrink-0 grid w-max max-w-full pr-2 flex items-center">
       <div class="col-span-1 row-span-2 w-18 mr-4">
-        <img src="{{ site_icon }}" class="h-18 w-full">
+        <img src="{{ site_icon }}" class="h-18 w-full" alt="">
       </div>
       <h1 class="col-start-2 mt-auto font-mono font-bold text-lg">{{ site_name }}</h1>
       <p class="col-start-2 mb-auto text-xs max-w-56">{{ site_description }}</p>
     </a>
     <nav class="sm:ml-auto" aria-label="links">
       <ul class="flex flex-row flex-wrap sm:(items-center h-full justify-end) <sm:mt-4">
-        {% for btn in action_buttons %}
-        {% if btn.sm_only !== true %}
+
+        {% for btn in header_actions %}
         <li class="<sm:hidden p-1 group relative flex justify-center">
           <button data-action="{{ btn.action }}" class="button !bg-opacity-0 !hover:bg-opacity-50 sm:text-sm">
             {{ btn.icon | feather | safe }}
@@ -33,8 +26,8 @@ sidebar:
             {{ btn.tooltip }}
           </span>
         </li>
-        {% endif %}
         {% endfor %}
+        
         {% for btn in nav %}
         <li class="<sm:(p-0.5 flex-grow text-center) sm:p-1">
           <a href="{{ btn.url }}" class="button <sm:(text-xs py-2 px-3 justify-center) sm:text-sm">
@@ -43,6 +36,7 @@ sidebar:
           </a>
         </li>
         {% endfor %}
+
       </ul>
     </nav>
   </div>
@@ -64,11 +58,11 @@ sidebar:
         {% for page in search.pages(section, "order title") %}
           <li>
           {% if page.data.url == url %}
-            <a aria-current="page" aria-description="{{ page.data.description }}" href="{{ page.data.url }}" 
+            <a aria-current="page" href="{{ page.data.url }}" 
               class="border-l border-primary pl-3 py-1 text-sm text-primary"
             >{{ page.data.title }}</a>
           {% else %}
-            <a aria-description="{{ page.data.description }}" href="{{ page.data.url }}" class="
+            <a href="{{ page.data.url }}" class="
               border-l border-dim pl-3 py-1 text-sm transition duration-200
               text-dim hover:text-primary
             ">{{ page.data.title }}</a>
@@ -136,3 +130,14 @@ sidebar:
   </aside>
 
 </main>
+
+<div class="fixed bottom-4 right-4 z-9 flex flex-col">
+  {% for btn in corner_actions %}
+  <button data-action="{{ btn.action }}" class="button-floating group {{ btn.breakpoint }}:(pointer-events-none opacity-0)">
+    <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+      {{ btn.tooltip }}
+    </span>
+    {{ btn.icon | feather | safe }}
+  </button>
+  {% endfor %}
+</div>

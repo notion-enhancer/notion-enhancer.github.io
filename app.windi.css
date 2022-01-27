@@ -1,6 +1,6 @@
 /**
  * notion-enhancer
- * (c) 2021 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
+ * (c) 2022 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
@@ -23,21 +23,6 @@ body,
 .overflow-y-auto {
   scroll-behavior: smooth;
 }
-
-/* SEARCH */
-
-input[type='search']::-webkit-search-decoration,
-input[type='search']::-webkit-search-cancel-button,
-input[type='search']::-webkit-search-results-button,
-input[type='search']::-webkit-search-results-decoration {
-  -webkit-appearance: none;
-}
-
-aside[aria-label='search'] [aria-label='results']:empty::after {
-  content: 'No results found. Try entering a different search term?';
-}
-
-/* MARKDOWN */
 
 .prose .inline-icon {
   @apply inline-block w-6 my-0 pb-2 !important;
@@ -94,15 +79,13 @@ aside[aria-label='search'] [aria-label='results']:empty::after {
   @apply block overflow-hidden w-max;
 }
 
-.prose pre[data-has-meta] {
+.prose pre[data-labelled] {
   @apply pt-9;
 }
-.prose pre[data-has-meta] > div:first-child {
+.prose pre[data-labelled] > div:first-child {
   @apply top-0 left-0 text-xs absolute py-0.75 px-2 rounded-br-sm;
   @apply transition bg-light-700 dark:bg-dark-300;
 }
-
-/* CODE HIGHLIGHT */
 
 /* https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css */
 .hljs-doctag,

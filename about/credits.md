@@ -14,7 +14,7 @@ dragonwocky is an Australian teenager and the primary developer
 and maintainer of the notion-enhancer.
 
 → You can get in touch with them on Discord at `dragonwocky#8449`,
-or by emailing [thedragonring.bod@gmail.com](thedragonring.bod@gmail.com).
+or by emailing [thedragonring.bod@gmail.com](mailto:thedragonring.bod@gmail.com).
 You can check out their other work on their [website](https://dragonwocky.me/)
 or their [GitHub profile](https://github.com/dragonwocky/).
 
@@ -25,7 +25,7 @@ the [notion-enhancer/notion-repackaged](https://github.com/notion-enhancer/notio
 project, creating pre-enhanced Notion installers and bringing Notion to Linux.
 
 → You can get in touch with them on Discord at `Jamezrin#2360`
-or by emailing [jaime@jamezrin.name](jaime@jamezrin.name).
+or by emailing [jaime@jamezrin.name](mailto:jaime@jamezrin.name).
 You can check out their other work on their [website](https://jamezrin.name/)
 or their [GitHub profile](https://github.com/jamezrin/).
 

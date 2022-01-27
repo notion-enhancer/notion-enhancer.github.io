@@ -1,18 +1,11 @@
 /**
  * notion-enhancer
- * (c) 2021 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
+ * (c) 2022 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
  * (https://notion-enhancer.github.io/) under the MIT license
  */
 
-/// <reference lib="dom" />
-
-"use strict";
-
-const _routeListeners: Array<() => void> = [];
-export const onRouteChange = (handler: () => void) => {
-  _routeListeners.push(handler);
-  handler();
-};
+const _routeListeners: Array<() => void> = [],
+  onRouteChange = (handler: () => void) => _routeListeners.push(handler);
 
 const normalisePathname = (pathname: string) =>
     pathname.replace(/\/$/, "") +
@@ -127,22 +120,26 @@ const navigateToRoute = async (url: URL) => {
   _routeListeners.forEach((handler) => handler());
 };
 
-const anchorSelector = "a[href]",
-  anchorRouter = {
-    onHover(event: Event) {
-      // cache potential destinations
-      if (!(event.target instanceof Element)) return;
-      const $anchor = event.target.closest(anchorSelector);
-      if (!($anchor instanceof HTMLAnchorElement)) return;
-      const url = new URL($anchor.href);
+const findAnchor = (event: MouseEvent) => {
+    const path = event.composedPath(),
+      $a = path.find(($) => $ instanceof Element && $.matches("a[href]"));
+    return <HTMLAnchorElement | undefined> $a;
+  },
+  mousemoveListener = (event: MouseEvent) => {
+    // cache potential destinations
+    const $a = findAnchor(event);
+    if ($a) {
+      const url = new URL($a.href);
       getRoutableRes(url);
-    },
-    onClick(event: Event) {
-      const openInNewTab = (event instanceof MouseEvent && event.ctrlKey);
-      if (openInNewTab || !(event.target instanceof Element)) return;
-      const $anchor = event.target.closest(anchorSelector);
-      if (!($anchor instanceof HTMLAnchorElement)) return;
-      const url = new URL($anchor.href);
+    }
+  },
+  clickListener = (event: MouseEvent) => {
+    // route internal links
+    const $a = findAnchor(event);
+    if ($a) {
+      const openInNewTab = event.ctrlKey;
+      if (openInNewTab) return;
+      const url = new URL($a.href);
       if (isRoutablePage(url)) {
         event.preventDefault();
         if (!isSamePage(url)) {
@@ -153,27 +150,25 @@ const anchorSelector = "a[href]",
           scrollTo(url.hash.slice(1));
         }
       }
-    },
+    }
+  },
+  popstateListener = () => {
+    if (_currentRoute === location.pathname) {
+      scrollTo(location.hash.slice(1));
+    } else navigateToRoute(new URL(location.href));
   };
-globalThis.addEventListener("popstate", (_event) => {
-  if (_currentRoute === location.pathname) {
-    scrollTo(location.hash.slice(1));
-  } else navigateToRoute(new URL(location.href));
-});
 
-const routedSignature = "" + crypto.getRandomValues(new Uint32Array(1))[0],
-  unroutedSelector = `${anchorSelector}:not([data-${routedSignature}])`,
-  documentObserver = new MutationObserver((_list, _observer) => {
-    const $anchors = document.querySelectorAll(unroutedSelector);
-    $anchors.forEach(($a) => {
-      if (!($a instanceof HTMLAnchorElement)) return;
-      $a.dataset[routedSignature] = "";
-      $a.addEventListener("click", anchorRouter.onClick);
-      $a.addEventListener("hover", anchorRouter.onHover);
-    });
-  });
-documentObserver.observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-  attributes: true,
-});
+const initRouter = () => {
+    _routeListeners.forEach((handler) => handler());
+    globalThis.addEventListener("popstate", popstateListener);
+    document.addEventListener("mousemove", mousemoveListener);
+    document.addEventListener("click", clickListener);
+    popstateListener();
+  },
+  deinitRouter = () => {
+    globalThis.removeEventListener("popstate", popstateListener);
+    document.removeEventListener("mousemove", mousemoveListener);
+    document.removeEventListener("click", clickListener);
+  };
+
+export { deinitRouter, initRouter, onRouteChange };

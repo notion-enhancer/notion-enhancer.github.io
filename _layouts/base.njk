@@ -31,25 +31,13 @@
 
   <body class="min-h-full w-full flex flex-col font-sans bg-body h-full">
 
-    <div class="flex items-center bg-purple-500 text-white text-sm font-bold px-4 py-3" role="alert">
-      {# {{ 'alert-triangle' | feather({ class: "w-4 h-4 mr-4 flex-shrink-0" }) | safe }} #}
-      <p><span class="mr-1.5">✨</span> notion-enhancer v0.11.0 is now available. Happy new year!</p>
-    </div>
+    {% if site_banner %}
+    <figure class="flex items-center bg-purple-500 text-white text-sm font-bold px-4 py-3" role="banner">
+      <figcaption><span class="mr-1.5">{{ site_banner_icon }}</span> {{ site_banner_message }}</figcaption>
+    </figure>
+    {% endif %}
 
     {{ content | safe }}
-
-    <div class="fixed bottom-4 right-4 z-9 flex flex-col">
-      {% for btn in action_buttons %}
-      <button data-action="{{ btn.action }}" class="button-floating group {{ btn.sm_class }}">
-        <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
-          {{ btn.tooltip }}
-        </span>
-        {{ btn.icon | feather | safe }}
-      </button>
-      {% endfor %}
-    </div>
-
-    {% include "search.njk" %}
 
   </body>
 </html>

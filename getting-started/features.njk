@@ -45,7 +45,7 @@ table_of_contents:
         bg-card border-dim
       ">
         {% if mod.preview %}
-          <img src="/assets/mods/{{ mod.preview }}" class="!my-0 object-cover w-full h-32">
+          <img src="/assets/mods/{{ mod.preview }}" class="!my-0 object-cover w-full h-32" alt="">
         {% endif %}
         <div class="px-4 py-2 break-words">
           <h4 class="!mt-2 flex items-center">
@@ -59,7 +59,7 @@ table_of_contents:
           {% for author in mod.authors %}
             <p class="text-xs">
               <a href="{[ author.homepage }}" class="!no-underline flex items-center">
-                <img src="{{ author.avatar }}" class="inline-block rounded-full !my-0 w-4 h-4">
+                <img src="{{ author.avatar }}" class="inline-block rounded-full !my-0 w-4 h-4" alt="">
                 <span class="ml-1.5">{{ author.name }}</span>
               </a>
             </p>

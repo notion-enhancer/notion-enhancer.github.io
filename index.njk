@@ -6,7 +6,7 @@ description: an enhancer/customiser for the all-in-one productivity workspace no
 <header class="flex flex-col <sm:p-4 sm:(pt-20 pb-18 px-6 items-center) bg-header border-b-1 border-dim">
   <div class="items-center grid w-max max-w-full">
     <div class="col-span-1 row-span-2 <sm:(mr-4 h-18 w-18) sm:(mr-6 h-36 w-36)">
-      <img src="{{ site_icon }}" class="w-full h-auto">
+      <img src="{{ site_icon }}" class="w-full h-auto" alt="">
     </div>
     <h1 class="col-start-2 mt-auto font-mono font-bold <sm:text-lg sm:text-3xl">{{ site_name }}</h1>
     <h2 class="col-start-2 mb-auto <sm:(text-xs max-w-56) sm:(text-lg max-w-sm)">{{ site_description }}</h2>
@@ -40,13 +40,13 @@ description: an enhancer/customiser for the all-in-one productivity workspace no
       database customisation, icon upload history, and more...
     </p>
 
-    <img src="./assets/screenshots/app-pastel-dark.png" title="pastel dark theme" class="w-full" data-tilt>
-    <img src="./assets/screenshots/app-material-ocean.png" title="material ocean theme" class="w-full" data-tilt>
+    <img src="./assets/screenshots/app-pastel-dark.png" title="pastel dark theme" alt="" class="w-full" data-tilt>
+    <img src="./assets/screenshots/app-material-ocean.png" title="material ocean theme" alt="" class="w-full" data-tilt>
   </div>
 
   <div>
-    <img src="./assets/screenshots/app-nord.png" title="nord theme" class="w-full" data-tilt>
-    <img src="./assets/screenshots/app-pinky-boom.png" title="pinky boom theme" class="w-full" data-tilt>
+    <img src="./assets/screenshots/app-nord.png" title="nord theme"  alt="" class="w-full" data-tilt>
+    <img src="./assets/screenshots/app-pinky-boom.png" title="pinky boom theme" alt="" class="w-full" data-tilt>
 
     <footer class="text-md px-1/20">
       Available on Mac, Windows, Linux or in the browser.<br>
@@ -55,4 +55,15 @@ description: an enhancer/customiser for the all-in-one productivity workspace no
   </div>
   
 </main>
+
+<div class="fixed bottom-4 right-4 z-9 flex flex-col">
+  {% for btn in landing_actions %}
+  <button data-action="{{ btn.action }}" class="button-floating group">
+    <span class="tooltip opacity-0 group-hover:opacity-100 right-10 bottom-0">
+      {{ btn.tooltip }}
+    </span>
+    {{ btn.icon | feather | safe }}
+  </button>
+  {% endfor %}
+</div>
 

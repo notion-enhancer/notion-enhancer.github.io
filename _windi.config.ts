@@ -75,22 +75,5 @@ export default defineConfig({
       text-gray-600 hover:text-gray-800
       dark:(text-gray-300 hover:text-gray-200)
     `,
-
-    "search-result-section": `
-      block bg-body pb-2 w-full text-primary sticky top-0
-    `,
-    "search-result": `
-      block mb-4 px-4 py-3 w-full rounded-md cursor-pointer
-      bg-card duration-50 hover:bg-primary flex items-center
-      focus:(bg-primary outline-none)
-    `,
-    "search-result-icon": `
-      feather h-6 w-6 mr-4 text-dim flex-shrink-0
-      group-hover:text-current group-focus:text-current
-    `,
-    "search-result-highlight": `
-      bg-transparent text-primary
-      group-hover:text-current group-focus:text-current
-    `,
   },
 });
