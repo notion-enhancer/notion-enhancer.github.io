@@ -7,8 +7,9 @@
 /// <reference lib="dom" />
 
 import psyche, {
+  platformModifier,
   registerHotkey,
-} from "https://deno.land/x/psyche@v0.3.0/client/psyche.min.mjs";
+} from "https://deno.land/x/psyche@v0.3.2/client/psyche.min.mjs";
 import { initRouter, onRouteChange } from "./_scripts/router.ts";
 import { tiltElements } from "./_scripts/tilt.ts";
 
@@ -74,7 +75,10 @@ const searchInstance = psyche({
       dark: { accent: "#d8b4fe" },
       scrollbarStyle: "square",
     },
-    hotkeys: [{ kbd: "{{modifier}} + SHIFT + L", label: "to toggle theme" }],
+    hotkeys: [{
+      kbd: `${platformModifier} + SHIFT + L`,
+      label: "to toggle theme",
+    }],
     index: await fetch("/search.json").then((res) => res.json()),
   }),
   initSearch = () => {
