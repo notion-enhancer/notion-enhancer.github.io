@@ -8,17 +8,12 @@ import { slugify } from "https://deno.land/x/psyche@v0.3.0/indexers/shared.ts";
 
 import type { Site } from "lume/core.ts";
 import type { Element } from "lume/deps/dom.ts";
-import { DOMParser } from "lume/deps/dom.ts";
-import { markdownIt, markdownItAttrs } from "lume/deps/markdown_it.ts";
+import { stringToDocument } from "lume/core/utils.ts";
 
 interface Heading {
   slug: string;
   text: string;
 }
-
-// @ts-ignore: expression not callable
-const md = markdownIt();
-md.use(markdownItAttrs);
 
 const crawlSlugs = ($: Element) => {
   const slugs: string[] = [],
@@ -34,16 +29,17 @@ const crawlSlugs = ($: Element) => {
 export default () => {
   return (site: Site) => {
     site.preprocess([".html"], (page) => {
-      const filename = page.src.path + page.src.ext;
+      // deno-lint-ignore no-explicit-any
+      const md = <any> site.formats.get(".md")!.engine,
+        filename = page.src.path + page.src.ext;
       if (page.data.table_of_contents || !filename.endsWith(".md")) return;
 
-      const content = Deno.readTextFileSync(site.src(filename)),
+      const content = <string> page.data.content,
         headings: Heading[] = [],
-        document = new DOMParser().parseFromString(
+        document = stringToDocument(
           // ignore frontmatter
           md.render(content.replace(/^---[\s\S]+?---/, "")),
-          "text/html",
-        )!,
+        ),
         slugs: string[] = crawlSlugs(document.body);
 
       const hSelector = "h1, h2, h3, h4, h5, h6";
