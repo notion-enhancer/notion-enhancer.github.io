@@ -219,15 +219,29 @@ repository.
 }
 ```
 
-#### Remove Linked Page Arrows
+#### Remove Link Arrows
 
-> Last updated: 2021-12-23
+> Last updated: 2022-02-10
 
 ![](https://user-images.githubusercontent.com/16874139/147217098-020034ab-a487-4456-bfea-f4df525cb9f5.png)
 
 ```css
-.pageLinkIndicator {
+/* remove all link arrows */
+svg.pageLinkIndicator {
   display: none !important;
+}
+
+/* remove linked database arrows only */
+.notion-collection_view-block svg.pageLinkIndicator {
+  display: none !important;
+}
+
+/* remove linked page arrows only */
+svg.pageLinkIndicator {
+  display: none !important;
+}
+.notion-collection_view-block svg.pageLinkIndicator {
+  display: block !important;
 }
 ```
 
