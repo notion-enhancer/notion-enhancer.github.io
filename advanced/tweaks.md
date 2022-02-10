@@ -221,13 +221,28 @@ repository.
 
 #### Remove Linked Page Arrows
 
-> Last updated: 2021-12-23
+> Last updated: 2022-02-10
 
 ![](https://user-images.githubusercontent.com/16874139/147217098-020034ab-a487-4456-bfea-f4df525cb9f5.png)
 
 ```css
-.pageLinkIndicator {
+/* To remove both linked page and linked database arrows */
+svg.pageLinkIndicator {
   display: none !important;
+}
+
+/* To remove only linked database arrows */
+.notion-collection_view-block svg.pageLinkIndicator {
+  display: none !important;
+}
+
+
+/* To remove only linked page arrows */
+svg.pageLinkIndicator {
+  display: none !important;
+}
+.notion-collection_view-block svg.pageLinkIndicator {
+  display: block !important;
 }
 ```
 
