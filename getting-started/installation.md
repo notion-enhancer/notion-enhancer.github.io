@@ -53,12 +53,46 @@ This is the recommended method of installation.
 Installations via notion-repackaged will need to be manually
 updated with each new release of Notion and/or the notion-enhancer.
 
-### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows →
+### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows
 
 - Installer: [`.exe`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-Setup-2.0.18-1.exe)
 - Portable build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-win.zip)
 
-### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS →
+You can also use your favorite package manager.
+
+#### Winget →
+
+The app can be installed via:
+
+```
+winget install NotionRepackaged.NotionEnhanced
+```
+
+#### ![](../assets/icons/chocolatey.svg){.inline-icon .mr-1} Chocolatey →
+
+
+The app can be installed via:
+
+```
+choco install notion-repackaged
+```
+
+#### Scoop →
+
+Add the [Extras](https://github.com/ScoopInstaller/Extras) bucket first:
+
+```
+scoop bucket add extras
+```
+
+The app can then be installed via:
+
+```
+scoop install notion-enhanced
+```
+
+
+### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS
 
 > Unfortunately, the M1 (arm64) build is currently non-functional
 > due to a bug in the packager we depend on
@@ -74,6 +108,14 @@ As it is a modified version of the Notion app,
 it is unsigned. It may be detected as malware or
 unable to be opened. To fix this, try following
 [Apple's official instructions](https://support.apple.com/en-us/HT202491).
+
+#### ![](../assets/icons/homebrew.svg){.inline-icon .mr-1} Homebrew →
+
+The app can be installed via:
+
+```
+brew install --cask notion-enhanced
+```
 
 ### ![](../assets/icons/tux.svg){.inline-icon .mr-1} Linux
 
