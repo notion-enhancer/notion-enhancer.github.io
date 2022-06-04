@@ -94,7 +94,7 @@ xattr -cr "<installation location>.app"
 > where the app has been installed, e.g. `/Applications/Notion Enhanced`.
 
 > If this is too complicated, it is recommended using notion-enhancer in
-> the browser instead.
+> the browser or running the Intel build of notion-repackaged through Rosetta instead.
 
 ### ![](../assets/icons/tux.svg){.inline-icon .mr-1} Linux
 

@@ -50,7 +50,6 @@ site.use(windicss({
 }));
 site.use(postcss());
 site.use(resolveUrls());
-// site.use(bundler());
 site.use(esbuild());
 site.use(minify());
 
