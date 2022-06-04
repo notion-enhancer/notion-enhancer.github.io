@@ -1,0 +1,282 @@
+/**
+ * notion-enhancer
+ * (c) 2022 dragonwocky <thedragonring.bod@gmail.com> (https://dragonwocky.me/)
+ * (https://notion-enhancer.github.io/) under the MIT license
+ */
+
+::-moz-selection {
+  @apply bg-primary;
+}
+
+::selection {
+  @apply bg-primary;
+}
+
+::-webkit-scrollbar {
+  @apply w-2 h-2 bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply transition bg-gray-300 dark:bg-dark-400;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-hover bg-gray-400 dark:bg-dark-300;
+}
+
+html,
+body,
+.overflow-y-auto {
+  scroll-behavior: smooth;
+}
+
+.prose .inline-icon {
+  @apply inline-block w-6 my-0 pb-2 !important;
+}
+
+.prose hr {
+  @apply border-dim !important;
+}
+
+.prose img:not(.inline-icon):not(.inline-block) {
+  @apply w-full rounded-md;
+}
+
+.prose code::before,
+.prose code::after,
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none !important;
+}
+
+.prose :not(pre) > code {
+  @apply bg-light-600 dark:bg-dark-500 rounded-md;
+  @apply font-normal text-dim py-0.5 px-1.5;
+}
+
+.prose blockquote {
+  @apply border-dim text-dim;
+}
+
+.prose ol > li::before {
+  @apply text-dim !important;
+}
+
+.prose ul > li::before {
+  @apply bg-dim !important;
+}
+
+.prose li > ul {
+  @apply my-0 !important;
+}
+
+.prose thead,
+.prose tbody tr {
+  @apply border-b-0;
+}
+
+.prose tbody tr {
+  @apply border-t border-dim;
+}
+
+.prose pre {
+  @apply transition bg-light-600 dark:bg-dark-500;
+  @apply text-dim rounded-md relative border border-dim;
+}
+
+.prose pre code {
+  @apply block overflow-hidden w-max;
+}
+
+.prose pre[data-labelled] {
+  @apply pt-9;
+}
+
+.prose pre[data-labelled] > div:first-child {
+  @apply top-0 left-0 text-xs absolute py-0.75 px-2 rounded-br-sm;
+  @apply transition bg-light-700 dark:bg-dark-300;
+}
+
+.prose kbd {
+  @apply font-mono;
+  padding: .25rem;
+  margin-right: .25rem;
+  font-size: .65rem;
+  line-height: 1rem;
+  border-radius: .375rem;
+  box-shadow: rgb(0 0 0 / 10%) 0 1px 3px 0, rgb(0 0 0 / 10%) 0 1px 2px -1px;
+  background: #f1f3f5;
+  border: 2px solid #d4d4d8;
+}
+
+.dark .prose kbd {
+  background: #1f1f1f;
+  border: 2px solid #222222;
+}
+
+/* https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css */
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  color: #d73a49;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  color: #6f42c1;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: #005cc5;
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  color: #032f62;
+}
+
+.hljs-built_in,
+.hljs-symbol {
+  color: #e36209;
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  color: #6a737d;
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  color: #22863a;
+}
+
+.hljs-subst {
+  color: #24292e;
+}
+
+.hljs-section {
+  color: #005cc5;
+  font-weight: bold;
+}
+
+.hljs-bullet {
+  color: #735c0f;
+}
+
+.hljs-emphasis {
+  color: #24292e;
+  font-style: italic;
+}
+
+.hljs-strong {
+  color: #24292e;
+  font-weight: bold;
+}
+
+.hljs-addition {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.hljs-deletion {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+/* https://github.com/highlightjs/highlight.js/blob/main/src/styles/github-dark.css */
+
+.dark {
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-meta .hljs-keyword,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-variable.language_ {
+    color: #ff7b72;
+  }
+  .hljs-title,
+  .hljs-title.class_,
+  .hljs-title.class_.inherited__,
+  .hljs-title.function_ {
+    color: #d2a8ff;
+  }
+  .hljs-attr,
+  .hljs-attribute,
+  .hljs-literal,
+  .hljs-meta,
+  .hljs-number,
+  .hljs-operator,
+  .hljs-variable,
+  .hljs-selector-attr,
+  .hljs-selector-class,
+  .hljs-selector-id {
+    color: #79c0ff;
+  }
+  .hljs-regexp,
+  .hljs-string,
+  .hljs-meta .hljs-string {
+    color: #a5d6ff;
+  }
+  .hljs-built_in,
+  .hljs-symbol {
+    color: #ffa657;
+  }
+  .hljs-comment,
+  .hljs-code,
+  .hljs-formula {
+    color: #8b949e;
+  }
+  .hljs-name,
+  .hljs-quote,
+  .hljs-selector-tag,
+  .hljs-selector-pseudo {
+    color: #7ee787;
+  }
+  .hljs-subst {
+    color: #c9d1d9;
+  }
+  .hljs-section {
+    color: #1f6feb;
+    font-weight: bold;
+  }
+  .hljs-bullet {
+    color: #f2cc60;
+  }
+  .hljs-emphasis {
+    color: #c9d1d9;
+    font-style: italic;
+  }
+  .hljs-strong {
+    color: #c9d1d9;
+    font-weight: bold;
+  }
+  .hljs-addition {
+    color: #aff5b4;
+    background-color: #033a16;
+  }
+  .hljs-deletion {
+    color: #ffdcd7;
+    background-color: #67060c;
+  }
+}
