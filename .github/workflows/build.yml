@@ -17,7 +17,7 @@ jobs:
           deno-version: v1.x
 
       - name: build
-        run: deno run -A https://deno.land/x/lume/ci.ts
+        run: deno run -A https://deno.land/x/lume@v1.6.0/ci.ts
       - name: deploy
         uses: crazy-max/ghaction-github-pages@v2
         with:

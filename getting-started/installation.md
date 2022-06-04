@@ -64,39 +64,37 @@ updated with each new release of Notion and/or the notion-enhancer.
 - Installer: [`.exe`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-Setup-2.0.18-1.exe)
 - Portable build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-win.zip)
 
-### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS →
+### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS
 
-#### Intel-based Macs
+> **Warning:** as this is a modified version of the Notion app,
+> it is unsigned. It may be detected as malware or be unable to
+> be opened. If this occurs, it can be fixed by following
+> [Apple's official instructions](https://support.apple.com/en-us/HT202491).
 
-- Intel installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1.dmg)
-- Portable Intel build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-mac.zip)
+#### ![](../assets/icons/intel.svg){.inline-icon .mr-1} Intel-based Macs →
 
-#### Apple Silicon (M1) Macs
+- x86_64 installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1.dmg)
+- Portable x86_64 build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-mac.zip)
 
-> Unfortunately, the M1 (arm64) build requires an extra step after installation
-> due to a bug in the packager we depend on
-> (see [electron-userland/electron-builder#5850](https://github.com/electron-userland/electron-builder/issues/5850)).
-> This step is easy to complete and a temporary measure until a solution is available.
-> If you feel uncomfortable using command-line tools use can use the browser extension instead.
+#### ![](../assets/icons/apple-m1.svg){.inline-icon .mr-1 .filter .dark:invert} Apple Silicon (M1) Macs →
 
-Download either of the below packages and move it to your Applications folder:
-- Arm64 installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64.dmg)
-- Portable Arm64 build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64-mac.zip)
+- arm64 installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64.dmg)
+- Portable arm64 build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64-mac.zip)
 
-After you've moved the application, open the Terminal (`Cmd+Space`, then type Terminal and press <kbd>return</kbd>) and paste the following command (then press <kbd>return</kbd>):
-```bash
-xattr -cr "/Applications/Notion Enhanced.app"
+An extra step is required to run the M1 (arm64) build of the app due to a bug in the packager we depend on
+(see [electron-userland/electron-builder#5850](https://github.com/electron-userland/electron-builder/issues/5850)).
+
+Open the terminal, type the following command, and then press the <kbd>return</kbd> key:
+
+```
+xattr -cr "<installation location>.app"
 ```
 
-Where `/Applications/Notion Enhanced.app` is replaced with the install location of your Notion Enhanced application.
+> The `<installation location>` should be replaced with the file path to
+> where the app has been installed, e.g. `/Applications/Notion Enhanced`.
 
-Notion Enhanced should now run properly on M1 Macs.
-
-#### Code signing
-As it is a modified version of the Notion app,
-it is unsigned. It may be detected as malware or
-unable to be opened. To fix this, try following
-[Apple's official instructions](https://support.apple.com/en-us/HT202491).
+> If this is too complicated, it is recommended using notion-enhancer in
+> the browser instead.
 
 ### ![](../assets/icons/tux.svg){.inline-icon .mr-1} Linux
 

@@ -6,9 +6,9 @@
 
 import { slugify } from "https://deno.land/x/psyche@v0.3.0/indexers/shared.ts";
 
-import type { Site } from "lume/core.ts";
-import type { Element } from "lume/deps/dom.ts";
-import { stringToDocument } from "lume/core/utils.ts";
+import type { Site } from "https://deno.land/x/lume@v1.6.0/core.ts";
+import type { Element } from "https://deno.land/x/lume@v1.6.0/deps/dom.ts";
+import { stringToDocument } from "https://deno.land/x/lume@v1.6.0/core/utils.ts";
 
 interface Heading {
   slug: string;
