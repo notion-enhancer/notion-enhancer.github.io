@@ -1,14 +1,14 @@
-import lume from "https://deno.land/x/lume@v1.6.0/mod.ts";
+import lume from "https://deno.land/x/lume@v1.9.1/mod.ts";
 
-import resolveUrls from "https://deno.land/x/lume@v1.6.0/plugins/resolve_urls.ts";
-import codeHighlight from "https://deno.land/x/lume@v1.6.0/plugins/code_highlight.ts";
-import bundler from "https://deno.land/x/lume@v1.6.0/plugins/bundler.ts";
-import postcss from "https://deno.land/x/lume@v1.6.0/plugins/postcss.ts";
+import resolveUrls from "https://deno.land/x/lume@v1.9.1/plugins/resolve_urls.ts";
+import codeHighlight from "https://deno.land/x/lume@v1.9.1/plugins/code_highlight.ts";
+// import bundler from "https://deno.land/x/lume@v1.9.1/plugins/bundler.ts";
+import postcss from "https://deno.land/x/lume@v1.9.1/plugins/postcss.ts";
 
 import psyche from "https://deno.land/x/psyche@v0.3.4/indexers/lume.ts";
 import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
-import esbuild from "https://deno.land/x/lume@v1.6.0/plugins/esbuild.ts";
+import esbuild from "https://deno.land/x/lume@v1.9.1/plugins/esbuild.ts";
 import minify from "https://raw.githubusercontent.com/lumeland/experimental-plugins/cb94abee21c241ad0b34fc872b3c5985caa0e0a8/minify/minify.ts";
 import windicss from "https://raw.githubusercontent.com/lumeland/experimental-plugins/cb94abee21c241ad0b34fc872b3c5985caa0e0a8/windicss/windicss.ts";
 
@@ -50,7 +50,7 @@ site.use(windicss({
 }));
 site.use(postcss());
 site.use(resolveUrls());
-site.use(bundler());
+// site.use(bundler());
 site.use(esbuild());
 site.use(minify());
 
