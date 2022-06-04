@@ -66,16 +66,33 @@ updated with each new release of Notion and/or the notion-enhancer.
 
 ### ![](../assets/icons/apple.svg){.inline-icon .mr-1} MacOS →
 
-> Unfortunately, the M1 (arm64) build is currently non-functional
-> due to a bug in the packager we depend on
-> (see [electron-userland/electron-builder#5850](https://github.com/electron-userland/electron-builder/issues/5850)).
-> This is not something we can currently fix.
-> Until a solution is available, we recommend running the
-> Intel build through Rosetta or using the browser extension instead.
+#### Intel-based Macs
 
 - Intel installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1.dmg)
 - Portable Intel build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-mac.zip)
 
+#### Apple Silicon (M1) Macs
+
+> Unfortunately, the M1 (arm64) build requires an extra step after installation
+> due to a bug in the packager we depend on
+> (see [electron-userland/electron-builder#5850](https://github.com/electron-userland/electron-builder/issues/5850)).
+> This step is easy to complete and a temporary measure until a solution is available.
+> If you feel uncomfortable using command-line tools use can use the browser extension instead.
+
+Download either of the below packages and move it to your Applications folder:
+- Arm64 installer: [`.dmg`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64.dmg)
+- Portable Arm64 build: [`.zip`](https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/Notion-Enhanced-2.0.18-1-arm64-mac.zip)
+
+After you've moved the application, open the Terminal (`Cmd+Space`, then type Terminal and press <kbd>return</kbd>) and paste the following command (then press <kbd>return</kbd>):
+```bash
+xattr -cr "/Applications/Notion Enhanced.app"
+```
+
+Where `/Applications/Notion Enhanced.app` is replaced with the install location of your Notion Enhanced application.
+
+Notion Enhanced should now run properly on M1 Macs.
+
+#### Code signing
 As it is a modified version of the Notion app,
 it is unsigned. It may be detected as malware or
 unable to be opened. To fix this, try following
