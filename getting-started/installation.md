@@ -93,8 +93,8 @@ xattr -cr "<installation location>.app"
 > The `<installation location>` should be replaced with the file path to
 > where the app has been installed, e.g. `/Applications/Notion Enhanced`.
 
-> If this is too complicated, it is recommended using notion-enhancer in
-> the browser or running the Intel build of notion-repackaged through Rosetta instead.
+> If this is too complicated, it is recommended to use the notion-enhancer in
+> the browser or run the Intel build of notion-repackaged through Rosetta instead.
 
 ### ![](../assets/icons/tux.svg){.inline-icon .mr-1} Linux
 
