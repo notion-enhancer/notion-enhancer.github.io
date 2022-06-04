@@ -56,7 +56,8 @@ updated with each new release of Notion and/or the notion-enhancer.
 
 > **Warning:** SSO sign-in (e.g. Google or Apple) does not work with
 > notion-repackaged. Instead, you will use the `Continue with email`
-> sign-in option.
+> sign-in option. You may then need to relaunch the app after you
+> have signed in for the notion-enhancer to activate.
 
 ### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows →
 
