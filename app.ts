@@ -9,7 +9,7 @@
 import psyche, {
   platformModifier,
   registerHotkey,
-} from "https://deno.land/x/psyche@v0.3.2/client/psyche.min.mjs";
+} from "https://deno.land/x/psyche@v0.3.4/client/psyche.min.mjs";
 import { initRouter, onRouteChange } from "./_scripts/router.ts";
 import { tiltElements } from "./_scripts/tilt.ts";
 
@@ -64,8 +64,6 @@ const toggleTheme = () => {
     }
     const $buttons = document.querySelectorAll("[data-action='toggle-theme']");
     $buttons.forEach(($) => eventListener($, "click", toggleTheme));
-    // prevent flash of unthemed content on load
-    document.documentElement.classList.remove("hidden");
   };
 
 const searchInstance = psyche({

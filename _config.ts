@@ -5,10 +5,10 @@ import codeHighlight from "lume/plugins/code_highlight.ts";
 import bundler from "lume/plugins/bundler.ts";
 import postcss from "lume/plugins/postcss.ts";
 
-import psyche from "https://deno.land/x/psyche@v0.3.2/indexers/lume.ts";
+import psyche from "https://deno.land/x/psyche@v0.3.4/indexers/lume.ts";
 import featherIcons from "https://cdn.skypack.dev/feather-icons";
 
-import esbuild from "https://raw.githubusercontent.com/lumeland/experimental-plugins/cb94abee21c241ad0b34fc872b3c5985caa0e0a8/esbuild/esbuild.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 import minify from "https://raw.githubusercontent.com/lumeland/experimental-plugins/cb94abee21c241ad0b34fc872b3c5985caa0e0a8/minify/minify.ts";
 import windicss from "https://raw.githubusercontent.com/lumeland/experimental-plugins/cb94abee21c241ad0b34fc872b3c5985caa0e0a8/windicss/windicss.ts";
 
