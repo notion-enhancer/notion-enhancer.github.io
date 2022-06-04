@@ -31,11 +31,16 @@
 
   <body class="min-h-full w-full flex flex-col font-sans bg-body h-full">
 
-    {% if site_banner %}
-    <figure class="flex items-center bg-purple-500 text-white text-sm font-bold px-4 py-3" role="banner">
-      <figcaption><span class="mr-1.5">{{ site_banner_icon }}</span> {{ site_banner_message }}</figcaption>
+    <a href="https://discord.gg/sFWPXtA">
+    <figure class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3" role="banner">
+      <figcaption>
+        <span class="mr-1.5">⚠️</span>
+        Recent Notion updates have impaired the functioning of the notion-enhancer.
+        See the #announcements channel in the Discord server for more information
+        until a fix can be released.
+      </figcaption>
     </figure>
-    {% endif %}
+    </a>
 
     {{ content | safe }}
 

@@ -26,8 +26,9 @@ Once you've installed the notion-enhancer, read the
 > in your file manager may be necessary).
 
 > **Warning:** though it is possible to have both vanilla Notion
-> and enhanced Notion installed at once, running both at
-> once may cause problems and should never be done.
+> and enhanced Notion apps installed at once, they may interfere with
+> each other and it is recommended against. Instead, consider
+> using the enhanced app and vanilla website (or vice versa).
 
 ## Browser Extension
 
@@ -52,6 +53,10 @@ This is the recommended method of installation.
 
 Installations via notion-repackaged will need to be manually
 updated with each new release of Notion and/or the notion-enhancer.
+
+> **Warning:** SSO sign-in (e.g. Google or Apple) does not work with
+> notion-repackaged. Instead, you will use the `Continue with email`
+> sign-in option.
 
 ### ![](../assets/icons/windows.svg){.inline-icon .mr-1} Windows →
 
