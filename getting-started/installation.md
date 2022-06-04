@@ -194,12 +194,26 @@ with each new release of Notion and/or the notion-enhancer.
 > the Windows Subsystem for Linux in order to enhance the
 > Windows app.
 
+> **Warning:** the vanilla Notion app has recently updated to Electron 18
+> and will automatically update. The notion-enhancer is not yet compatible
+> with this. As such, please stick to version 2.0.18 of the Notion app
+> or use notion-repackaged until further notice.
+
 #### Prerequisites
 
 - [Node.js](https://nodejs.org/en/) v16.0.0+
 - A default installation of the [official Notion app](https://www.notion.so/desktop)
 
 #### ![](../assets/icons/npm.svg){.inline-icon .mr-1} Enhancement →
+
+If the `npx` package runner is available, the notion-enhancer can
+be inserted into Notion with a single command.
+
+```
+npx notion-enhancer apply
+```
+
+If it is not, refer to the steps below:
 
 1. Open a command line and install the
    [notion-enhancer NPM package](https://www.npmjs.com/package/notion-enhancer):
